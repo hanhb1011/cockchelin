@@ -27,9 +27,7 @@ struct RecipeSearchView: View {
               imgName: "best_1")
     ]
     
-    let recipe = Bundle.main.decode([Recipe].self, from: "RecipeData.json")
-    
-    
+    let recipe = RecipeModel.loadSavedRecipes()
     
     var body: some View {
         NavigationView{
