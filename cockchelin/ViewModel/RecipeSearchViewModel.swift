@@ -18,4 +18,8 @@ class RecipeSearchViewModel: ObservableObject {
     //ㅑㅐㅂㅈ대랴ㅗ댜ㅐㄹㄷ
     
     
+    
+    //;;;;
+    
+    
 }
