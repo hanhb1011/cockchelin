@@ -14,7 +14,7 @@ struct Post{
 }
 
 struct RecipeSearchView: View {
-    @State var searchText = ""
+    @State var searchText = "M"
     @State var isSearching = false
     
     //여기가 파일 리스트들
@@ -26,7 +26,7 @@ struct RecipeSearchView: View {
               detail: "spicy, 여기가 설명란",
               imgName: "best_1")
     ]
-    
+    //class/Struct (도면) ->  instance(사용 가능한 데이터)
     let recipe = RecipeModel.loadSavedRecipes()
     
     var body: some View {
