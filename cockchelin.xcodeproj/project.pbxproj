@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		568738A8254EA5DE0082E360 /* MapoGoldenPier.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 568738A7254EA5DE0082E360 /* MapoGoldenPier.ttf */; };
 		665E03D1254B117D00F62F66 /* cockchelinApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665E03D0254B117D00F62F66 /* cockchelinApp.swift */; };
 		665E03D3254B117D00F62F66 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665E03D2254B117D00F62F66 /* ContentView.swift */; };
 		665E03D5254B117E00F62F66 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 665E03D4254B117E00F62F66 /* Assets.xcassets */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		568738A7254EA5DE0082E360 /* MapoGoldenPier.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MapoGoldenPier.ttf; sourceTree = "<group>"; };
 		665E03CD254B117D00F62F66 /* cockchelin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cockchelin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		665E03D0254B117D00F62F66 /* cockchelinApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cockchelinApp.swift; sourceTree = "<group>"; };
 		665E03D2254B117D00F62F66 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 		665E03CF254B117D00F62F66 /* cockchelin */ = {
 			isa = PBXGroup;
 			children = (
+				568738A7254EA5DE0082E360 /* MapoGoldenPier.ttf */,
 				665E03F4254B122C00F62F66 /* Model */,
 				665E03F1254B122C00F62F66 /* View */,
 				665E03F7254B122C00F62F66 /* ViewModel */,
@@ -180,6 +183,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				568738A8254EA5DE0082E360 /* MapoGoldenPier.ttf in Resources */,
 				665E03D8254B117E00F62F66 /* Preview Assets.xcassets in Resources */,
 				665E03D5254B117E00F62F66 /* Assets.xcassets in Resources */,
 				665E03ED254B11EB00F62F66 /* RecipeData.json in Resources */,

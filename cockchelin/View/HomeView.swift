@@ -45,7 +45,7 @@ struct HomeView: View {
                 //temp
                 TempView()
                 
-            }.navigationBarTitle(Text("Cockchelin🍸"))
+            }.navigationBarTitle(Text("당신만의, 칵테일🍸"))
         }.padding(.top, -20)
         
     }
@@ -54,7 +54,9 @@ struct HomeView: View {
 struct TodayCocktailView: View{
     var body: some View{
         VStack(alignment: .leading){
-            Text("today's cocktail").font(.headline)
+            Text("오늘처럼 비오는 날엔💦")
+                //.font(.headline)
+                .font(Font.custom("MapoGoldenPier", size : 20))
             ScrollView(.horizontal){
                 VStack(alignment: .leading){
                     
@@ -89,11 +91,16 @@ struct GroupView: View{
                 .resizable()
                 .renderingMode(.original).cornerRadius(5)
                 .clipShape(Circle())
-                .frame(width:40, height:40)
+                .frame(width:95, height:80)
                 .clipped()
-            Text("Daiquiri").foregroundColor(.primary).lineLimit(nil)
+            Text("Daiquiri")
+                .foregroundColor(.primary).lineLimit(nil)
                 .padding(.leading, 0)
-        }.frame(width:90, height:90)
+                .font(Font.custom("MapoGoldenPier", size: 20))
+            Text("우울할 땐 부드러움으로 마음을 녹여요!").lineLimit(nil)
+                .padding(.leading, 0)
+                .font(Font.custom("MapoGoldenPier", size: 13))
+        }.frame(width:125 , height:150)
     }
 }
 
