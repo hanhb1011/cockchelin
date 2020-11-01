@@ -52,7 +52,7 @@ class RecipeModel {
         let savedRecipes: [Recipe] = loadSavedRecipes()
         
         let changedRecipes = savedRecipes.map { (currentRecipe) -> Recipe in
-            if (recipe.name == currentRecipe.name) {
+            if (recipe.id == currentRecipe.id) {
                 var modifiedRecipe = currentRecipe
                 modifiedRecipe = recipe
                 return modifiedRecipe

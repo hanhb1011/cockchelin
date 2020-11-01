@@ -104,13 +104,13 @@ struct ItemRow: View {
                 .frame(width:80, height:80)
                 .clipped()
         VStack(alignment: .leading){
-            Text(item.name).font(.headline)
+            Text(item.names[0]).font(.headline)
             HStack{
                 ForEach(item.ingredients){ section in
-                Text(section.name)
+                Text(section.names[0])
             }
             }
-            Text(item.glassType).font(.subheadline)
+            Text(item.glassType.rawValue).font(.subheadline)
             Text("Degree : \(item.alcoholDegree)%").font(.subheadline)
 
         }.padding(.leading, 8)

@@ -22,7 +22,7 @@ struct RecipeView: View {
     var body: some View {
         VStack {
             HStack {
-                Text(recipeViewModel.recipe.name).bold()
+                Text(recipeViewModel.recipe.names[0]).bold()
                 if (recipeViewModel.recipe.favoriteChecked) {
                     Image(systemName: "star.fill")
                         .onTapGesture {
@@ -66,7 +66,7 @@ struct RecipeView: View {
             Text("재료").bold()
             ForEach(recipeViewModel.recipe.ingredients) { ingredient in
                 HStack {
-                    Text("\(ingredient.name)")
+                    Text("\(ingredient.names[0])")
                     
                     Text(String(self.recipeViewModel.getLiquidVolume(ingredient: ingredient, liquidUnitType: self.units[unitSelectorIndex], numberOfServings: self.numbers[numberSelectorIndex])))
                     
@@ -84,7 +84,11 @@ struct RecipeView: View {
             }
             
             Text("레시피").bold()
-            Text(recipe.RecipeInformation).padding()
+            ForEach(recipeViewModel.recipe.RecipeInformation) { recipeProcess in
+                
+                Text("ingredient index: \(recipeProcess.ingredientIndex) behavior: \(recipeProcess.behavior.rawValue)")
+                
+            }
         }
         
     }
@@ -97,7 +101,16 @@ struct RecipeView: View {
 }
 
 #if DEBUG
-let testRecipe = Recipe(name: "Recipe name", alcoholDegree: 25, ingredients: [Ingredient(name: "ingredient0", volume: 60, type: .ml), Ingredient(name: "ingredient1", volume: 1, type: .oz)], favoriteChecked: false, RecipeInformation: "recipe information", techniqueType: .build, lastTimeRecipeOpened: Date(), latitude: 0.0, longitude: 1.1, liquidColor: .blue, glassType: "glass type")
+let testRecipe = Recipe(names: ["Recipe name"],
+                        alcoholDegree: 25,
+                        ingredients: [Ingredient(names: ["ingredient0"], volume: 60, type: .ml), Ingredient(names: ["ingredient1"], volume: 1, type: .oz)],
+                        favoriteChecked: false,
+                        RecipeInformation: [RecipeProcess(ingredientIndex: 0, behavior: .pour)],
+                        techniqueTypes: [.build],
+                        lastTimeRecipeOpened: Date(),
+                        latitude: 0.0, longitude: 1.1,
+                        liquidColor: .blue,
+                        glassType: .stemmedLiqueurGlass)
 #endif
 
 struct RecipeView_Previews: PreviewProvider {
