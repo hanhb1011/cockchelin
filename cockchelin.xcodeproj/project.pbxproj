@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		568738A8254EA5DE0082E360 /* MapoGoldenPier.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 568738A7254EA5DE0082E360 /* MapoGoldenPier.ttf */; };
+		6604CB4925569B7700824A2D /* RecipeData.json in Resources */ = {isa = PBXBuildFile; fileRef = 6604CB4825569B7700824A2D /* RecipeData.json */; };
 		665E03D1254B117D00F62F66 /* cockchelinApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665E03D0254B117D00F62F66 /* cockchelinApp.swift */; };
 		665E03D3254B117D00F62F66 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665E03D2254B117D00F62F66 /* ContentView.swift */; };
 		665E03D5254B117E00F62F66 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 665E03D4254B117E00F62F66 /* Assets.xcassets */; };
@@ -21,11 +22,11 @@
 		665E03FE254B122C00F62F66 /* RecipeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665E03F6254B122C00F62F66 /* RecipeModel.swift */; };
 		665E03FF254B122C00F62F66 /* RecipeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665E03F8254B122C00F62F66 /* RecipeViewModel.swift */; };
 		6690C697254D27C100F5031E /* RecipeSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6690C696254D27C100F5031E /* RecipeSearchViewModel.swift */; };
-		6690C6A4254EBEC200F5031E /* RecipeData.json in Resources */ = {isa = PBXBuildFile; fileRef = 6690C6A3254EBEC200F5031E /* RecipeData.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		568738A7254EA5DE0082E360 /* MapoGoldenPier.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MapoGoldenPier.ttf; sourceTree = "<group>"; };
+		6604CB4825569B7700824A2D /* RecipeData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = RecipeData.json; sourceTree = "<group>"; };
 		665E03CD254B117D00F62F66 /* cockchelin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cockchelin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		665E03D0254B117D00F62F66 /* cockchelinApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cockchelinApp.swift; sourceTree = "<group>"; };
 		665E03D2254B117D00F62F66 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -41,7 +42,6 @@
 		665E03F6254B122C00F62F66 /* RecipeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeModel.swift; sourceTree = "<group>"; };
 		665E03F8254B122C00F62F66 /* RecipeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeViewModel.swift; sourceTree = "<group>"; };
 		6690C696254D27C100F5031E /* RecipeSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeSearchViewModel.swift; sourceTree = "<group>"; };
-		6690C6A3254EBEC200F5031E /* RecipeData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = RecipeData.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,7 +81,7 @@
 				665E03D0254B117D00F62F66 /* cockchelinApp.swift */,
 				665E03E7254B11EB00F62F66 /* Constants.swift */,
 				665E03E6254B11EB00F62F66 /* Helper.swift */,
-				6690C6A3254EBEC200F5031E /* RecipeData.json */,
+				6604CB4825569B7700824A2D /* RecipeData.json */,
 				665E03D4254B117E00F62F66 /* Assets.xcassets */,
 				665E03D9254B117E00F62F66 /* Info.plist */,
 				665E03D6254B117E00F62F66 /* Preview Content */,
@@ -184,7 +184,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				568738A8254EA5DE0082E360 /* MapoGoldenPier.ttf in Resources */,
-				6690C6A4254EBEC200F5031E /* RecipeData.json in Resources */,
+				6604CB4925569B7700824A2D /* RecipeData.json in Resources */,
 				665E03D8254B117E00F62F66 /* Preview Assets.xcassets in Resources */,
 				665E03D5254B117E00F62F66 /* Assets.xcassets in Resources */,
 			);
