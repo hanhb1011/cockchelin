@@ -34,6 +34,7 @@ struct RecipeSearchView: View {
             List{
                 ScrollView{
                     HStack{
+                    HStack{
                         TextField("Search here", text: $searchText)
                             .padding(.leading, 24)
                     }
@@ -56,14 +57,22 @@ struct RecipeSearchView: View {
                         }.padding(.horizontal, 12)
                             .foregroundColor(Color.gray)
                     )
+                        NavigationLink(destination:Filter()){Image(systemName: "pencil")}
+                }
+                    
                 }
                 
                 //Cocktail Recipe list
-                ForEach((recipe).filter({"\($0)".contains(searchText)||searchText.isEmpty})){
+                ForEach((recipe).filter({"\($0)".lowercased()
+                                            .contains(searchText.lowercased())||searchText.isEmpty})){
                     section in
-                
+
+                    
+                    if(section.alcoholDegree <=
+                            50){
                    ItemRow(item: section)
-          }
+                    }
+                }
                 
             }.navigationBarTitle(Text("Cockchelin🍸"))
         }.padding(.top, -20)
@@ -137,6 +146,86 @@ struct RecipeSearchView_Previews: PreviewProvider {
         RecipeSearchView()
     }
 }
+
+struct Filter : View{
+    
+    @State var width : CGFloat = 0
+    @State var width1 : CGFloat = 15
+    var totalWidth = UIScreen.main.bounds.width-60
+    
+    var body: some View{
+        
+        VStack{
+            
+            Text("Degree")
+                .font(.title)
+                .fontWeight(.bold)
+            
+            Text("\(self.getValue(val: 100*self.width/self.totalWidth))-\(self.getValue(val:100*self.width1/self.totalWidth))도")
+                .fontWeight(.bold)
+                .padding(.top)
+                
+            ZStack(alignment:.leading){
+                
+                Rectangle()
+                    .fill(Color.black.opacity(0.20))
+                    .frame(height:6)
+                
+                Rectangle()
+                    .fill(Color.black)
+                    .frame(width: self.width1 - self.width, height: 6)
+                    .offset(x: self.width + 18)
+                
+                HStack(spacing: 0){
+                    
+                    Circle()
+                        .fill(Color.black)
+                        .frame(width: 18, height: 18)
+                        .offset(x: self.width)
+                        .gesture(
+                        
+                            DragGesture()
+                                .onChanged({
+                                    (value) in
+                                    
+                                    if value.location.x>=0 && value.location.x<=self.width1{
+                                    self.width = value.location.x
+                                    }
+                                })
+                            
+                        )
+                    
+                    Circle()
+                        .fill(Color.black)
+                        .frame(width: 18, height: 18)
+                        .offset(x: self.width1)
+                        .gesture(
+                        
+                            DragGesture()
+                                .onChanged({
+                                    (value) in
+                                    
+                                    if value.location.x<=self.totalWidth && value.location.x>=self.width{
+                                    self.width1 = value.location.x
+                                    }
+                                })
+                            
+                        )
+                }
+                
+            }.padding(.top, 25)
+            
+        }
+        .padding()
+    }
+    
+    func getValue(val: CGFloat)->String{
+        return String(format:"%.2f",val)
+    }
+    
+}
+
+
 /*
 var id = UUID()
 var name: String
