@@ -8,6 +8,12 @@
 
 import SwiftUI
 
+extension Color{
+    static let themeBackground = Color("BackgroundColor")
+    static let themeSecondary = Color("SecondaryColor")
+    static let themeForeground = Color("ForegroundColor")
+}
+
 struct Constants {
     struct TabBarImageName{
         static let tabBar0 = "heart.fill"
