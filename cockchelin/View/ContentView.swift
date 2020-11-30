@@ -19,7 +19,7 @@ struct ContentView: View{
     }
     
     @State var selected = 0//시작tab
-    
+    /*
     var body: some View{
         TabView(selection: $selected){
             HomeView().tabItem({
@@ -34,6 +34,57 @@ struct ContentView: View{
                 Text ("\(Constants.TabBarText.tabBar1)")
             }).tag(1)
         }.accentColor(Color.red)
+    }
+ */
+    @State var animate = false
+    @State var endSplash = false
+    
+    var body: some View{
+        ZStack{
+            TabView(selection: $selected){
+                HomeView().tabItem({
+                    Image(systemName: "house")
+                        .font(.title)
+                    Text ("\(Constants.TabBarText.tabBar0)")
+                }).tag(0)
+                
+                RecipeSearchView().tabItem({
+                    Image(systemName: Constants.TabBarImageName.tabBar0)
+                        .font(.title)
+                    Text ("\(Constants.TabBarText.tabBar1)")
+                }).tag(1)
+            }.accentColor(Color.red)
+            
+            ZStack{
+                Color("PointColor")
+                
+                Image("logo")
+                    .resizable()
+                    .renderingMode(.original)
+                    .aspectRatio(contentMode: animate ? .fill : .fit)
+                    .frame(width: animate ? nil : 120, height: animate ? nil : 120)
+                 //scale view
+                    .scaleEffect(animate ? 3 : 1)
+                //set width to avoid oversize
+                    .frame(width: UIScreen.main.bounds.width)
+                
+            }
+            .ignoresSafeArea(.all, edges: .all)
+            .onAppear(perform: animateSplash )
+            //hide view after finish
+            .opacity(endSplash ? 0 : 1)
+        }
+    }
+    
+    func animateSplash(){
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.35){
+            withAnimation(Animation.easeOut(duration: 0.45)){
+                animate.toggle()
+            }
+            withAnimation(Animation.easeOut(duration: 0.35)){
+                endSplash.toggle()
+            }
+        }
     }
 }
 
