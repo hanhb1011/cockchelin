@@ -22,6 +22,7 @@
 		665E03FE254B122C00F62F66 /* RecipeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665E03F6254B122C00F62F66 /* RecipeModel.swift */; };
 		665E03FF254B122C00F62F66 /* RecipeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665E03F8254B122C00F62F66 /* RecipeViewModel.swift */; };
 		6690C697254D27C100F5031E /* RecipeSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6690C696254D27C100F5031E /* RecipeSearchViewModel.swift */; };
+		A25583B425868EAB0087FEAD /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25583B325868EAB0087FEAD /* FilterView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		665E03F6254B122C00F62F66 /* RecipeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeModel.swift; sourceTree = "<group>"; };
 		665E03F8254B122C00F62F66 /* RecipeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeViewModel.swift; sourceTree = "<group>"; };
 		6690C696254D27C100F5031E /* RecipeSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeSearchViewModel.swift; sourceTree = "<group>"; };
+		A25583B325868EAB0087FEAD /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 				665E03E3254B11DD00F62F66 /* RecipeSearchView.swift */,
 				665E03E0254B11D700F62F66 /* HomeView.swift */,
 				665E03D2254B117D00F62F66 /* ContentView.swift */,
+				A25583B325868EAB0087FEAD /* FilterView.swift */,
 				665E03F2254B122C00F62F66 /* RecipeView.swift */,
 			);
 			path = View;
@@ -198,6 +201,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				665E03FB254B122C00F62F66 /* RecipeView.swift in Sources */,
+				A25583B425868EAB0087FEAD /* FilterView.swift in Sources */,
 				665E03E1254B11D700F62F66 /* HomeView.swift in Sources */,
 				665E03D3254B117D00F62F66 /* ContentView.swift in Sources */,
 				665E03EB254B11EB00F62F66 /* Helper.swift in Sources */,
