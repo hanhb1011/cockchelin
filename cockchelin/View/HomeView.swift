@@ -18,12 +18,12 @@ struct HomeView: View {
             
             VStack{
                 Rectangle()
-                    .fill(Color.themeSecondary)
+                    .fill(Color.themeBackground)
                     .frame(height:100.0)
                     .edgesIgnoringSafeArea(.top)
                     .edgesIgnoringSafeArea(.bottom)
                     .overlay(Text("Cockchelin")
-                                .font(Font.custom("MapoGoldenPier", size : 35))
+                                .font(Font.system(size: 35))
                                 .fontWeight(.bold)
                                 .padding(.bottom,20.0))
                     .frame(height:60.0)
@@ -46,45 +46,7 @@ struct HomeView: View {
                 }
             }//VStack
         }//ZStack
-        /*
-        NavigationView{
 
-            List{
-                ScrollView{
-                    HStack{
-                        TextField("Search here", text: $searchText)
-                            .padding(.leading, 24)
-                    }
-                    .padding()
-                    .background(Color(.systemGray5))
-                    .cornerRadius(6)
-                    //.padding(.horizontal)
-                    .overlay(
-                        HStack{
-                            Image(systemName: "magnifyingglass")
-                            Spacer()
-                            Image(systemName: "xmark.circle.fill")
-                        }.padding(.horizontal,12)
-                            .foregroundColor(Color.gray)
-                    )
-                }
-                
-                //today's cocktail list
-                TodayCocktailView()
-                
-                //best cocktail list
-                BestCocktailView()
-                
-                //favorite cocktail list
-                FavoriteView()
-                
-                //temp
-                TempView()
-                
-            }.navigationBarTitle(Text("당신만의, 칵테일🍸"))
-           
-        }.padding(.top, -20) //Navigation
-         */
     }
 }
 
@@ -120,28 +82,6 @@ struct TodayCocktailView: View{
         VStack(alignment: .center, spacing:20){
             RecipeCardView()
         }
-        /*
-        VStack(alignment: .leading){
-            Text("오늘처럼 비오는 날엔💦")
-                //.font(.headline)
-                .font(Font.custom("MapoGoldenPier", size : 20))
-            ScrollView(.horizontal){
-                VStack(alignment: .leading){
-                    
-                    HStack{
-                        NavigationLink(destination:
-                        GroupDetailView()){
-                            GroupView()
-                        }
-                        GroupView()
-                        GroupView()
-                        GroupView()
-                        GroupView()
-                    }
-                }
-            }//SCROLL
-        }//VStack
- */
     }//VIEW
 }
 
@@ -165,11 +105,11 @@ struct GroupView: View{
             Text("Daiquiri")
                 .foregroundColor(.primary).lineLimit(nil)
                 .padding(.leading, 0)
-                .font(Font.custom("MapoGoldenPier", size: 20))
+                .font(Font.system(size: 20))
             Text("우울할 땐 부드러움으로 마음을 녹여요!").lineLimit(nil)
                 .padding(.leading, 0)
                 .foregroundColor(Color.black)
-                .font(Font.custom("MapoGoldenPier", size: 13))
+                .font(Font.system(size: 13))
         }.frame(width:125 , height:150)
     }
 }
@@ -179,34 +119,6 @@ struct bestItem{
     let image, title, content : String
 }
 struct BestCocktailView: View{
-    /*
-    let cocktails:[bestItem] = [
-        bestItem(id:0, image:"rusty-nail", title: "number 1", content: "20"),
-        bestItem(id:1, image:"margarita", title: "number 2", content: "20"),
-        bestItem(id:2, image:"rusty-nail", title: "number 3", content: "20"),
-        bestItem(id:3, image:"margarita", title: "number 4", content: "20"),
-    ]
-    var body: some View{
-        VStack{
-            Image("margarita")
-                .resizable()
-                .scaledToFit()
-           
-            VStack(alignment: .leading, spacing: 9){
-                 Text("베스트 칵테일")//여기 변수 넣어야
-                    .font(.system(.title, design:.serif))
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                    .foregroundColor(Color("PointColor"))
-                    .lineLimit(1)
-
-            }
-            .padding()
-            .padding(.bottom, 12)
-        }.frame(width:150, height: 150)
-        .background(Color.white)
-        .cornerRadius(12)
-        .shadow(color:Color("BackgroundColor"), radius: 8, x:0, y:0)
-    }*/
    var body: some View{
         VStack(alignment: .leading){
             Text("BEST cocktail").font(.headline)

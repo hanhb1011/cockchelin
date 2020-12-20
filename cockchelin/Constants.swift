@@ -18,7 +18,7 @@ struct Constants {
     struct TabBarImageName{
         static let tabBar0 = "heart.fill"
         static let tabBar1 = "heart.fill"
-        static let tabBar2 = "tmp2.fill"
+        static let tabBar2 = "book.fill"
         static let tabBar3 = "tmp3.fill"
         
     }
@@ -26,7 +26,7 @@ struct Constants {
     struct TabBarText{
         static let tabBar0 = "home"
         static let tabBar1 = "recipe"
-        static let tabBar2 = "myRecipe"
+        static let tabBar2 = "bookmark"
         static let tabBar3 = "mypage"
         
     }

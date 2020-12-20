@@ -9,33 +9,16 @@
 import SwiftUI
 
 struct ContentView: View{
-    let titleFontAttrs = [NSAttributedString.Key.font: UIFont(name : "MapoGoldenPier", size: 30)]
+    //let titleFontAttrs = [NSAttributedString.Key.font: UIFont(name : "MapoGoldenPier", size: 30)]
     
     init(){
         UITabBar.appearance().backgroundColor = .red
         UINavigationBar.appearance().backgroundColor = UIColor(named: "BackColor")
-        UINavigationBar.appearance().titleTextAttributes = titleFontAttrs as [NSAttributedString.Key : Any]
-        UINavigationBar.appearance().largeTitleTextAttributes = titleFontAttrs as [NSAttributedString.Key : Any]
+        //UINavigationBar.appearance().titleTextAttributes = titleFontAttrs as [NSAttributedString.Key : Any]
+        //UINavigationBar.appearance().largeTitleTextAttributes = titleFontAttrs as [NSAttributedString.Key : Any]
     }
     
-    @State var selected = 0//시작tab
-    /*
-    var body: some View{
-        TabView(selection: $selected){
-            HomeView().tabItem({
-                Image(systemName: "house")
-                    .font(.title)
-                Text ("\(Constants.TabBarText.tabBar0)")
-            }).tag(0)
-            
-            RecipeSearchView().tabItem({
-                Image(systemName: Constants.TabBarImageName.tabBar0)
-                    .font(.title)
-                Text ("\(Constants.TabBarText.tabBar1)")
-            }).tag(1)
-        }.accentColor(Color.red)
-    }
- */
+    @State var selected = 0 //시작tab index
     @State var animate = false
     @State var endSplash = false
     
@@ -49,10 +32,16 @@ struct ContentView: View{
                 }).tag(0)
                 
                 RecipeSearchView().tabItem({
-                    Image(systemName: Constants.TabBarImageName.tabBar0)
+                    Image(systemName: Constants.TabBarImageName.tabBar1)
                         .font(.title)
                     Text ("\(Constants.TabBarText.tabBar1)")
                 }).tag(1)
+                
+                BookmarkView().tabItem({
+                    Image(systemName: Constants.TabBarImageName.tabBar2)
+                        .font(.title)
+                    Text ("\(Constants.TabBarText.tabBar2)")
+                }).tag(2)
             }.accentColor(Color.red)
             
             ZStack{

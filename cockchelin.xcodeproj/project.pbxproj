@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		568738A8254EA5DE0082E360 /* MapoGoldenPier.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 568738A7254EA5DE0082E360 /* MapoGoldenPier.ttf */; };
+		562B2A2E258FA6F00014A558 /* BookmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562B2A2D258FA6F00014A558 /* BookmarkView.swift */; };
 		6604CB4925569B7700824A2D /* RecipeData.json in Resources */ = {isa = PBXBuildFile; fileRef = 6604CB4825569B7700824A2D /* RecipeData.json */; };
 		665E03D1254B117D00F62F66 /* cockchelinApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665E03D0254B117D00F62F66 /* cockchelinApp.swift */; };
 		665E03D3254B117D00F62F66 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665E03D2254B117D00F62F66 /* ContentView.swift */; };
@@ -26,7 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		568738A7254EA5DE0082E360 /* MapoGoldenPier.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MapoGoldenPier.ttf; sourceTree = "<group>"; };
+		562B2A2D258FA6F00014A558 /* BookmarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkView.swift; sourceTree = "<group>"; };
 		6604CB4825569B7700824A2D /* RecipeData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = RecipeData.json; sourceTree = "<group>"; };
 		665E03CD254B117D00F62F66 /* cockchelin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cockchelin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		665E03D0254B117D00F62F66 /* cockchelinApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cockchelinApp.swift; sourceTree = "<group>"; };
@@ -76,7 +76,6 @@
 		665E03CF254B117D00F62F66 /* cockchelin */ = {
 			isa = PBXGroup;
 			children = (
-				568738A7254EA5DE0082E360 /* MapoGoldenPier.ttf */,
 				665E03F4254B122C00F62F66 /* Model */,
 				665E03F1254B122C00F62F66 /* View */,
 				665E03F7254B122C00F62F66 /* ViewModel */,
@@ -102,11 +101,12 @@
 		665E03F1254B122C00F62F66 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				665E03E3254B11DD00F62F66 /* RecipeSearchView.swift */,
-				665E03E0254B11D700F62F66 /* HomeView.swift */,
 				665E03D2254B117D00F62F66 /* ContentView.swift */,
-				A25583B325868EAB0087FEAD /* FilterView.swift */,
+				665E03E0254B11D700F62F66 /* HomeView.swift */,
 				665E03F2254B122C00F62F66 /* RecipeView.swift */,
+				665E03E3254B11DD00F62F66 /* RecipeSearchView.swift */,
+				A25583B325868EAB0087FEAD /* FilterView.swift */,
+				562B2A2D258FA6F00014A558 /* BookmarkView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -186,7 +186,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				568738A8254EA5DE0082E360 /* MapoGoldenPier.ttf in Resources */,
 				6604CB4925569B7700824A2D /* RecipeData.json in Resources */,
 				665E03D8254B117E00F62F66 /* Preview Assets.xcassets in Resources */,
 				665E03D5254B117E00F62F66 /* Assets.xcassets in Resources */,
@@ -205,6 +204,7 @@
 				665E03E1254B11D700F62F66 /* HomeView.swift in Sources */,
 				665E03D3254B117D00F62F66 /* ContentView.swift in Sources */,
 				665E03EB254B11EB00F62F66 /* Helper.swift in Sources */,
+				562B2A2E258FA6F00014A558 /* BookmarkView.swift in Sources */,
 				665E03FE254B122C00F62F66 /* RecipeModel.swift in Sources */,
 				665E03E4254B11DD00F62F66 /* RecipeSearchView.swift in Sources */,
 				6690C697254D27C100F5031E /* RecipeSearchViewModel.swift in Sources */,
