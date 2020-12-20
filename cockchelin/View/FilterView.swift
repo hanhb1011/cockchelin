@@ -21,7 +21,9 @@ struct Filterview : View{
         FilterItem(title: "CocktailGlass", checked: false),
         FilterItem(title: "OldFashonedGlass", checked: false),
         FilterItem(title: "HighballGlass", checked: false),
-        FilterItem(title: "FootedPilsnerGlass", checked: false)
+        FilterItem(title: "FootedPilsnerGlass", checked: false),
+        FilterItem(title:      "SourGlass",          checked: false),
+        FilterItem(title: "CollinsGlass", checked: false)
 
         ]
     
@@ -30,7 +32,7 @@ struct Filterview : View{
     var body: some View{
         
         VStack{
-            
+            //GlassType RadioButton
             VStack{
                 
                 HStack{
@@ -55,6 +57,8 @@ struct Filterview : View{
             .padding(.bottom,10)
             .padding(.top,10)
             .background(Color.white)
+            
+            //Degree RangeSlider
             
             HStack{
             Text("Degree")
