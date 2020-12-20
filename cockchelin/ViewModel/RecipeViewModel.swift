@@ -132,8 +132,6 @@ class RecipeViewModel: ObservableObject {
         }
         
         res.append(".square")
-        
-        print(res)
         return res
     }
 }
