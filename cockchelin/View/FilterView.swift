@@ -102,12 +102,11 @@ struct CheckBox : View{
     
     @State var filters = [
         
-        FilterItem(title: "Most Relevant", checked: false),
-        FilterItem(title: "Top Rated", checked: false),
-        FilterItem(title: "Lowest Price", checked: false),
-        FilterItem(title: "Highest Price", checked: false),
-        FilterItem(title: "Most Favourite", checked: false),
-        FilterItem(title: "Available Now", checked: false)
+        FilterItem(title: "StemmedLiqueurGlass", checked: false),
+        FilterItem(title: "CocktailGlass", checked: false),
+        FilterItem(title: "OldFashonedGlass", checked: false),
+        FilterItem(title: "HighballGlass", checked: false),
+        FilterItem(title: "FootedPilsnerGlass", checked: false)
 
         ]
     
@@ -119,22 +118,7 @@ struct CheckBox : View{
         ZStack(alignment: Alignment(horizontal: .trailing, vertical: .top), content: {
 
             
-            //Filter button
-            
-            Button(action: {
-                withAnimation{showFilter.toggle()}
-            }, label: {
-                Image(systemName: "slider.vertical.3")
-                    .font(.title2)
-                    .foregroundColor(.black)
-                    .padding(.vertical, 10)
-                    .padding(.horizontal, 15)
-                    .background(Color.white)
-                    .cornerRadius(10)
-                    .shadow(color: Color.black.opacity(0.1), radius: 5, x: 5, y: 5)
-            })
-            .padding(.trailing)
-            .padding(.top)
+        
             
             //Filter or Radio Button View
             
@@ -145,9 +129,9 @@ struct CheckBox : View{
                 VStack(spacing:18){
                     
                     HStack{
-                        Text("Search By")
-                            .font(.title2)
-                            .fontWeight(.heavy  )
+                        Text("Glass")
+                            .font(.title)
+                            .fontWeight(.bold  )
                             .foregroundColor(.black)
                         
                         Spacer()
