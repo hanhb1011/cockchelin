@@ -20,76 +20,185 @@ struct RecipeView: View {
     @State private var units: [LiquidUnitType] = [.ml, .oz]
     
     var body: some View {
-        VStack {
-            HStack {
-                Text(recipeViewModel.recipe.names[0]).bold()
-                if (recipeViewModel.recipe.favoriteChecked) {
-                    Image(systemName: "star.fill")
-                        .onTapGesture {
-                            self.recipeViewModel.checkFavorite()
-                        }
-                }
-                else {
-                    Image(systemName: "star")
-                        .onTapGesture {
-                            self.recipeViewModel.checkFavorite()
-                        }
-                }
-            }
-            Text("(\(recipe.alcoholDegree) %)")
-            Text(recipeViewModel.recipe.lastTimeRecipeOpened.description).foregroundColor(.gray)
-            
-            Divider()
-                .background(Color(.systemGray4))
-                .padding(.leading)
-            
-            //TODO image
-            
-            HStack {
-                Picker("Numbers", selection: $numberSelectorIndex) {
-                    ForEach(0 ..< numbers.count) { index in
-                        Text(String(self.numbers[index])).tag(index)
-                    }
-                }
-                .pickerStyle(SegmentedPickerStyle())
-                .fixedSize()
-                
-                Picker("Units", selection: $unitSelectorIndex) {
-                    ForEach(0 ..< units.count) { index in
-                        Text(self.units[index].rawValue).tag(index)
-                    }
-                }
-                .pickerStyle(SegmentedPickerStyle())
-                .fixedSize()
-            }
-            
-            Text("재료").bold()
-            ForEach(recipeViewModel.recipe.ingredients) { ingredient in
+        ScrollView() {
+            VStack {
+                Image("temp")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 250, height: 250, alignment: .center)
                 HStack {
-                    Text("\(ingredient.names[0])")
-                    
-                    Text(String(self.recipeViewModel.getLiquidVolume(ingredient: ingredient, liquidUnitType: self.units[unitSelectorIndex], numberOfServings: self.numbers[numberSelectorIndex])))
-                    
-                    if (ingredient.type == .oz || ingredient.type == .ml) {
-                        Text(self.units[unitSelectorIndex].rawValue)
+                    Text(recipeViewModel.recipe.names[0])
+                        .bold()
+                        .font(.system(size: 35, weight: .bold))
+                        .padding(.horizontal, 30)
+                        .padding(.vertical, 10)
+                        .foregroundColor(Color(red: 50/255, green: 50/255, blue: 50/255, opacity: 100))
+                    Spacer()
+                    /*
+                    if (recipeViewModel.recipe.favoriteChecked) {
+                        Image(systemName: "star.fill")
+                            .onTapGesture {
+                                self.recipeViewModel.checkFavorite()
+                            }
                     }
                     else {
-                        Text(ingredient.type.rawValue)
+                        Image(systemName: "star")
+                            .onTapGesture {
+                                self.recipeViewModel.checkFavorite()
+                            }
                     }
+                    */
+                }
+                
+                HStack {
+                    Spacer()
+                    HStack {
+                        Image(systemName: "flame")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 28, height: 28, alignment: .center)
+                            .foregroundColor(Color(red: 255/255, green: 100/255, blue: 168/255, opacity: 100))
+                        
+                        Text("\(recipeViewModel.recipe.alcoholDegree) %")
+                            .font(.system(size: 15, weight: .bold))
+                            .foregroundColor(Color(red: 135/255, green: 135/255, blue: 135/255, opacity: 100))
+                    }
+                    Spacer()
+                    HStack {
+                        Image(systemName: "number")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 25, height: 25, alignment: .center)
+                            .foregroundColor(Color(red: 255/255, green: 100/255, blue: 168/255, opacity: 100))
+                        
+                        Text("\(recipeViewModel.recipe.ingredients.count) 개의 재료")
+                            .font(.system(size: 15, weight: .bold))
+                            .foregroundColor(Color(red: 135/255, green: 135/255, blue: 135/255, opacity: 100))
+                    }
+                    Spacer()
+                    
+                    HStack {
+                        Image(systemName: "questionmark.circle")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 28, height: 28, alignment: .center)
+                            .foregroundColor(Color(red: 255/255, green: 100/255, blue: 168/255, opacity: 100))
+                        
+                        Text(recipeViewModel.getTechniqueTypes())
+                            .font(.system(size: 15, weight: .bold))
+                            .foregroundColor(Color(red: 135/255, green: 135/255, blue: 135/255, opacity: 100))
+                    }
+                    Spacer()
+                }
+                .padding(.horizontal, 30)
+                /*
+                Text("(\(recipe.alcoholDegree) %)")
+                Text(recipeViewModel.recipe.lastTimeRecipeOpened.description).foregroundColor(.gray)
+                */
+                
+                HStack {
+                    Text("수량")
+                        .bold()
+                        .font(.system(size: 20, weight: .bold))
+                        .padding(.horizontal, 30)
+                        .padding(.vertical, 10)
+                        .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
+                    Spacer()
+                    Picker("Numbers", selection: $numberSelectorIndex) {
+                        ForEach(0 ..< numbers.count) { index in
+                            Text(String(self.numbers[index])).tag(index)
+                        }
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                    .fixedSize()
+                    .padding(.horizontal, 30)
+                    .padding(.vertical, 5)
+                }
+                
+                HStack {
+                    Text("재료")
+                        .bold()
+                        .font(.system(size: 20, weight: .bold))
+                        .padding(.horizontal, 30)
+                        .padding(.vertical, 10)
+                        .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
+                    Spacer()
+                    Picker("Units", selection: $unitSelectorIndex) {
+                        ForEach(0 ..< units.count) { index in
+                            Text(self.units[index].rawValue).tag(index)
+                        }
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                    .fixedSize()
+                    .padding(.horizontal, 30)
+                    .padding(.vertical, 5)
+                }
+                ForEach(recipeViewModel.recipe.ingredients) { ingredient in
+                    HStack {
+                        Image(systemName: "checkmark.square")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 20, height: 20, alignment: .center)
+                            .foregroundColor(Color(red: 255/255, green: 100/255, blue: 168/255, opacity: 100))
+                            .padding(.horizontal, 5)
+                        Text("\(ingredient.names[0])")
+                            .font(.system(size: 16))
+                            .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
+                        Text(String(self.recipeViewModel.getLiquidVolume(ingredient: ingredient, liquidUnitType: self.units[unitSelectorIndex], numberOfServings: self.numbers[numberSelectorIndex])))
+                                .font(.system(size: 16))
+                                .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
+                        
+                        if (ingredient.type == .oz || ingredient.type == .ml) {
+                            Text(self.units[unitSelectorIndex].rawValue)
+                                .font(.system(size: 16))
+                                .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
+                        }
+                        else {
+                            Text(ingredient.type.rawValue)
+                                .font(.system(size: 16))
+                                .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
+                        }
+                        Spacer()
+                    }
+                    .padding(.horizontal, 30)
+                    .padding(.vertical, 2)
+                    
                     
                 }
-                .padding()
                 
+                HStack {
+                    Text("레시피")
+                        .bold()
+                        .font(.system(size: 20, weight: .bold))
+                        .padding(.horizontal, 30)
+                        .padding(.vertical, 10)
+                        .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
+                    Spacer()
+                }
                 
-            }
-            
-            Text("레시피").bold()
-            ForEach(recipeViewModel.recipe.RecipeInformation) { recipeProcess in
-                
-                Text("ingredient index: \(recipeProcess.ingredientIndex) behavior: \(recipeProcess.behavior.rawValue)")
+                ForEach(0..<recipeViewModel.recipe.RecipeInformation.count) { i in
+                    
+                    HStack {
+                        Image(systemName: recipeViewModel.getIndexImage(index: i))
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 20, height: 20, alignment: .center)
+                            .foregroundColor(Color(red: 255/255, green: 100/255, blue: 168/255, opacity: 100))
+                            .padding(.horizontal, 5)
+                        
+                        Text(recipeViewModel.getRecipeProcessString(recipeProcess: recipeViewModel.recipe.RecipeInformation[i]))
+                            .font(.system(size: 16))
+                            .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
+                        
+                        Spacer()
+                    }
+                    .padding(.horizontal, 30)
+                    .padding(.vertical, 2)
+                }
                 
             }
         }
+        .background(Color(red: 247/255, green: 247/255, blue: 251/255, opacity: 100).edgesIgnoringSafeArea(.all))
         
     }
     
