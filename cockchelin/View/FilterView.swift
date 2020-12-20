@@ -8,24 +8,70 @@
 import SwiftUI
 
 
-struct RangeSlider : View{
+
+struct Filterview : View{
     
     @State var width : CGFloat = 0
     @State var width1 : CGFloat = 15
     var totalWidth = UIScreen.main.bounds.width-60
     
+    @State var filters = [
+        
+        FilterItem(title: "StemmedLiqueurGlass", checked: false),
+        FilterItem(title: "CocktailGlass", checked: false),
+        FilterItem(title: "OldFashonedGlass", checked: false),
+        FilterItem(title: "HighballGlass", checked: false),
+        FilterItem(title: "FootedPilsnerGlass", checked: false),
+        FilterItem(title:      "SourGlass",          checked: false),
+        FilterItem(title: "CollinsGlass", checked: false)
+
+        ]
+    
+    @State var showFilter = false
+    
     var body: some View{
         
+        ScrollView{
         VStack{
+            //GlassType RadioButton
+            VStack{
+                
+                HStack{
+                    Text("Glass")
+                        .font(.title)
+                        .fontWeight(.bold  )
+                        .foregroundColor(.black)
+                    
+                    Spacer()
+                   
+                        Text("Done")
+                            .fontWeight(.heavy)
+                            
+                }.padding([.horizontal,.top])
+                .padding(.bottom, 10)
+                
+                ForEach(filters){filter in
+                    CardView(filter:filter)
+                    
+                }
+            }
+            .padding(.bottom,10)
+            .padding(.top,10)
+            .background(Color.white)
             
+            //Degree RangeSlider
+            
+            HStack{
             Text("Degree")
                 .font(.title)
                 .fontWeight(.bold)
             
+                Spacer()
+                
             Text("\(self.getValue(val: 100*self.width/self.totalWidth))-\(self.getValue(val:100*self.width1/self.totalWidth))도")
                 .fontWeight(.bold)
-                .padding(.top)
                 
+            }
             ZStack(alignment:.leading){
                 
                 Rectangle()
@@ -79,99 +125,14 @@ struct RangeSlider : View{
         }
         .padding()
     }
-    
+    }
     func getValue(val: CGFloat)->String{
         return String(format:"%.2f",val)
     }
     
 }
 
-struct CheckBox : View{
-    
 
-    
-    @State var filters = [
-        
-        FilterItem(title: "Most Relevant", checked: false),
-        FilterItem(title: "Top Rated", checked: false),
-        FilterItem(title: "Lowest Price", checked: false),
-        FilterItem(title: "Highest Price", checked: false),
-        FilterItem(title: "Most Favourite", checked: false),
-        FilterItem(title: "Available Now", checked: false)
-
-        ]
-    
-    @State var edges = UIApplication.shared.windows.first?.safeAreaInsets
-    
-    @State var showFilter = false
-    
-    var body : some View{
-        ZStack(alignment: Alignment(horizontal: .trailing, vertical: .top), content: {
-
-            
-            //Filter button
-            
-            Button(action: {
-                withAnimation{showFilter.toggle()}
-            }, label: {
-                Image(systemName: "slider.vertical.3")
-                    .font(.title2)
-                    .foregroundColor(.black)
-                    .padding(.vertical, 10)
-                    .padding(.horizontal, 15)
-                    .background(Color.white)
-                    .cornerRadius(10)
-                    .shadow(color: Color.black.opacity(0.1), radius: 5, x: 5, y: 5)
-            })
-            .padding(.trailing)
-            .padding(.top)
-            
-            //Filter or Radio Button View
-            
-            VStack{
-                
-                Spacer()
-                
-                VStack(spacing:18){
-                    
-                    HStack{
-                        Text("Search By")
-                            .font(.title2)
-                            .fontWeight(.heavy  )
-                            .foregroundColor(.black)
-                        
-                        Spacer()
-                        
-                        Button(action: {
-                            withAnimation{showFilter.toggle()}
-                        }, label: {
-                            Text("Done")
-                                .fontWeight(.heavy)
-                                
-                        })
-                        
-                    }.padding([.horizontal,.top])
-                    .padding(.bottom, 10)
-                    
-                    ForEach(filters){filter in
-                        CardView(filter:filter)
-                        
-                    }
-                }
-                .padding(.bottom,10)
-                .padding(.bottom,edges?.bottom)
-                .padding(.top,10)
-                .background(Color.white)
-                .offset(y: showFilter ? 0 :UIScreen.main.bounds.height/2)
-            }
-            .ignoresSafeArea()
-            .background(Color.black.opacity(0.3).ignoresSafeArea().opacity(showFilter ? 1 : 0))
-            .onTapGesture(perform: {
-                withAnimation{showFilter.toggle()}
-            })
-        })
-    }
-}
 
 struct CardView: View{
     @State var filter: FilterItem
@@ -214,4 +175,10 @@ struct FilterItem : Identifiable{
     var title: String
     var checked: Bool
     
+}
+
+struct FilterView_Previews: PreviewProvider {
+    static var previews: some View {
+        Filterview()
+    }
 }
