@@ -29,12 +29,9 @@ struct Filterview : View{
     
     var body: some View{
         
-        
         VStack{
             
-           
-            
-            VStack(spacing:18){
+            VStack{
                 
                 HStack{
                     Text("Glass")
@@ -130,62 +127,7 @@ struct Filterview : View{
     
 }
 
-struct CheckBox : View{
-    
 
-    
-    @State var filters = [
-        
-        FilterItem(title: "StemmedLiqueurGlass", checked: false),
-        FilterItem(title: "CocktailGlass", checked: false),
-        FilterItem(title: "OldFashonedGlass", checked: false),
-        FilterItem(title: "HighballGlass", checked: false),
-        FilterItem(title: "FootedPilsnerGlass", checked: false)
-
-        ]
-    
-    @State var showFilter = false
-    
-    var body : some View{
-        
-
-            //Filter or Radio Button View
-            
-            VStack{
-                
-                Spacer()
-                
-                VStack(spacing:18){
-                    
-                    HStack{
-                        Text("Glass")
-                            .font(.title)
-                            .fontWeight(.bold  )
-                            .foregroundColor(.black)
-                        
-                        Spacer()
-                       
-                            Text("Done")
-                                .fontWeight(.heavy)
-                                
-                    }.padding([.horizontal,.top])
-                    .padding(.bottom, 10)
-                    
-                    ForEach(filters){filter in
-                        CardView(filter:filter)
-                        
-                    }
-                }
-                .padding(.bottom,10)
-                .padding(.top,10)
-                .background(Color.white)
-                
-            }
-            .ignoresSafeArea()
-            .background(Color.black.opacity(0.3).ignoresSafeArea())
-            
-    }
-}
 
 struct CardView: View{
     @State var filter: FilterItem
