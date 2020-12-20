@@ -31,6 +31,7 @@ struct Filterview : View{
     
     var body: some View{
         
+        ScrollView{
         VStack{
             //GlassType RadioButton
             VStack{
@@ -124,7 +125,7 @@ struct Filterview : View{
         }
         .padding()
     }
-    
+    }
     func getValue(val: CGFloat)->String{
         return String(format:"%.2f",val)
     }
