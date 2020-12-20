@@ -7,6 +7,14 @@
 
 import SwiftUI
 
+struct Filterview : View{
+    var body : some View{
+        VStack{
+            CheckBox()
+            RangeSlider()
+        }
+    }
+}
 
 struct RangeSlider : View{
     
@@ -17,15 +25,17 @@ struct RangeSlider : View{
     var body: some View{
         
         VStack{
-            
+            HStack{
             Text("Degree")
                 .font(.title)
                 .fontWeight(.bold)
             
+                Spacer()
+                
             Text("\(self.getValue(val: 100*self.width/self.totalWidth))-\(self.getValue(val:100*self.width1/self.totalWidth))도")
                 .fontWeight(.bold)
-                .padding(.top)
                 
+            }
             ZStack(alignment:.leading){
                 
                 Rectangle()
@@ -142,13 +152,11 @@ struct CheckBox : View{
                         
                         Spacer()
                         
-                        Button(action: {
-                            withAnimation{showFilter.toggle()}
-                        }, label: {
+                       
                             Text("Done")
                                 .fontWeight(.heavy)
                                 
-                        })
+                        
                         
                     }.padding([.horizontal,.top])
                     .padding(.bottom, 10)
@@ -162,13 +170,11 @@ struct CheckBox : View{
                 .padding(.bottom,edges?.bottom)
                 .padding(.top,10)
                 .background(Color.white)
-                .offset(y: showFilter ? 0 :UIScreen.main.bounds.height/2)
+                
             }
             .ignoresSafeArea()
-            .background(Color.black.opacity(0.3).ignoresSafeArea().opacity(showFilter ? 1 : 0))
-            .onTapGesture(perform: {
-                withAnimation{showFilter.toggle()}
-            })
+            .background(Color.black.opacity(0.3).ignoresSafeArea())
+            
         })
     }
 }
@@ -214,4 +220,10 @@ struct FilterItem : Identifiable{
     var title: String
     var checked: Bool
     
+}
+
+struct FilterView_Previews: PreviewProvider {
+    static var previews: some View {
+        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
+    }
 }

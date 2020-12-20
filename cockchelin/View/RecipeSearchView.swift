@@ -16,6 +16,8 @@ struct Post{
 struct RecipeSearchView: View {
     @State var searchText = ""
     @State var isSearching = false
+    @State var mindegree : CGFloat = 0
+    @State var maxdegree : CGFloat = 100
     
     //여기가 파일 리스트들
     let posts: [Post] = [
@@ -57,7 +59,7 @@ struct RecipeSearchView: View {
                         }.padding(.horizontal, 12)
                             .foregroundColor(Color.gray)
                     )
-                        NavigationLink(destination:RangeSlider()){Image(systemName: "slider.vertical.3")}
+                        NavigationLink(destination:Filterview()){Image(systemName: "slider.vertical.3")}
                 }
                     
                 }
@@ -68,10 +70,10 @@ struct RecipeSearchView: View {
                     section in
 
                     
-                    if(section.alcoholDegree <=
-                            50){
-                   ItemRow(item: section)
-                    }
+                    
+                /*    if(Int(mindegree) <=  section.alcoholDegree <= Int(maxdegree) ){
+                 */  ItemRow(item: section)
+                  //  }
                 }
                 
             }.navigationBarTitle(Text("Cockchelin🍸"))
