@@ -65,8 +65,8 @@ struct RecipeSearchView: View {
                 }
                 
                 //Cocktail Recipe list
-                ForEach((recipe).filter({"\($0)".lowercased()
-                                            .contains(searchText.lowercased())||searchText.isEmpty})){
+                ForEach((recipe).filter({"\($0)".lowercased().trimmingCharacters(in: .whitespaces)
+                                            .contains(searchText.lowercased().trimmingCharacters(in: .whitespaces))||searchText.isEmpty})){
                     section in
 
                     

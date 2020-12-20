@@ -7,24 +7,60 @@
 
 import SwiftUI
 
-struct Filterview : View{
-    var body : some View{
-        VStack{
-            CheckBox()
-            RangeSlider()
-        }
-    }
-}
 
-struct RangeSlider : View{
+
+struct Filterview : View{
     
     @State var width : CGFloat = 0
     @State var width1 : CGFloat = 15
     var totalWidth = UIScreen.main.bounds.width-60
     
+    @State var filters = [
+        
+        FilterItem(title: "StemmedLiqueurGlass", checked: false),
+        FilterItem(title: "CocktailGlass", checked: false),
+        FilterItem(title: "OldFashonedGlass", checked: false),
+        FilterItem(title: "HighballGlass", checked: false),
+        FilterItem(title: "FootedPilsnerGlass", checked: false),
+        FilterItem(title:      "SourGlass",          checked: false),
+        FilterItem(title: "CollinsGlass", checked: false)
+
+        ]
+    
+    @State var showFilter = false
+    
     var body: some View{
         
+        ScrollView{
         VStack{
+            //GlassType RadioButton
+            VStack{
+                
+                HStack{
+                    Text("Glass")
+                        .font(.title)
+                        .fontWeight(.bold  )
+                        .foregroundColor(.black)
+                    
+                    Spacer()
+                   
+                        Text("Done")
+                            .fontWeight(.heavy)
+                            
+                }.padding([.horizontal,.top])
+                .padding(.bottom, 10)
+                
+                ForEach(filters){filter in
+                    CardView(filter:filter)
+                    
+                }
+            }
+            .padding(.bottom,10)
+            .padding(.top,10)
+            .background(Color.white)
+            
+            //Degree RangeSlider
+            
             HStack{
             Text("Degree")
                 .font(.title)
@@ -89,79 +125,14 @@ struct RangeSlider : View{
         }
         .padding()
     }
-    
+    }
     func getValue(val: CGFloat)->String{
         return String(format:"%.2f",val)
     }
     
 }
 
-struct CheckBox : View{
-    
 
-    
-    @State var filters = [
-        
-        FilterItem(title: "StemmedLiqueurGlass", checked: false),
-        FilterItem(title: "CocktailGlass", checked: false),
-        FilterItem(title: "OldFashonedGlass", checked: false),
-        FilterItem(title: "HighballGlass", checked: false),
-        FilterItem(title: "FootedPilsnerGlass", checked: false)
-
-        ]
-    
-    @State var edges = UIApplication.shared.windows.first?.safeAreaInsets
-    
-    @State var showFilter = false
-    
-    var body : some View{
-        ZStack(alignment: Alignment(horizontal: .trailing, vertical: .top), content: {
-
-            
-        
-            
-            //Filter or Radio Button View
-            
-            VStack{
-                
-                Spacer()
-                
-                VStack(spacing:18){
-                    
-                    HStack{
-                        Text("Glass")
-                            .font(.title)
-                            .fontWeight(.bold  )
-                            .foregroundColor(.black)
-                        
-                        Spacer()
-                        
-                       
-                            Text("Done")
-                                .fontWeight(.heavy)
-                                
-                        
-                        
-                    }.padding([.horizontal,.top])
-                    .padding(.bottom, 10)
-                    
-                    ForEach(filters){filter in
-                        CardView(filter:filter)
-                        
-                    }
-                }
-                .padding(.bottom,10)
-                .padding(.bottom,edges?.bottom)
-                .padding(.top,10)
-                .background(Color.white)
-                
-            }
-            .ignoresSafeArea()
-            .background(Color.black.opacity(0.3).ignoresSafeArea())
-            
-        })
-    }
-}
 
 struct CardView: View{
     @State var filter: FilterItem
@@ -208,6 +179,6 @@ struct FilterItem : Identifiable{
 
 struct FilterView_Previews: PreviewProvider {
     static var previews: some View {
-        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
+        Filterview()
     }
 }
