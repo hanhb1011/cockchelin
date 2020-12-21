@@ -52,13 +52,23 @@ struct HomeView: View {
 
 struct RecipeCardView: View{
     var body: some View{
+        VStack(alignment: .leading) {
+            Text("오늘의 칵테일 align 수정필요")
+                .font(.system(.title, design:.serif))
+                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                .font(.headline)
+                .foregroundColor(Color("PointColor"))
+                //.font(Font.system(size: 40))
+        }
         VStack{
             Image("todayCocktail")
                 .resizable()
                 .scaledToFit()
+                .frame(width: 290, height: 200, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                .padding(.top, 10)
            
             VStack(alignment: .leading, spacing: 12){
-                 Text("오늘의 칵테일")//여기 변수 넣어야
+                 Text("칵테일 이름")//여기 변수 넣어야
                     .font(.system(.title, design:.serif))
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                     .foregroundColor(Color("PointColor"))
@@ -70,7 +80,7 @@ struct RecipeCardView: View{
                     .italic()
             }
             .padding()
-            .padding(.bottom, 12)
+            .padding(.bottom, 8)
         }
         .background(Color.white)
         .cornerRadius(12)
@@ -95,22 +105,34 @@ struct GroupDetailView: View{
 //today's cocktail list
 struct GroupView: View{
     var body: some View{
-        VStack(alignment: .leading){
-            Image("recImg_0")
+        VStack{
+            Image("temp")
                 .resizable()
-                .renderingMode(.original).cornerRadius(5)
-                .clipShape(Circle())
-                .frame(width:95, height:80)
-                .clipped()
-            Text("Daiquiri")
-                .foregroundColor(.primary).lineLimit(nil)
-                .padding(.leading, 0)
-                .font(Font.system(size: 20))
-            Text("우울할 땐 부드러움으로 마음을 녹여요!").lineLimit(nil)
-                .padding(.leading, 0)
-                .foregroundColor(Color.black)
-                .font(Font.system(size: 13))
-        }.frame(width:125 , height:150)
+                //.scaledToFit()
+                .frame(width: 130, height: 110, alignment: .center)
+                .padding(.top, 5)
+           
+            VStack(alignment: .leading, spacing: 5){
+                 Text("베스트 n등")//여기 베스트순으로 indexing 넣어야
+                    //.font(.system(.title, design:.serif))
+                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .font(Font.system(size: 15))
+                    .foregroundColor(Color("PointColor"))
+                    .lineLimit(1)
+                    
+                Text("베스트 n등에 걸맞는 멋진멘트")
+                    //.font(.system(.body, design:.serif))
+                    .font(Font.system(size: 10))
+                    .foregroundColor(Color.gray)
+                    .italic()
+            }
+            .padding()
+            .padding(.top, -15)
+            //.padding(.bottom, 4)
+        }
+        .background(Color.white)
+        .cornerRadius(12)
+        .shadow(color:Color("BackgroundColor"), radius: 8, x:0, y:0)
     }
 }
 
@@ -121,11 +143,11 @@ struct bestItem{
 struct BestCocktailView: View{
    var body: some View{
         VStack(alignment: .leading){
-            Text("BEST cocktail").font(.headline)
+            Text("BEST Cocktail")
+                .font(.headline)
                 .foregroundColor(Color("PointColor"))
             ScrollView(.horizontal){
                 VStack(alignment: .leading){
-                    
                     HStack{
                         NavigationLink(destination:
                         GroupDetailView()){
@@ -138,7 +160,7 @@ struct BestCocktailView: View{
                     }
                 }
             }
-        }
+        }.padding(.top, 5)
     }
 }
 
