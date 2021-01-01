@@ -44,6 +44,7 @@
 		665E03F8254B122C00F62F66 /* RecipeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeViewModel.swift; sourceTree = "<group>"; };
 		6690C696254D27C100F5031E /* RecipeSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeSearchViewModel.swift; sourceTree = "<group>"; };
 		A25583B325868EAB0087FEAD /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
+		A2C7C525259F0C2A0041E6E2 /* cockchelin copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "cockchelin copy-Info.plist"; path = "/Users/khs/Documents/cockchelin/cockchelin copy-Info.plist"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +63,7 @@
 			children = (
 				665E03CF254B117D00F62F66 /* cockchelin */,
 				665E03CE254B117D00F62F66 /* Products */,
+				A2C7C525259F0C2A0041E6E2 /* cockchelin copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
