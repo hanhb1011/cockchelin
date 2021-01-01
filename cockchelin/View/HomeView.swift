@@ -38,9 +38,8 @@ struct HomeView: View {
                     //best cocktail list
                     BestCocktailView()
                     
-                    //RoundedRectangle(cornerRadius: 20)
-                      //      .frame(height:150)
-
+                    NewUpdatedView()
+                    
                 }.foregroundColor(Color.themeForeground)
                 .padding(.horizontal)
                 }
@@ -164,65 +163,49 @@ struct BestCocktailView: View{
     }
 }
 
-struct BestListView: View{
-    let bestitem: bestItem
+//new updated items
+class ListViewModel: ObservableObject{
+    @Published var items = [
+        Item(name: "cocktail0", details: "Strong", image: "black-russian", price: 20),
+        Item(name: "cocktail1", details: "Extreme Strong", image: "black-russian", price: 20),
+        Item(name: "cocktail2", details: "Medium", image: "black-russian", price: 20),
+        Item(name: "cocktail3", details: "Strong", image: "black-russian", price: 20),
+    ]
+}
+
+struct NewUpdatedView: View{
+    @StateObject var listData = ListViewModel()
     
-    var body: some View{
-        VStack{
-            Image(bestitem.image)
-                .resizable()
-                .frame(width:80, height:80)
-                .cornerRadius(12)
-            Text(bestitem.title)
-                .font(.subheadline)
-                .fontWeight(.bold)
-        }
-    }
-}
-
-struct FavoriteView: View{
-    var body: some View{
+   var body: some View{
         VStack(alignment: .leading){
-            Text("Favorite cocktail").font(.headline)
-            ScrollView(.horizontal){
-                VStack(alignment: .leading){
-                    
-                    HStack{
-                        NavigationLink(destination:
-                        GroupDetailView()){
-                            GroupView()
-                        }
-                        GroupView()
-                        GroupView()
-                        GroupView()
-                        GroupView()
+            Text("Updated Cocktail!")
+                .font(.headline)
+                .foregroundColor(Color("PointColor"))
+           
+            //list view..
+            ScrollView(.vertical, showsIndicators: false){
+                LazyVStack(spacing: 0){
+                    ForEach(listData.items){item in
+                        //Item view..
+                        ItemView(item: $listData.items[getIndex(item: item)])
+                        
+                        Spacer()
                     }
+                    .background(Color.white)
+                    .cornerRadius(12)
+                    .shadow(color:Color("BackgroundColor"), radius: 8, x:0, y:0)
+                  
                 }
-            }//.frame(height:200)
-        }
-    }
-}
+                
 
-struct TempView: View{
-    var body: some View{
-        VStack(alignment: .leading){
-            Text("임시입니다").font(.headline)
-            ScrollView(.horizontal){
-                VStack(alignment: .leading){
-                    
-                    HStack{
-                        NavigationLink(destination:
-                        GroupDetailView()){
-                            GroupView()
-                        }
-                        GroupView()
-                        GroupView()
-                        GroupView()
-                        GroupView()
-                    }
-                }
-            }//.frame(height:200)
-        }
+            }
+        }.padding(.top, 5)
+    }
+    
+    func getIndex(item: Item)->Int{
+        return listData.items.firstIndex{(item1)->Bool in
+            return item.id == item1.id
+        } ?? 0
     }
 }
 

@@ -42,6 +42,7 @@ struct ContentView: View{
                         .font(.title)
                     Text ("\(Constants.TabBarText.tabBar2)")
                 }).tag(2)
+                
             }.accentColor(Color.red)
             
             ZStack{
