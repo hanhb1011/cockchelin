@@ -11,10 +11,11 @@ import Foundation
 class RecipeModel {
     
     static func loadSavedRecipes() -> [Recipe] {
-        
+        /*
         if let recipesFromUserDefaults = getSavedRecipesFromUserDefaults() {
             return recipesFromUserDefaults
         }
+         */
         
         return getSavedRecipesFromJSONFile()!
     }

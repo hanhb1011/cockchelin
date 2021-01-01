@@ -14,10 +14,16 @@ struct Post{
 }
 
 struct RecipeSearchView: View {
+    @ObservedObject var recipeSearchViewModel: RecipeSearchViewModel
     @State var searchText = ""
     @State var isSearching = false
     @State var mindegree : CGFloat = 0
     @State var maxdegree : CGFloat = 100
+    
+    init() {
+        self.recipeSearchViewModel = RecipeSearchViewModel()
+        
+    }
     
     //여기가 파일 리스트들
     let posts: [Post] = [
@@ -28,8 +34,6 @@ struct RecipeSearchView: View {
               detail: "spicy, 여기가 설명란",
               imgName: "best_1")
     ]
-    
-    let recipe = RecipeModel.loadSavedRecipes()
     
     var body: some View {
         NavigationView{
@@ -65,7 +69,7 @@ struct RecipeSearchView: View {
                 }
                 
                 //Cocktail Recipe list
-                ForEach((recipe).filter({"\($0)".lowercased().trimmingCharacters(in: .whitespaces)
+                ForEach((self.recipeSearchViewModel.recipes).filter({"\($0)".lowercased().trimmingCharacters(in: .whitespaces)
                                             .contains(searchText.lowercased().trimmingCharacters(in: .whitespaces))||searchText.isEmpty})){
                     section in
 
@@ -127,7 +131,9 @@ struct ItemRow: View {
         }.padding(.leading, 8)
         }.padding(.leading, 16).padding(.top, 8)
         }.padding(.leading, -20).padding(.bottom, 8)
-        }}
+        }
+        
+    }
 }
 
 /*
