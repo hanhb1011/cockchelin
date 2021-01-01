@@ -182,7 +182,7 @@ struct NewUpdatedView: View{
                 .font(.headline)
                 .foregroundColor(Color("PointColor"))
            
-            //list view..
+            //Item list view..
             ScrollView(.vertical, showsIndicators: false){
                 LazyVStack(spacing: 0){
                     ForEach(listData.items){item in
@@ -196,9 +196,7 @@ struct NewUpdatedView: View{
                     .shadow(color:Color("BackgroundColor"), radius: 8, x:0, y:0)
                   
                 }
-                
-
-            }
+            }//ScrollView
         }.padding(.top, 5)
     }
     
