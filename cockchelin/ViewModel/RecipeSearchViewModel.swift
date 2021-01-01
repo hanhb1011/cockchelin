@@ -11,15 +11,11 @@ import Foundation
 
 class RecipeSearchViewModel: ObservableObject {
     
+    @Published var recipes: [Recipe]
     
-    //111
-    
-    
-    //ㅑㅐㅂㅈ대랴ㅗ댜ㅐㄹㄷ
-    
-    
-    
-    //;;;;
+    init(){
+        self.recipes = RecipeModel.loadSavedRecipes()
+    }
     
     
 }
