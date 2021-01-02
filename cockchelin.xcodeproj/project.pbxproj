@@ -24,6 +24,7 @@
 		665E03FE254B122C00F62F66 /* RecipeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665E03F6254B122C00F62F66 /* RecipeModel.swift */; };
 		665E03FF254B122C00F62F66 /* RecipeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665E03F8254B122C00F62F66 /* RecipeViewModel.swift */; };
 		6690C697254D27C100F5031E /* RecipeSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6690C696254D27C100F5031E /* RecipeSearchViewModel.swift */; };
+		66CA2A8825A0D19000CEB149 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CA2A8725A0D19000CEB149 /* Filter.swift */; };
 		A25583B425868EAB0087FEAD /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25583B325868EAB0087FEAD /* FilterView.swift */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +48,7 @@
 		665E03F6254B122C00F62F66 /* RecipeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeModel.swift; sourceTree = "<group>"; };
 		665E03F8254B122C00F62F66 /* RecipeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeViewModel.swift; sourceTree = "<group>"; };
 		6690C696254D27C100F5031E /* RecipeSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeSearchViewModel.swift; sourceTree = "<group>"; };
+		66CA2A8725A0D19000CEB149 /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		A25583B325868EAB0087FEAD /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -84,6 +86,7 @@
 				665E03F1254B122C00F62F66 /* View */,
 				665E03F7254B122C00F62F66 /* ViewModel */,
 				665E03D0254B117D00F62F66 /* cockchelinApp.swift */,
+				66CA2A8725A0D19000CEB149 /* Filter.swift */,
 				665E03E7254B11EB00F62F66 /* Constants.swift */,
 				665E03E6254B11EB00F62F66 /* Helper.swift */,
 				6604CB4825569B7700824A2D /* RecipeData.json */,
@@ -218,6 +221,7 @@
 				665E03D1254B117D00F62F66 /* cockchelinApp.swift in Sources */,
 				562B2A43259F04830014A558 /* Item.swift in Sources */,
 				665E03EC254B11EB00F62F66 /* Constants.swift in Sources */,
+				66CA2A8825A0D19000CEB149 /* Filter.swift in Sources */,
 				665E03FD254B122C00F62F66 /* Recipe.swift in Sources */,
 				665E03FF254B122C00F62F66 /* RecipeViewModel.swift in Sources */,
 			);

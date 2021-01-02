@@ -11,8 +11,9 @@ import SwiftUI
 
 struct Filterview : View{
     
-    @State var width : CGFloat = 0
-    @State var width1 : CGFloat = 15
+    var filter: Filter
+    @State var width : CGFloat
+    @State var width1 : CGFloat
     var totalWidth = UIScreen.main.bounds.width-60
     
     @State var filters = [
@@ -29,8 +30,14 @@ struct Filterview : View{
     
     @State var showFilter = false
     
+    init(filter: Filter) {
+        self.filter = filter
+        self._width = State<CGFloat>(initialValue: CGFloat(self.filter.minDegree) * self.totalWidth / 100)
+        self._width1 = State<CGFloat>(initialValue: CGFloat(self.filter.maxDegree) * self.totalWidth / 100)
+    }
+    
+    
     var body: some View{
-        
         ScrollView{
         VStack{
             //GlassType RadioButton
@@ -96,7 +103,8 @@ struct Filterview : View{
                                     (value) in
                                     
                                     if value.location.x>=0 && value.location.x<=self.width1{
-                                    self.width = value.location.x
+                                        self.width = value.location.x
+                                        self.filter.minDegree = Double(100 * self.width / self.totalWidth)
                                     }
                                 })
                             
@@ -113,7 +121,8 @@ struct Filterview : View{
                                     (value) in
                                     
                                     if value.location.x<=self.totalWidth && value.location.x>=self.width{
-                                    self.width1 = value.location.x
+                                        self.width1 = value.location.x
+                                        self.filter.maxDegree = Double(100 * self.width1 / self.totalWidth)
                                     }
                                 })
                             
@@ -124,7 +133,11 @@ struct Filterview : View{
             
         }
         .padding()
-    }
+        }
+        .onAppear() {
+            width = CGFloat(self.filter.minDegree) * self.totalWidth / 100
+            width1 = CGFloat(self.filter.maxDegree) * self.totalWidth / 100
+        }
     }
     func getValue(val: CGFloat)->String{
         return String(format:"%.2f",val)
@@ -179,6 +192,6 @@ struct FilterItem : Identifiable{
 
 struct FilterView_Previews: PreviewProvider {
     static var previews: some View {
-        Filterview()
+        Filterview(filter: Filter())
     }
 }

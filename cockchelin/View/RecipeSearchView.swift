@@ -15,14 +15,13 @@ struct Post{
 
 struct RecipeSearchView: View {
     @ObservedObject var recipeSearchViewModel: RecipeSearchViewModel
+    @ObservedObject var filter: Filter
     @State var searchText = ""
     @State var isSearching = false
-    @State var mindegree : CGFloat = 0
-    @State var maxdegree : CGFloat = 100
     
     init() {
         self.recipeSearchViewModel = RecipeSearchViewModel()
-        
+        self.filter = Filter()
     }
     
     //여기가 파일 리스트들
@@ -63,7 +62,7 @@ struct RecipeSearchView: View {
                         }.padding(.horizontal, 12)
                             .foregroundColor(Color.gray)
                     )
-                        NavigationLink(destination:Filterview()){Image(systemName: "slider.vertical.3")}
+                        NavigationLink(destination:Filterview(filter: filter)){Image(systemName: "slider.vertical.3")}
                 }
                     
                 }
@@ -85,7 +84,14 @@ struct RecipeSearchView: View {
                 //Item list view..
                 ScrollView(.vertical, showsIndicators: false){
                     LazyVStack(spacing: 0){
-                        ForEach((self.recipeSearchViewModel.recipes).filter({"\($0)".lowercased().trimmingCharacters(in: .whitespaces) .contains(searchText.lowercased() .trimmingCharacters(in: .whitespaces)) || searchText.isEmpty})){section in
+                        ForEach((self.recipeSearchViewModel.recipes)
+                                    .filter{"\($0)".lowercased().trimmingCharacters(in: .whitespaces).contains(searchText.lowercased() .trimmingCharacters(in: .whitespaces)) || searchText.isEmpty}
+                                    .filter {
+                                        print("\($0.alcoholDegree)")
+                                        print(Int(self.filter.maxDegree))
+                                        print(Int(self.filter.minDegree))
+                                        return $0.alcoholDegree <= Int(self.filter.maxDegree) && $0.alcoholDegree >= Int(self.filter.minDegree)
+                                    }){section in
                             
                             /*    if(Int(mindegree) <=  section.alcoholDegree <= Int(maxdegree) ){
                             */  ItemRow(item: section)
