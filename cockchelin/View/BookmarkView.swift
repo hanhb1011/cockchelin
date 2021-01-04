@@ -14,6 +14,7 @@ struct BookmarkView: View {
 }
 
 struct BookmarkView_Previews: PreviewProvider {
+    @State var hyoj = 0
     static var previews: some View {
         BookmarkView()
     }

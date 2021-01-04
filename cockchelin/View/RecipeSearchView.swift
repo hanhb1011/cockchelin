@@ -15,14 +15,13 @@ struct Post{
 
 struct RecipeSearchView: View {
     @ObservedObject var recipeSearchViewModel: RecipeSearchViewModel
+    @ObservedObject var filter: Filter
     @State var searchText = ""
     @State var isSearching = false
-    @State var mindegree : CGFloat = 0
-    @State var maxdegree : CGFloat = 100
     
     init() {
         self.recipeSearchViewModel = RecipeSearchViewModel()
-        
+        self.filter = Filter()
     }
     
     //여기가 파일 리스트들
@@ -63,11 +62,12 @@ struct RecipeSearchView: View {
                         }.padding(.horizontal, 12)
                             .foregroundColor(Color.gray)
                     )
-                        NavigationLink(destination:Filterview()){Image(systemName: "slider.vertical.3")}
+                        NavigationLink(destination:Filterview(filter: filter)){Image(systemName: "slider.vertical.3")}
                 }
                     
                 }
-                
+                //--------------------------------------
+                /*!!아래 코드로 수정하였음!!
                 //Cocktail Recipe list
                 ForEach((self.recipeSearchViewModel.recipes).filter({"\($0)".lowercased().trimmingCharacters(in: .whitespaces)
                                             .contains(searchText.lowercased().trimmingCharacters(in: .whitespaces))||searchText.isEmpty})){
@@ -79,6 +79,33 @@ struct RecipeSearchView: View {
                  */  ItemRow(item: section)
                   //  }
                 }
+                */
+                
+                //Item list view..
+                ScrollView(.vertical, showsIndicators: false){
+                    LazyVStack(spacing: 0){
+                        ForEach((self.recipeSearchViewModel.recipes)
+                                    .filter{"\($0)".lowercased().trimmingCharacters(in: .whitespaces).contains(searchText.lowercased() .trimmingCharacters(in: .whitespaces)) || searchText.isEmpty}
+                                    .filter {
+                                        print("\($0.alcoholDegree)")
+                                        print(Int(self.filter.maxDegree))
+                                        print(Int(self.filter.minDegree))
+                                        return $0.alcoholDegree <= Int(self.filter.maxDegree) && $0.alcoholDegree >= Int(self.filter.minDegree)
+                                    }){section in
+                            
+                            /*    if(Int(mindegree) <=  section.alcoholDegree <= Int(maxdegree) ){
+                            */  ItemRow(item: section)
+                            //  }
+                            Spacer()
+                        }
+                        .background(Color.white)
+                        .cornerRadius(12)
+                        .shadow(color:Color("BackgroundColor"), radius: 8, x:0, y:0)
+                      
+                    }
+                }//ScrollView
+                
+                //--------------------------------------
                 
             }.navigationBarTitle(Text("Cockchelin🍸"))
         }.padding(.top, -20)
