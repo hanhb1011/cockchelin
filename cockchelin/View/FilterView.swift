@@ -157,6 +157,8 @@ struct CardView: View{
             Text(filter.title)
                 .fontWeight(.semibold)
                 .foregroundColor(Color.black.opacity(0.7))
+                .frame(height: 30, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+            
             Spacer()
             
             ZStack{
