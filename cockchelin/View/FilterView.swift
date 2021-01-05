@@ -16,15 +16,13 @@ struct Filterview : View{
     @State var width1 : CGFloat
     var totalWidth = UIScreen.main.bounds.width-60
     
-    @State var filters = [
+    @State var Colors = [
         
-        FilterItem(title: "StemmedLiqueurGlass", checked: false),
-        FilterItem(title: "CocktailGlass", checked: false),
-        FilterItem(title: "OldFashonedGlass", checked: false),
-        FilterItem(title: "HighballGlass", checked: false),
-        FilterItem(title: "FootedPilsnerGlass", checked: false),
-        FilterItem(title:      "SourGlass",          checked: false),
-        FilterItem(title: "CollinsGlass", checked: false)
+        FilterItem(title: "붉은 빛", checked: true),
+        FilterItem(title: "푸른 빛", checked: true),
+        FilterItem(title: "노란 빛", checked: true),
+        FilterItem(title: "다채로운 색상 ", checked: true),
+        FilterItem(title: "무색", checked: true)
 
         ]
     
@@ -44,20 +42,20 @@ struct Filterview : View{
             VStack{
                 
                 HStack{
-                    Text("Glass")
+                    Text("색상")
                         .font(.title)
                         .fontWeight(.bold  )
                         .foregroundColor(.black)
                     
                     Spacer()
                    
-                        Text("Done")
+                        Text("적용")
                             .fontWeight(.heavy)
                             
                 }.padding([.horizontal,.top])
                 .padding(.bottom, 10)
                 
-                ForEach(filters){filter in
+                ForEach(Colors){filter in
                     CardView(filter:filter)
                     
                 }
@@ -68,8 +66,10 @@ struct Filterview : View{
             
             //Degree RangeSlider
             
+            
+            
             HStack{
-            Text("Degree")
+            Text("도수")
                 .font(.title)
                 .fontWeight(.bold)
             
