@@ -144,16 +144,18 @@ struct RecipeView: View {
                         Text("\(ingredient.names[0])")
                             .font(.system(size: 16))
                             .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
-                        Text(String(self.recipeViewModel.getLiquidVolume(ingredient: ingredient, liquidUnitType: self.units[unitSelectorIndex], numberOfServings: self.numbers[numberSelectorIndex])))
-                                .font(.system(size: 16))
-                                .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
+                        if (ingredient.type != .none) {
+                            Text(String(self.recipeViewModel.getLiquidVolume(ingredient: ingredient, liquidUnitType: self.units[unitSelectorIndex], numberOfServings: self.numbers[numberSelectorIndex])))
+                                    .font(.system(size: 16))
+                                    .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
+                        }
                         
                         if (ingredient.type == .oz || ingredient.type == .ml) {
                             Text(self.units[unitSelectorIndex].rawValue)
                                 .font(.system(size: 16))
                                 .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
                         }
-                        else {
+                        else if (ingredient.type != .none) {
                             Text(ingredient.type.rawValue)
                                 .font(.system(size: 16))
                                 .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
