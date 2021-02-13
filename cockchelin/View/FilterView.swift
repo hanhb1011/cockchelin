@@ -128,7 +128,7 @@ struct Filterview : View{
                             
                         )
                 }
-                
+            
             }.padding(.top, 25)
             
         }
