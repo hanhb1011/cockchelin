@@ -94,7 +94,7 @@ struct RecipeSearchView: View {
                                     }){section in
                             
                             /*    if(Int(mindegree) <=  section.alcoholDegree <= Int(maxdegree) ){
-                            */  ItemRow(item: section)
+                            */  RecipeItemView(recipe: section)
                             //  }
                             Spacer()
                         }
@@ -133,6 +133,7 @@ struct CommonRecipeView: View{
     }
 }
 
+@available(*, deprecated)
 struct ItemRow: View {
     var item: Recipe
  
