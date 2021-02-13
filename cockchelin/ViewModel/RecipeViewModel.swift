@@ -23,7 +23,7 @@ class RecipeViewModel: ObservableObject {
     
     func updateCurrentTimestamp() {
         recipe.lastTimeRecipeOpened = Date()
-        print(recipe.lastTimeRecipeOpened.description)
+        //print(recipe.lastTimeRecipeOpened.description)
         RecipeModel.updateRecipe(recipe: recipe)
     }
     

@@ -18,7 +18,7 @@ struct RecipeItemView: View {
     var body: some View {
         NavigationLink(destination: RecipeView(recipe: recipe)){
             HStack{
-                Image("temp")
+                Image(RecipeModel.getRandomCocktailImageName())
                     .resizable()
                     .scaledToFit()
                     .frame(width: 100, height: 100, alignment: .center)
@@ -28,17 +28,18 @@ struct RecipeItemView: View {
                         .bold()
                         .font(.system(size: 20, weight: .bold))
                         .foregroundColor(Color(red: 70/255, green: 70/255, blue: 70/255, opacity: 100))
-                    
+                        .padding(.bottom, 0.5)
+                        .lineLimit(1)
                     
                     HStack {
                         Text(getIngredient())
-                            .font(.system(size: 13, weight: .bold))
+                            .font(.system(size: 13))
                             .foregroundColor(Color(red: 150/255, green: 150/255, blue: 150/255, opacity: 100))
-                            .lineLimit(1)
+                            .lineLimit(2)
                     }
 
                     Text("\(recipe.alcoholDegree)%")
-                        .font(.system(size: 13, weight: .bold))
+                        .font(.system(size: 13))
                         .foregroundColor(Color(red: 150/255, green: 150/255, blue: 150/255, opacity: 100))
 
                 }.padding(.leading, 8)
@@ -53,7 +54,7 @@ struct RecipeItemView: View {
         var ret: String = ""
         
         self.recipe.ingredients.forEach { ingredient in
-            ret.append("\(ingredient.names[0]) ")
+            ret.append("\(ingredient.names[0])  ")
         }
         
         

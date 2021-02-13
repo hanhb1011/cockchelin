@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 class RecipeModel {
     
@@ -82,5 +83,11 @@ class RecipeModel {
         }
         
         return foundedRecipe
+    }
+    
+    static func getRandomCocktailImageName() -> String {
+        let randomCocktailImages: [String] = ["temp", "temp2", "todayCocktail"]
+        
+        return randomCocktailImages.randomElement()!
     }
 }

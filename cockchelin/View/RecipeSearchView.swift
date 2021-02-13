@@ -43,8 +43,8 @@ struct RecipeSearchView: View {
                         TextField("Search here", text: $searchText)
                             .padding(.leading, 24)
                     }
-                    .padding()
-                    .background(Color(.systemGray5))
+                    .padding(10)
+                    .background(Color(red: 250/255, green: 250/255, blue: 250/255, opacity: 100))
                     .cornerRadius(6)
                     //.padding(.horizontal)
                     .onTapGesture(perform: {
@@ -87,9 +87,6 @@ struct RecipeSearchView: View {
                         ForEach((self.recipeSearchViewModel.recipes)
                                     .filter{"\($0)".lowercased().trimmingCharacters(in: .whitespaces).contains(searchText.lowercased() .trimmingCharacters(in: .whitespaces)) || searchText.isEmpty}
                                     .filter {
-                                        print("\($0.alcoholDegree)")
-                                        print(Int(self.filter.maxDegree))
-                                        print(Int(self.filter.minDegree))
                                         return $0.alcoholDegree <= Int(self.filter.maxDegree) && $0.alcoholDegree >= Int(self.filter.minDegree)
                                     }){section in
                             
