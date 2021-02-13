@@ -38,6 +38,8 @@ struct HomeView: View {
                     //best cocktail list
                     BestCocktailView()
                     
+                    IngredientsView()
+                    
                     NewUpdatedView()
                     
                 }.foregroundColor(Color.themeForeground)
@@ -52,11 +54,12 @@ struct HomeView: View {
 struct RecipeCardView: View{
     var body: some View{
         VStack(alignment: .leading) {
-            Text("오늘의 칵테일 align 수정필요")
+            Text("Today's Cocktail")
                 .font(.system(.title, design:.serif))
                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                 .font(.headline)
                 .foregroundColor(Color("PointColor"))
+                
                 //.font(Font.system(size: 40))
         }
         VStack{
@@ -88,7 +91,7 @@ struct RecipeCardView: View{
 }
 struct TodayCocktailView: View{
     var body: some View{
-        VStack(alignment: .center, spacing:20){
+        VStack(alignment: .leading, spacing:20){
             RecipeCardView()
         }
     }//VIEW
@@ -163,6 +166,65 @@ struct BestCocktailView: View{
     }
 }
 
+struct IngredientsCell: View{
+    var body: some View{
+        ZStack{
+            VStack(alignment: .leading){
+                Text("Brandy")
+                    .font(.headline)
+                    .foregroundColor(Color("PointColor"))
+                    .padding(.top, 8)
+                    .padding(.leading)
+                
+                HStack{
+                    Text("특징?")
+                        .font(.subheadline).bold()
+                        .foregroundColor(Color("PointColor"))
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 8)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 20)
+                                .fill(Color.gray.opacity(0.25))
+                        )
+                        .frame(width: 80, height: 24)
+                    
+                    Image("june-bug")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 72, height: 72)
+                        .padding([.bottom, .trailing], 4)
+                        .cornerRadius(10)
+                }
+            }
+        }
+        .background(Color.white)
+        .cornerRadius(12)
+        //.shadow(color: .blue, radius: 6, x: 0, y: 0)
+    }
+}
+
+struct IngredientsView: View{
+    private let gridItems = [GridItem(.flexible()), GridItem(.flexible())]
+    
+    var body: some View{
+        VStack(alignment: .leading){
+            Text("Cocktail Ingredients")
+                .font(.headline)
+                .foregroundColor(Color("PointColor"))
+        
+            ScrollView{
+                LazyVGrid(columns: gridItems, spacing:15) {
+                    ForEach(0..<4){_ in
+                        IngredientsCell()
+                    }
+                }
+            }
+            .navigationTitle("Ingredients")
+            .foregroundColor(Color("PointColor"))
+        }.frame(height: 290)
+    }
+}
+
 //new updated items
 class ListViewModel: ObservableObject{
     @Published var items = [
@@ -209,6 +271,8 @@ struct NewUpdatedView: View{
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
+        Group {
+            HomeView()
+        }
     }
 }
