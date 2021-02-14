@@ -237,8 +237,18 @@ class ListViewModel: ObservableObject{
 
 struct NewUpdatedView: View{
     @StateObject var listData = ListViewModel()
+    @ObservedObject var recipeSearchViewModel: RecipeSearchViewModel
+    @ObservedObject var filter: Filter
+    @State var searchText = ""
+    @State var isSearching = false
+    
+    init() {
+        self.recipeSearchViewModel = RecipeSearchViewModel()
+        self.filter = Filter()
+    }
     
    var body: some View{
+    
         VStack(alignment: .leading){
             Text("Updated Cocktail!")
                 .font(.headline)
@@ -247,9 +257,11 @@ struct NewUpdatedView: View{
             //Item list view..
             ScrollView(.vertical, showsIndicators: false){
                 LazyVStack(spacing: 0){
-                    ForEach(listData.items){item in
-                        //Item view..
-                        ItemView(item: $listData.items[getIndex(item: item)])
+                    let totalCount = (self.recipeSearchViewModel.recipes.count)
+                    
+                    //last updated 10 list
+                    ForEach(totalCount-10..<totalCount){section in
+                        RecipeItemView(recipe: self.recipeSearchViewModel.recipes[section])
                         
                         Spacer()
                     }
