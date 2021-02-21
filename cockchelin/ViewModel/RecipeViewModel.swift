@@ -90,7 +90,7 @@ class RecipeViewModel: ObservableObject {
             case .stir:
                 return "젓는다."
             case .shake:
-                return "쉐이크한다."
+                return "얼음과 함께 쉐이크한다."
             case .float:
                 return "플로팅한다."
             case .blend:
