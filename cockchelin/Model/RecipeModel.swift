@@ -12,13 +12,19 @@ import SwiftUI
 class RecipeModel {
     
     static func loadSavedRecipes() -> [Recipe] {
-        /*
-        if let recipesFromUserDefaults = getSavedRecipesFromUserDefaults() {
-            return recipesFromUserDefaults
-        }
-         */
+
+        let recipesFromUserDefaults = getSavedRecipesFromUserDefaults()
+        let recipesFromJSONFile = getSavedRecipesFromJSONFile()
         
-        return getSavedRecipesFromJSONFile()!
+        if (recipesFromUserDefaults == nil) {
+            return recipesFromJSONFile!
+        }
+        
+        if (recipesFromUserDefaults!.count < recipesFromJSONFile!.count) {
+            return recipesFromJSONFile!
+        }
+        
+        return recipesFromUserDefaults!
     }
     
     static func getSavedRecipesFromJSONFile() -> [Recipe]? {
