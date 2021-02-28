@@ -201,7 +201,20 @@ struct RecipeView: View {
             }
         }
         .background(Color(red: 247/255, green: 247/255, blue: 251/255, opacity: 100).edgesIgnoringSafeArea(.all))
-        
+        .navigationBarItems(trailing:
+            Button(action: {
+                recipeViewModel.checkFavorite()
+            }) {
+                if (true == recipeViewModel.recipe.favoriteChecked) {
+                    Image(systemName: "star.fill")
+                        .foregroundColor(Color(red: 255/255, green: 100/255, blue: 168/255, opacity: 100))
+                }
+                else {
+                    Image(systemName: "star")
+                        .foregroundColor(Color(red: 255/255, green: 100/255, blue: 168/255, opacity: 100))
+                }
+            }
+        )
     }
     
     init(recipe: Recipe) {
