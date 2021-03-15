@@ -11,6 +11,7 @@ import SwiftUI
 
 struct Filterview : View{
     
+    @ObservedObject var filterViewModel: FilterView
     var filter: Filter
     @State var width : CGFloat
     @State var width1 : CGFloat
