@@ -45,8 +45,6 @@ struct RecipeProcess: Codable, Identifiable {
         self.ingredientIndex = ingredientIndex
         self.behavior = behavior
     }
-    
-    
 }
 
 enum TechniqueType: String, Codable, CaseIterable {

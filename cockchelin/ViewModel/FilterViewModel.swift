@@ -21,5 +21,8 @@ class FilterViewModel: ObservableObject {
     
 }
 
-
-
+struct IngredientSearchItem {
+    var id = UUID()
+    let ingredientName: String
+    let imageName: String
+}
