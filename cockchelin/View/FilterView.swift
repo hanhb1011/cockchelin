@@ -11,7 +11,7 @@ import SwiftUI
 
 struct Filterview : View{
     
-    @ObservedObject var filterViewModel: FilterView
+    @ObservedObject var filterViewModel = FilterViewModel()
     var filter: Filter
     @State var width : CGFloat
     @State var width1 : CGFloat
@@ -29,6 +29,8 @@ struct Filterview : View{
     
     @State var showFilter = false
     
+    @State var selectedIndex = 0
+    
     init(filter: Filter) {
         self.filter = filter
         self._width = State<CGFloat>(initialValue: CGFloat(self.filter.minDegree) * self.totalWidth / 100)
@@ -39,6 +41,51 @@ struct Filterview : View{
     var body: some View{
         ScrollView{
         VStack{
+            HStack {
+                Text("재료 선택")
+                    .bold()
+                    .font(.system(size: 25, weight: .bold))
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 10)
+                    .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
+                Spacer()
+            }
+            
+            HStack {
+                VStack {
+                    ForEach(self.filterViewModel.classificationList) { classification in
+                        HStack {
+                            Button(action: {
+                                self.selectedIndex = classification.index
+                                
+                                
+                                
+                            }, label: {
+                                Text(classification.name)
+                                .font(.system(size: 18, weight: .bold))
+                                .foregroundColor(Color(red: 80/255, green: 80/255, blue: 80/255, opacity: 100))
+                            })
+                            .padding()
+                        }
+                        .frame(width: 80)
+                        .background(self.selectedIndex == classification.index ? Color.pink : Color(red: 247/255, green: 247/255, blue: 251/255, opacity: 100))
+                    }
+                    
+                    
+                }
+                .padding(.vertical)
+                .frame(width: 80)
+                .background(Color(red: 247/255, green: 247/255, blue: 251/255, opacity: 100)
+                .edgesIgnoringSafeArea(.all))
+                
+                Spacer()
+                
+                
+                
+                
+            }
+            
+            
             //GlassType RadioButton
             VStack{
                 
@@ -69,71 +116,73 @@ struct Filterview : View{
             
             
             
-            HStack{
-            Text("도수")
-                .font(.title)
-                .fontWeight(.bold)
-            
-                Spacer()
+            VStack {
+                HStack{
+                Text("도수")
+                    .font(.title)
+                    .fontWeight(.bold)
                 
-            Text("\(self.getValue(val: 100*self.width/self.totalWidth))-\(self.getValue(val:100*self.width1/self.totalWidth))도")
-                .fontWeight(.bold)
-                
-            }
-            ZStack(alignment:.leading){
-                
-                Rectangle()
-                    .fill(Color.black.opacity(0.20))
-                    .frame(height:6)
-                
-                Rectangle()
-                    .fill(Color.black)
-                    .frame(width: self.width1 - self.width, height: 6)
-                    .offset(x: self.width + 18)
-                
-                HStack(spacing: 0){
+                    Spacer()
                     
-                    Circle()
-                        .fill(Color.black)
-                        .frame(width: 18, height: 18)
-                        .offset(x: self.width)
-                        .gesture(
-                        
-                            DragGesture()
-                                .onChanged({
-                                    (value) in
-                                    
-                                    if value.location.x>=0 && value.location.x<=self.width1{
-                                        self.width = value.location.x
-                                        self.filter.minDegree = Double(100 * self.width / self.totalWidth)
-                                    }
-                                })
-                            
-                        )
+                Text("\(self.getValue(val: 100*self.width/self.totalWidth))-\(self.getValue(val:100*self.width1/self.totalWidth))도")
+                    .fontWeight(.bold)
                     
-                    Circle()
-                        .fill(Color.black)
-                        .frame(width: 18, height: 18)
-                        .offset(x: self.width1)
-                        .gesture(
-                        
-                            DragGesture()
-                                .onChanged({
-                                    (value) in
-                                    
-                                    if value.location.x<=self.totalWidth && value.location.x>=self.width{
-                                        self.width1 = value.location.x
-                                        self.filter.maxDegree = Double(100 * self.width1 / self.totalWidth)
-                                    }
-                                })
-                            
-                        )
                 }
-            
-            }.padding(.top, 25)
-            
+                ZStack(alignment:.leading){
+                    
+                    Rectangle()
+                        .fill(Color.black.opacity(0.20))
+                        .frame(height:6)
+                    
+                    Rectangle()
+                        .fill(Color.black)
+                        .frame(width: self.width1 - self.width, height: 6)
+                        .offset(x: self.width + 18)
+                    
+                    HStack(spacing: 0){
+                        
+                        Circle()
+                            .fill(Color.black)
+                            .frame(width: 18, height: 18)
+                            .offset(x: self.width)
+                            .gesture(
+                            
+                                DragGesture()
+                                    .onChanged({
+                                        (value) in
+                                        
+                                        if value.location.x>=0 && value.location.x<=self.width1{
+                                            self.width = value.location.x
+                                            self.filter.minDegree = Double(100 * self.width / self.totalWidth)
+                                        }
+                                    })
+                                
+                            )
+                        
+                        Circle()
+                            .fill(Color.black)
+                            .frame(width: 18, height: 18)
+                            .offset(x: self.width1)
+                            .gesture(
+                            
+                                DragGesture()
+                                    .onChanged({
+                                        (value) in
+                                        
+                                        if value.location.x<=self.totalWidth && value.location.x>=self.width{
+                                            self.width1 = value.location.x
+                                            self.filter.maxDegree = Double(100 * self.width1 / self.totalWidth)
+                                        }
+                                    })
+                                
+                            )
+                    }
+                
+                }.padding(.top, 25)
+                
+                }
+            .padding()
         }
-        .padding()
         }
         .onAppear() {
             width = CGFloat(self.filter.minDegree) * self.totalWidth / 100
