@@ -78,3 +78,18 @@ func printIngredients() {
     saveIngredientsToJSONFile(ingredients: ingredients)
 }
 
+func getClassificationsFromJSONFile() -> [Classification]? {
+    
+    if let fileLocation = Bundle.main.url(forResource: "Classifications", withExtension: "json") {
+        do {
+            let data = try Data(contentsOf: fileLocation)
+            let jsonDecoder = JSONDecoder()
+            let dataFromJson = try jsonDecoder.decode([Classification].self, from: data)
+            return dataFromJson
+        } catch {
+            print(error)
+        }
+    }
+    
+    return nil
+}

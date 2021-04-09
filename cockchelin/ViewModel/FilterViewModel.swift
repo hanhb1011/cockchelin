@@ -12,23 +12,26 @@ class FilterViewModel: ObservableObject {
     /*
      subclass?
      */
-    let classificationList: [Classification] = [Classification(index: 0, name: "기주"), Classification(index: 1, name: "리큐어"), Classification(index: 2, name: "주스"), Classification(index: 3, name: "기타")]
+    let classificationList: [Classification]
+    
+    init() {
+        classificationList = getClassificationsFromJSONFile()!
+        
+    }
+    
+    func getSelectedIngredientList(index: Int) -> String {
+        var ret: String = ""
+        var i = 0
+        classificationList[index].ingredientSearchItems.forEach { ingredient in
+            ret.append("[\(i)] \(ingredient)   ")
+            i += 1
+            if ((i % 2) == 0) {
+                ret.append("\n")
+            }
+        }
+        
+        return ret
+    }
     
     
-    
-    
-    
-    
-}
-
-struct Classification: Identifiable {
-    var id = UUID()
-    var index: Int
-    var name: String
-    var ingredientSearchItems: [IngredientSearchItem] = []
-}
-
-struct IngredientSearchItem {
-    let ingredientName: String
-    let imageName: String
 }

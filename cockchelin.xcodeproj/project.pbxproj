@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		562B2A2E258FA6F00014A558 /* BookmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562B2A2D258FA6F00014A558 /* BookmarkView.swift */; };
 		562B2A43259F04830014A558 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562B2A42259F04830014A558 /* Item.swift */; };
+		6653B4952620A6490096A0A5 /* Classification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6653B4942620A6490096A0A5 /* Classification.swift */; };
+		6653B49B2620ADF70096A0A5 /* Classifications.json in Resources */ = {isa = PBXBuildFile; fileRef = 6653B49A2620ADF70096A0A5 /* Classifications.json */; };
 		665E03D1254B117D00F62F66 /* cockchelinApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665E03D0254B117D00F62F66 /* cockchelinApp.swift */; };
 		665E03D3254B117D00F62F66 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665E03D2254B117D00F62F66 /* ContentView.swift */; };
 		665E03D5254B117E00F62F66 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 665E03D4254B117E00F62F66 /* Assets.xcassets */; };
@@ -34,6 +36,8 @@
 /* Begin PBXFileReference section */
 		562B2A2D258FA6F00014A558 /* BookmarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkView.swift; sourceTree = "<group>"; };
 		562B2A42259F04830014A558 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		6653B4942620A6490096A0A5 /* Classification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Classification.swift; sourceTree = "<group>"; };
+		6653B49A2620ADF70096A0A5 /* Classifications.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Classifications.json; sourceTree = "<group>"; };
 		665E03CD254B117D00F62F66 /* cockchelin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cockchelin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		665E03D0254B117D00F62F66 /* cockchelinApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cockchelinApp.swift; sourceTree = "<group>"; };
 		665E03D2254B117D00F62F66 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -98,6 +102,7 @@
 				66CA2A8725A0D19000CEB149 /* Filter.swift */,
 				665E03E7254B11EB00F62F66 /* Constants.swift */,
 				665E03E6254B11EB00F62F66 /* Helper.swift */,
+				6653B49A2620ADF70096A0A5 /* Classifications.json */,
 				66A45CB825E2567A00F84B1C /* RecipeData.json */,
 				66E5D7CB25FE0E4100700367 /* Ingredients.json */,
 				665E03D4254B117E00F62F66 /* Assets.xcassets */,
@@ -135,6 +140,7 @@
 				665E03F5254B122C00F62F66 /* Recipe.swift */,
 				665E03F6254B122C00F62F66 /* RecipeModel.swift */,
 				562B2A42259F04830014A558 /* Item.swift */,
+				6653B4942620A6490096A0A5 /* Classification.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -206,6 +212,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6653B49B2620ADF70096A0A5 /* Classifications.json in Resources */,
 				66E5D7CC25FE0E4100700367 /* Ingredients.json in Resources */,
 				665E03D8254B117E00F62F66 /* Preview Assets.xcassets in Resources */,
 				665E03D5254B117E00F62F66 /* Assets.xcassets in Resources */,
@@ -220,6 +227,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6653B4952620A6490096A0A5 /* Classification.swift in Sources */,
 				665E03FB254B122C00F62F66 /* RecipeView.swift in Sources */,
 				A25583B425868EAB0087FEAD /* FilterView.swift in Sources */,
 				665E03E1254B11D700F62F66 /* HomeView.swift in Sources */,

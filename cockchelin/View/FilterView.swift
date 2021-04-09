@@ -30,11 +30,14 @@ struct Filterview : View{
     @State var showFilter = false
     
     @State var selectedIndex = 0
+    @State var temp: String = ""
     
     init(filter: Filter) {
         self.filter = filter
         self._width = State<CGFloat>(initialValue: CGFloat(self.filter.minDegree) * self.totalWidth / 100)
         self._width1 = State<CGFloat>(initialValue: CGFloat(self.filter.maxDegree) * self.totalWidth / 100)
+        
+        self.temp = filterViewModel.getSelectedIngredientList(index: self.selectedIndex)
     }
     
     
@@ -57,8 +60,7 @@ struct Filterview : View{
                         HStack {
                             Button(action: {
                                 self.selectedIndex = classification.index
-                                
-                                
+                                self.temp = self.filterViewModel.getSelectedIngredientList(index: classification.index)
                                 
                             }, label: {
                                 Text(classification.name)
@@ -68,7 +70,7 @@ struct Filterview : View{
                             .padding()
                         }
                         .frame(width: 80)
-                        .background(self.selectedIndex == classification.index ? Color.pink : Color(red: 247/255, green: 247/255, blue: 251/255, opacity: 100))
+                        .background(self.selectedIndex == classification.index ? Color(red: 255/255, green: 150/255, blue: 168/255, opacity: 100) : Color(red: 247/255, green: 247/255, blue: 251/255, opacity: 100))
                     }
                     
                     
@@ -78,10 +80,12 @@ struct Filterview : View{
                 .background(Color(red: 247/255, green: 247/255, blue: 251/255, opacity: 100)
                 .edgesIgnoringSafeArea(.all))
                 
+                
+                Text(self.temp)
+                    .frame(height: 250, alignment: .topLeading)
+                    .font(.system(size: 10, weight: .bold))
+                
                 Spacer()
-                
-                
-                
                 
             }
             
