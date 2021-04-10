@@ -50,14 +50,9 @@ struct ContentView: View{
                 
                 Image("logo")
                     .resizable()
-                    .renderingMode(.original)
-                    .aspectRatio(contentMode: animate ? .fill : .fit)
-                    .frame(width: animate ? nil : 120, height: animate ? nil : 120)
-                 //scale view
-                    .scaleEffect(animate ? 3 : 1)
-                //set width to avoid oversize
-                    .frame(width: UIScreen.main.bounds.width)
-                
+                    .scaledToFit()
+                    .frame(width: 400, height: 400, alignment: .center)
+                    .offset(x:15, y:-150)
             }
             .ignoresSafeArea(.all, edges: .all)
             .onAppear(perform: animateSplash )
@@ -67,7 +62,7 @@ struct ContentView: View{
     }
     
     func animateSplash(){
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.35){
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.85){
             withAnimation(Animation.easeOut(duration: 0.45)){
                 animate.toggle()
             }
