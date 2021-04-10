@@ -47,9 +47,8 @@ struct Filterview : View{
     
     init(filter: Filter) {
         self.filter = filter
-        self._width = State<CGFloat>(initialValue: CGFloat(self.filter.minDegree) * self.totalWidth / 100)
-        self._width1 = State<CGFloat>(initialValue: CGFloat(self.filter.maxDegree) * self.totalWidth / 100)
-        
+        self._width = State<CGFloat>(initialValue: CGFloat(self.filter.minDegree) * self.totalWidth / 50)
+        self._width1 = State<CGFloat>(initialValue: CGFloat(self.filter.maxDegree) * self.totalWidth / 50)
     }
     
     var body: some View{
@@ -217,8 +216,8 @@ struct Filterview : View{
         }
         }
         .onAppear() {
-            width = CGFloat(self.filter.minDegree) * self.totalWidth / 100
-            width1 = CGFloat(self.filter.maxDegree) * self.totalWidth / 100
+            width = CGFloat(self.filter.minDegree) * self.totalWidth / 50
+            width1 = CGFloat(self.filter.maxDegree) * self.totalWidth / 50
         }
     }
     func getValue(val: CGFloat)->String{
