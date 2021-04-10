@@ -28,17 +28,29 @@ struct Filterview : View{
     
     @State var showFilter = false
     
-    @State var selectedIndex = 0
+    @State var selectedTotal = true
+    @State var selectedClassificationList: [Bool] = [false, false, false, false]
     @State var temp: String = ""
+    @State var savedClassificaionList: [Bool] = [false, false, false, false]
+    
+    func clearSelectedClassificationList() {
+        savedClassificaionList.removeAll()
+        savedClassificaionList = selectedClassificationList.map {$0}
+        selectedClassificationList = selectedClassificationList.map {_ in false}
+    }
+    
+    func setSelectedClassificationList() {
+        selectedClassificationList = savedClassificaionList.map {$0}
+        savedClassificaionList.removeAll()
+    }
+    
     
     init(filter: Filter) {
         self.filter = filter
         self._width = State<CGFloat>(initialValue: CGFloat(self.filter.minDegree) * self.totalWidth / 100)
         self._width1 = State<CGFloat>(initialValue: CGFloat(self.filter.maxDegree) * self.totalWidth / 100)
         
-        self.temp = filterViewModel.getSelectedIngredientList(index: self.selectedIndex)
     }
-    
     
     var body: some View{
         ScrollView{
@@ -146,41 +158,58 @@ struct Filterview : View{
                     .bold()
                     .font(.system(size: 25, weight: .bold))
                     .padding(.horizontal, 10)
-                    .padding(.vertical, 10)
                     .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
                 Spacer()
             }
-            
             HStack {
-                VStack {
+                Text("주어진 재료로 만들 수 있는 칵테일 찾기")
+                    .bold()
+                    .font(.system(size: 15, weight: .bold))
+                    .padding(.horizontal, 10)
+                    .foregroundColor(Color(red: 110/255, green: 110/255, blue: 110/255, opacity: 100))
+                Spacer()
+            }
+            VStack {
+                HStack {
+                    HStack {
+                        Button(action: {
+                            selectedTotal.toggle()
+                            if (selectedTotal == true) {
+                                clearSelectedClassificationList()
+                            }
+                            else {
+                                setSelectedClassificationList()
+                            }
+                            
+                        }, label: {
+                            Text("전체")
+                            .font(.system(size: 15, weight: .bold))
+                                .foregroundColor(self.selectedTotal == true ? Color.accentColor : Color(red: 80/255, green: 80/255, blue: 80/255, opacity: 100))
+                        })
+                    }
+                    .frame(width: 60)
+                    
                     ForEach(self.filterViewModel.classificationList) { classification in
                         HStack {
                             Button(action: {
-                                self.selectedIndex = classification.index
-                                self.temp = self.filterViewModel.getSelectedIngredientList(index: classification.index)
+                                self.selectedClassificationList[classification.index].toggle()
+                                
+                                if(self.selectedClassificationList[classification.index] == true) {
+                                    selectedTotal = false
+                                }
                                 
                             }, label: {
                                 Text(classification.name)
-                                .font(.system(size: 18, weight: .bold))
-                                .foregroundColor(Color(red: 80/255, green: 80/255, blue: 80/255, opacity: 100))
+                                .font(.system(size: 15, weight: .bold))
+                                    .foregroundColor(self.selectedClassificationList[classification.index] == true ? Color.accentColor : Color(red: 80/255, green: 80/255, blue: 80/255, opacity: 100))
                             })
-                            .padding()
                         }
-                        .frame(width: 80)
-                        .background(self.selectedIndex == classification.index ? Color(red: 255/255, green: 150/255, blue: 168/255, opacity: 100) : Color(red: 247/255, green: 247/255, blue: 251/255, opacity: 100))
+                        .frame(width: 60)
                     }
-                    
                     
                 }
                 .padding(.vertical)
-                .frame(width: 80)
-                .background(Color(red: 247/255, green: 247/255, blue: 251/255, opacity: 100)
-                .edgesIgnoringSafeArea(.all))
                 
-                
-                Text(self.temp)
-                    .frame(height: 250, alignment: .topLeading)
-                    .font(.system(size: 10, weight: .bold))
                 
                 Spacer()
                 

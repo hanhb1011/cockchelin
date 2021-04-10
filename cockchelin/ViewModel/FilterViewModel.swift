@@ -9,6 +9,8 @@ import Foundation
 
 class FilterViewModel: ObservableObject {
     
+    var havingIngredients: [String] = []
+    
     /*
      subclass?
      */
