@@ -55,7 +55,6 @@ struct Filterview : View{
         ScrollView{
         VStack{
    
-            
             VStack{
                 
                 HStack{
