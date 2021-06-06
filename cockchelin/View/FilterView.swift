@@ -169,24 +169,22 @@ struct Filterview : View{
             }
             VStack {
                 HStack {
-                    HStack {
-                        Button(action: {
-                            selectedTotal.toggle()
-                            if (selectedTotal == true) {
-                                clearSelectedClassificationList()
-                            }
-                            else {
-                                setSelectedClassificationList()
-                            }
-                            
-                        }, label: {
-                            Text("전체")
-                            .font(.system(size: 15, weight: .bold))
-                                .foregroundColor(self.selectedTotal == true ? Color.accentColor : Color(red: 80/255, green: 80/255, blue: 80/255, opacity: 100))
-                        })
-                    }
+                    Button(action: {
+                        selectedTotal.toggle()
+                        if (selectedTotal == true) {
+                            clearSelectedClassificationList()
+                        }
+                        else {
+                            setSelectedClassificationList()
+                        }
+                        
+                    }, label: {
+                        Text("전체")
+                        .font(.system(size: 15, weight: .bold))
+                            .foregroundColor(self.selectedTotal == true ? Color.accentColor : Color(red: 80/255, green: 80/255, blue: 80/255, opacity: 100))
+                    })
                     .frame(width: 60)
-                    
+                
                     ForEach(self.filterViewModel.classificationList) { classification in
                         HStack {
                             Button(action: {
@@ -208,6 +206,19 @@ struct Filterview : View{
                 }
                 .padding(.vertical)
                 
+                /* TODO: use Grid layout..*/
+                ForEach(filterViewModel.classificationList) { classification in
+                    ForEach(classification.ingredientSearchItems) { searchItem in
+                        if (selectedTotal == true || selectedClassificationList[classification.index] == true) {
+                            
+                            Text("\(searchItem.ingredientName)  \(String(searchItem.selected))")
+                                .fontWeight(searchItem.selected ? .bold : .none)
+                                .onTapGesture {
+                                    filterViewModel.toggleSelectedVariable(id: searchItem.id, classificationIdx: classification.index)
+                                }
+                        }
+                    }
+                }
                 
                 Spacer()
                 

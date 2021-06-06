@@ -7,9 +7,15 @@
 
 import Foundation
 
+struct IngredientSearchItem: Codable, Identifiable {
+    var id = UUID()
+    var ingredientName: String
+    var selected: Bool
+}
+
 struct Classification: Codable, Identifiable {
     var id = UUID()
     var index: Int
     var name: String
-    var ingredientSearchItems: [String] = []
+    var ingredientSearchItems: [IngredientSearchItem]
 }
