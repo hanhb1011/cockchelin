@@ -88,7 +88,17 @@ struct RecipeSearchView: View {
                                     .filter{"\($0)".lowercased().trimmingCharacters(in: .whitespaces).contains(searchText.lowercased() .trimmingCharacters(in: .whitespaces)) || searchText.isEmpty}
                                     .filter {
                                         return $0.alcoholDegree <= Int(self.filter.maxDegree) && $0.alcoholDegree >= Int(self.filter.minDegree)
-                                    }){section in
+                                    }
+                                    .filter {
+                                        if (filter.isEnabled) {
+                                            return recipeSearchViewModel.isMakeableRecipe(recipe: $0, givenIngredients: filter.ingredients)
+                                        }
+                                        else {
+                                            return true
+                                        }
+                                    }
+                        
+                        ){section in
                             
                             /*    if(Int(mindegree) <=  section.alcoholDegree <= Int(maxdegree) ){
                             */  RecipeItemView(recipe: section)

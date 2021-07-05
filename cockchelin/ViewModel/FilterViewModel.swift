@@ -12,11 +12,12 @@ class FilterViewModel: ObservableObject {
     /*
      subclass?
      */
+    var filter: Filter
     @Published var classificationList: [Classification]
     
-    init() {
+    init(filter: Filter) {
         classificationList = getClassificationsFromJSONFile()!
-        
+        self.filter = filter
     }
     
     func toggleSelectedVariable(id: UUID, classificationIdx: Int) {
@@ -44,6 +45,9 @@ class FilterViewModel: ObservableObject {
         
         classificationList = newClassificationList
         
+        let ingredients = getIngredientsFromClassificationList()
+        filter.updateIngredients(ingredients: ingredients)
+        
         //TODO update in UserDefaults
     }
     
@@ -59,6 +63,20 @@ class FilterViewModel: ObservableObject {
         }
         
         return ret
+    }
+    
+    func getIngredientsFromClassificationList() -> [String] {
+        var ingredients: [String] = []
+        
+        classificationList.forEach { classification in
+            classification.ingredientSearchItems.forEach { ingredientSearchItem in
+                if (ingredientSearchItem.selected) {
+                    ingredients.append(ingredientSearchItem.ingredientName)
+                }
+            }
+        }
+        
+        return ingredients
     }
     
 }

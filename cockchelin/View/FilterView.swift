@@ -11,11 +11,11 @@ import SwiftUI
 
 struct Filterview : View{
     
-    @ObservedObject var filterViewModel = FilterViewModel()
+    @ObservedObject var filterViewModel: FilterViewModel
     var filter: Filter
     @State var width : CGFloat
     @State var width1 : CGFloat
-    let totalWidth: CGFloat = 200
+    let totalWidth: CGFloat = 300
     
     @State var Colors = [
         
@@ -49,108 +49,112 @@ struct Filterview : View{
         self.filter = filter
         self._width = State<CGFloat>(initialValue: CGFloat(self.filter.minDegree) * self.totalWidth / 50)
         self._width1 = State<CGFloat>(initialValue: CGFloat(self.filter.maxDegree) * self.totalWidth / 50)
+        self.filterViewModel = FilterViewModel(filter: filter)
     }
     
     var body: some View{
         ScrollView{
         VStack{
    
-            VStack{
-                
-                HStack{
+            VStack {
+                HStack {
                     Text("색상")
-                        .fontWeight(.bold  )
-                        .foregroundColor(.black)
+                        .bold()
+                        .font(.system(size: 25, weight: .bold))
+                        .padding(.horizontal, 10)
+                        .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
                     
                     Spacer()
-                   
-                        Text("적용")
-                            .fontWeight(.heavy)
+                    Text("적용")
+                        .bold()
+                        .font(.system(size: 25, weight: .bold))
+                        .padding(.horizontal, 10)
+                        .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
                             
-                }.padding([.horizontal,.top])
+                }
                 .padding(.bottom, 10)
                 HStack{
-                ForEach(Colors){filter in
-                    CardView(filter:filter)
-                }
+                    ForEach(Colors){filter in
+                        CardView(filter:filter)
+                    }
                 }
             }
-            .padding(.bottom,10)
-            .padding(.top,10)
             .background(Color.white)
             //ColorRadio
         
-            VStack {
-                HStack{
-                    VStack{
-                Text("도수")
-                    .font(.title)
-                    .fontWeight(.bold)
-                    
-                Text("\(self.getValue(val: round(50*self.width/self.totalWidth)))-\(self.getValue(val:round(50*self.width1/self.totalWidth)))도")
-                    .fontWeight(.bold)
-                    }//Text
-                    
-                    Spacer()
-                    
-                    ZStack(alignment:.leading){
+            HStack {
+                VStack {
+                    HStack {
+                    Text("도수")
+                        .bold()
+                        .font(.system(size: 25, weight: .bold))
+                        .padding(.horizontal, 10)
+                        .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
                         
-                        Rectangle()
-                            .fill(Color.black.opacity(0.20))
-                            .frame(width: self.totalWidth, height:6)
+                    Text("\(self.getValue(val: round(50*self.width/self.totalWidth)))-\(self.getValue(val:round(50*self.width1/self.totalWidth)))도")
+                        .fontWeight(.bold)
+                    
+                        Spacer()
+                    }
                         
-                        Rectangle()
-                            .fill(Color.black)
-                            .frame(width: self.width1 - self.width, height: 6)
-                            .offset(x: self.width)
+                        Spacer()
                         
-                        HStack(spacing: 0){
+                        ZStack(alignment:.leading){
                             
-                            Circle()
+                            Rectangle()
+                                .fill(Color.black.opacity(0.20))
+                                .frame(width: self.totalWidth, height:6)
+                            
+                            Rectangle()
                                 .fill(Color.black)
-                                .frame(width: 18, height: 18)
+                                .frame(width: self.width1 - self.width, height: 6)
                                 .offset(x: self.width)
-                                .gesture(
-                                
-                                    DragGesture()
-                                        .onChanged({
-                                            (value) in
-                                            
-                                            if value.location.x>=0 && value.location.x<=self.width1{
-                                                self.width = value.location.x
-                                                self.filter.minDegree = Double(100 * self.width / self.totalWidth)/2
-                                            }
-                                        })
-                                    
-                                )
                             
-                            Circle()
-                                .fill(Color.black)
-                                .frame(width: 18, height: 18)
-                                .offset(x: self.width1 - self.totalWidth/10)
-                                .gesture(
+                            HStack(spacing: 0){
                                 
-                                    DragGesture()
-                                        .onChanged({
-                                            (value) in
-                                            
-                                            print("\(filter.maxDegree)")
-                                            
-                                            if value.location.x<=self.totalWidth && value.location.x>=self.width{
-                                                self.width1 = value.location.x
-                                                self.filter.maxDegree = Double(100 * self.width1 / self.totalWidth)/2
-                                            }
-                                        })
+                                Circle()
+                                    .fill(Color.black)
+                                    .frame(width: 18, height: 18)
+                                    .offset(x: self.width)
+                                    .gesture(
                                     
-                                )
-                        }
-                    
+                                        DragGesture()
+                                            .onChanged({
+                                                (value) in
+                                                
+                                                if value.location.x>=0 && value.location.x<=self.width1{
+                                                    self.width = value.location.x
+                                                    self.filter.minDegree = Double(100 * self.width / self.totalWidth)/2
+                                                }
+                                            })
+                                        
+                                    )
+                                
+                                Circle()
+                                    .fill(Color.black)
+                                    .frame(width: 18, height: 18)
+                                    .offset(x: self.width1 - self.totalWidth/10)
+                                    .gesture(
+                                    
+                                        DragGesture()
+                                            .onChanged({
+                                                (value) in
+                                                
+                                                print("\(filter.maxDegree)")
+                                                
+                                                if value.location.x<=self.totalWidth && value.location.x>=self.width{
+                                                    self.width1 = value.location.x
+                                                    self.filter.maxDegree = Double(100 * self.width1 / self.totalWidth)/2
+                                                }
+                                            })
+                                        
+                                    )
+                            }
+                        
                     }.padding(25) //Rangeslider
-                    
                 }
-                }
-            .padding()
-            
+                
+            }
             HStack {
                 Text("재료 선택")
                     .bold()
@@ -221,7 +225,6 @@ struct Filterview : View{
                 }
                 
                 Spacer()
-                
             }
         }
         }
