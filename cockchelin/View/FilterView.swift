@@ -18,12 +18,11 @@ struct Filterview : View{
     let totalWidth: CGFloat = 300
     
     @State var Colors = [
-        
-        FilterItem(title: "붉음", checked: true, color: "red"),
-        FilterItem(title: "노란", checked: true, color: "yellow"),
-        FilterItem(title: "초록", checked: true, color: "green"),
-        FilterItem(title: "푸름", checked: true, color: "blue"),
-        FilterItem(title: "기타", checked: true, color: "gray")
+            FilterItem(title: "붉음", checked: true, color: "red"),
+            FilterItem(title: "노란", checked: true, color: "yellow"),
+            FilterItem(title: "초록", checked: true, color: "green"),
+            FilterItem(title: "푸름", checked: true, color: "blue"),
+            FilterItem(title: "기타", checked: true, color: "gray")
         ]
     
     @State var showFilter = false
@@ -53,42 +52,32 @@ struct Filterview : View{
     }
     
     var body: some View{
-        ScrollView{
-        VStack{
-   
+        ScrollView {
             VStack {
-                HStack {
-                    Text("색상")
-                        .bold()
-                        .font(.system(size: 25, weight: .bold))
-                        .padding(.horizontal, 10)
-                        .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
-                    
-                    Spacer()
-                    Text("적용")
-                        .bold()
-                        .font(.system(size: 25, weight: .bold))
-                        .padding(.horizontal, 10)
-                        .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
+
+                VStack {
+                    HStack {
+                        Text("색상")
                             
-                }
-                .padding(.bottom, 10)
-                HStack{
-                    ForEach(Colors){filter in
-                        CardView(filter:filter)
+                            .bold()
+                            .font(.system(size: 23, weight: .bold))
+                            .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
+                        Spacer()
+                    }
+                    HStack{
+                        ForEach(Colors){filter in
+                            CardView(filter:filter)
+                        }
                     }
                 }
-            }
-            .background(Color.white)
-            //ColorRadio
-        
-            HStack {
+                .padding(.horizontal, 30)
+                .padding(.bottom, 30)
+            
                 VStack {
                     HStack {
                     Text("도수")
                         .bold()
-                        .font(.system(size: 25, weight: .bold))
-                        .padding(.horizontal, 10)
+                        .font(.system(size: 23, weight: .bold))
                         .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
                         
                     Text("\(self.getValue(val: round(50*self.width/self.totalWidth)))-\(self.getValue(val:round(50*self.width1/self.totalWidth)))도")
@@ -96,9 +85,6 @@ struct Filterview : View{
                     
                         Spacer()
                     }
-                        
-                        Spacer()
-                        
                         ZStack(alignment:.leading){
                             
                             Rectangle()
@@ -151,83 +137,124 @@ struct Filterview : View{
                                     )
                             }
                         
-                    }.padding(25) //Rangeslider
+                    }
+                    .padding(.horizontal, 25)
                 }
+                .padding(.horizontal, 30)
+                .padding(.bottom, 30)
                 
-            }
-            HStack {
-                Text("재료 선택")
-                    .bold()
-                    .font(.system(size: 25, weight: .bold))
-                    .padding(.horizontal, 10)
-                    .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
-                Spacer()
-            }
-            HStack {
-                Text("주어진 재료로 만들 수 있는 칵테일 찾기")
-                    .bold()
-                    .font(.system(size: 15, weight: .bold))
-                    .padding(.horizontal, 10)
-                    .foregroundColor(Color(red: 110/255, green: 110/255, blue: 110/255, opacity: 100))
-                Spacer()
-            }
-            VStack {
-                HStack {
-                    Button(action: {
-                        selectedTotal.toggle()
-                        if (selectedTotal == true) {
-                            clearSelectedClassificationList()
-                        }
-                        else {
-                            setSelectedClassificationList()
-                        }
-                        
-                    }, label: {
-                        Text("전체")
-                        .font(.system(size: 15, weight: .bold))
-                            .foregroundColor(self.selectedTotal == true ? Color.accentColor : Color(red: 80/255, green: 80/255, blue: 80/255, opacity: 100))
-                    })
-                    .frame(width: 60)
                 
-                    ForEach(self.filterViewModel.classificationList) { classification in
+                VStack {
+                    HStack {
+                        Text("재료 선택")
+                            .bold()
+                            .font(.system(size: 23, weight: .bold))
+                            .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
+                        Spacer()
+                    }
+                    .padding(.bottom, 1)
+                    HStack {
+                        Text("주어진 재료로 만들 수 있는 칵테일 찾기")
+                            .bold()
+                            .font(.system(size: 15, weight: .bold))
+                            .foregroundColor(Color(red: 110/255, green: 110/255, blue: 110/255, opacity: 100))
+                        Spacer()
+                    }
+                    .padding(.bottom, 5)
+                    VStack {
                         HStack {
                             Button(action: {
-                                self.selectedClassificationList[classification.index].toggle()
-                                
-                                if(self.selectedClassificationList[classification.index] == true) {
-                                    selectedTotal = false
+                                selectedTotal.toggle()
+                                if (selectedTotal == true) {
+                                    clearSelectedClassificationList()
+                                }
+                                else {
+                                    setSelectedClassificationList()
                                 }
                                 
                             }, label: {
-                                Text(classification.name)
-                                .font(.system(size: 15, weight: .bold))
-                                    .foregroundColor(self.selectedClassificationList[classification.index] == true ? Color.accentColor : Color(red: 80/255, green: 80/255, blue: 80/255, opacity: 100))
+                                Text("전체")
+                                .font(.system(size: 20, weight: .bold))
+                                    .foregroundColor(self.selectedTotal == true ? Color.selectedButtonColor : Color(red: 80/255, green: 80/255, blue: 80/255, opacity: 100))
                             })
-                        }
-                        .frame(width: 60)
-                    }
-                    
-                }
-                .padding(.vertical)
-                
-                /* TODO: use Grid layout..*/
-                ForEach(filterViewModel.classificationList) { classification in
-                    ForEach(classification.ingredientSearchItems) { searchItem in
-                        if (selectedTotal == true || selectedClassificationList[classification.index] == true) {
-                            
-                            Text("\(searchItem.ingredientName)  \(String(searchItem.selected))")
-                                .fontWeight(searchItem.selected ? .bold : .none)
-                                .onTapGesture {
-                                    filterViewModel.toggleSelectedVariable(id: searchItem.id, classificationIdx: classification.index)
+                            Spacer()
+                        
+                            ForEach(self.filterViewModel.classificationList) { classification in
+                                HStack {
+                                    Button(action: {
+                                        self.selectedClassificationList[classification.index].toggle()
+                                        
+                                        if(self.selectedClassificationList[classification.index] == true) {
+                                            selectedTotal = false
+                                        }
+                                        
+                                    }, label: {
+                                        Text(classification.name)
+                                        .font(.system(size: 20, weight: .bold))
+                                            .foregroundColor(self.selectedClassificationList[classification.index] == true ? Color.selectedButtonColor : Color(red: 80/255, green: 80/255, blue: 80/255, opacity: 100))
+                                    })
                                 }
+                                
+                                if (classification.index != self.filterViewModel.classificationList.count - 1) {
+                                    Spacer()
+                                }
+                            }
+                            
+                        }
+                        .padding(.vertical, 5)
+                        VStack {
+                            ForEach(filterViewModel.classificationList) { classification in
+                                ForEach(classification.ingredientSearchItems) { searchItem in
+                                    if (selectedTotal == true || selectedClassificationList[classification.index] == true) {
+                                        
+                                        
+                                        HStack {
+                                            Text(searchItem.ingredientName)
+                                                .font(.system(size: 17))
+                                                .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
+                                            
+                                            Spacer()
+                                            
+                                            Image(systemName: searchItem.selected ? "checkmark.circle.fill" : "checkmark.circle")
+                                                .resizable()
+                                                .scaledToFit()
+                                                .frame(width: 20, height: 20, alignment: .center)
+                                                .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
+                                                .padding(.horizontal, 5)
+                                            
+                                        }
+                                        .padding(.vertical, 2)
+                                        .onTapGesture {
+                                            filterViewModel.toggleSelectedVariable(id: searchItem.id, classificationIdx: classification.index)
+                                            filter.updateIngredients(givenIngredients: filterViewModel.getIngredientsFromClassificationList())
+                                        }
+                                        
+                                    }
+                                }
+                            }
                         }
                     }
                 }
+                .padding(.horizontal, 30)
+                .padding(.bottom, 20)
                 
-                Spacer()
             }
         }
-        }
+        .navigationBarTitle(Text("필터"))
+        .background(Color.themeBackground.edgesIgnoringSafeArea(.all))
+        .navigationBarItems(trailing:
+                                Button(action: {
+                                    filter.isEnabled.toggle()
+                                    filter.printIngredients()
+                                }) {
+                                    if (true == filter.isEnabled) {
+                                        Text("해제")
+                                    }
+                                    else {
+                                        Text("적용")
+                                    }
+                                }
+                            )
         .onAppear() {
             width = CGFloat(self.filter.minDegree) * self.totalWidth / 50
             width1 = CGFloat(self.filter.maxDegree) * self.totalWidth / 50
@@ -270,7 +297,6 @@ struct CardView: View{
     }
     
 }
-
 
 struct FilterItem : Identifiable{
     

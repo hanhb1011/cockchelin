@@ -26,29 +26,6 @@ struct RecipeView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 250, height: 250, alignment: .center)
-                HStack {
-                    Text(recipeViewModel.recipe.names[0])
-                        .bold()
-                        .font(.system(size: 35, weight: .bold))
-                        .padding(.horizontal, 30)
-                        .padding(.vertical, 10)
-                        .foregroundColor(Color(red: 50/255, green: 50/255, blue: 50/255, opacity: 100))
-                    Spacer()
-                    /*
-                    if (recipeViewModel.recipe.favoriteChecked) {
-                        Image(systemName: "star.fill")
-                            .onTapGesture {
-                                self.recipeViewModel.checkFavorite()
-                            }
-                    }
-                    else {
-                        Image(systemName: "star")
-                            .onTapGesture {
-                                self.recipeViewModel.checkFavorite()
-                            }
-                    }
-                    */
-                }
                 
                 HStack {
                     Spacer()
@@ -200,7 +177,8 @@ struct RecipeView: View {
                 
             }
         }
-        .background(Color(red: 247/255, green: 247/255, blue: 251/255, opacity: 100).edgesIgnoringSafeArea(.all))
+        .navigationBarTitle(Text(recipeViewModel.recipe.names[0]))
+        .background(Color.themeBackground.edgesIgnoringSafeArea(.all))
         .navigationBarItems(trailing:
             Button(action: {
                 recipeViewModel.checkFavorite()

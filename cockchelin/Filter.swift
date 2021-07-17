@@ -13,15 +13,19 @@ class Filter: ObservableObject {
     @Published var maxDegree: Double = 50.0
     
     @Published var isEnabled: Bool = false
-    @Published var ingredients: [String] = []
+    var ingredients: [String] = []
     
     init() {
         
     }
     
-    func updateIngredients(ingredients: [String]) {
+    func printIngredients() {
+        print(ingredients)
+    }
+    
+    func updateIngredients(givenIngredients: [String]) {
         
-        self.ingredients = ingredients
+        self.ingredients = givenIngredients
         
         print(ingredients)
     }

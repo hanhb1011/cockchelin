@@ -12,8 +12,8 @@ struct ContentView: View{
     //let titleFontAttrs = [NSAttributedString.Key.font: UIFont(name : "MapoGoldenPier", size: 30)]
     
     init(){
-        UITabBar.appearance().backgroundColor = .red
-        UINavigationBar.appearance().backgroundColor = UIColor(named: "BackColor")
+        UITabBar.appearance().backgroundColor = UIColor(Color.themeBackground)
+        //UINavigationBar.appearance().backgroundColor = UIColor(named: "BackColor")
         //UINavigationBar.appearance().titleTextAttributes = titleFontAttrs as [NSAttributedString.Key : Any]
         //UINavigationBar.appearance().largeTitleTextAttributes = titleFontAttrs as [NSAttributedString.Key : Any]
     }
@@ -43,7 +43,7 @@ struct ContentView: View{
                     Text ("\(Constants.TabBarText.tabBar2)")
                 }).tag(2)
                 
-            }.accentColor(Color.red)
+            }.accentColor(Color.selectedButtonColor)
             
             ZStack{
                 Color("PointColor")

@@ -44,11 +44,13 @@ class FilterViewModel: ObservableObject {
         }
         
         classificationList = newClassificationList
-        
-        let ingredients = getIngredientsFromClassificationList()
-        filter.updateIngredients(ingredients: ingredients)
-        
+
         //TODO update in UserDefaults
+    }
+    
+    func updateFilterIngredients() {
+        let ingredients = getIngredientsFromClassificationList()
+        filter.updateIngredients(givenIngredients: ingredients)
     }
     
     func getSelectedIngredientList(index: Int) -> String {

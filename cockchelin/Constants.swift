@@ -9,9 +9,10 @@
 import SwiftUI
 
 extension Color{
-    static let themeBackground = Color("BackgroundColor")
+    static let themeBackground = Color(red: 247/255, green: 247/255, blue: 251/255, opacity: 100)
     static let themeSecondary = Color("SecondaryColor")
     static let themeForeground = Color("ForegroundColor")
+    static let selectedButtonColor = Color(red: 255/255, green: 100/255, blue: 168/255, opacity: 100)
 }
 
 struct Constants {
