@@ -16,7 +16,7 @@ class FilterViewModel: ObservableObject {
     @Published var classificationList: [Classification]
     
     init(filter: Filter) {
-        classificationList = getClassificationsFromJSONFile()!
+        classificationList = loadClassifications()!
         self.filter = filter
     }
     
@@ -44,8 +44,8 @@ class FilterViewModel: ObservableObject {
         }
         
         classificationList = newClassificationList
-
-        //TODO update in UserDefaults
+        
+        saveClassificationsToUserDefaults(classifications: newClassificationList)
     }
     
     func updateFilterIngredients() {

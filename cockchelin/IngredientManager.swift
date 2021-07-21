@@ -78,6 +78,19 @@ func printIngredients() {
     saveIngredientsToJSONFile(ingredients: ingredients)
 }
 
+func loadClassifications() -> [Classification]? {
+    
+    if let classificationsFromUserDefaults = getClassificationsFromUserDefaults() {
+        return classificationsFromUserDefaults
+    }
+    
+    if let classificationsFromJSONFile = getClassificationsFromJSONFile() {
+        return classificationsFromJSONFile
+    }
+    
+    return nil
+}
+
 func getClassificationsFromJSONFile() -> [Classification]? {
     
     if let fileLocation = Bundle.main.url(forResource: "Classifications", withExtension: "json") {
@@ -93,3 +106,25 @@ func getClassificationsFromJSONFile() -> [Classification]? {
     
     return nil
 }
+
+func getClassificationsFromUserDefaults() -> [Classification]? {
+    let defaults = UserDefaults.standard
+    if let savedClassifications = defaults.object(forKey: "SavedClassifications") as? Data {
+        let decoder = JSONDecoder()
+        if let savedClassifications = try? decoder.decode([Classification].self, from: savedClassifications) {
+            return savedClassifications
+        }
+    }
+    
+    return nil
+}
+
+func saveClassificationsToUserDefaults(classifications: [Classification]) {
+    let encoder = JSONEncoder()
+    if let encoded = try? encoder.encode(classifications) {
+        let defaults = UserDefaults.standard
+        defaults.set(encoded, forKey: "SavedClassifications")
+    }
+    
+}
+    
