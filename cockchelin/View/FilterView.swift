@@ -12,20 +12,21 @@ import SwiftUI
 struct Filterview : View{
     
     @ObservedObject var filterViewModel: FilterViewModel
-    var filter: Filter
+    @ObservedObject var filter: Filter
     @State var width : CGFloat
     @State var width1 : CGFloat
     let totalWidth: CGFloat = 300
     
-    @State var Colors = [
-            FilterItem(title: "붉음", checked: true, color: "red"),
-            FilterItem(title: "노란", checked: true, color: "yellow"),
-            FilterItem(title: "초록", checked: true, color: "green"),
-            FilterItem(title: "푸름", checked: true, color: "blue"),
-            FilterItem(title: "기타", checked: true, color: "gray")
-        ]
-    
-    @State var showFilter = false
+    @State var colorFirstRow = [
+        FilterItem(colorType: .black, color: Color(Color.myBlack)),
+        FilterItem(colorType: .blue, color: Color(Color.myBlue)),
+        FilterItem(colorType: .brown, color: Color(Color.myBrown)), // beige and brown merged
+        FilterItem(colorType: .green, color: Color(Color.myGreen))]
+    @State var colorSecondRow = [
+        FilterItem(colorType: .mixed, color: Color(Color.myMixed)),
+        FilterItem(colorType: .red, color: Color(Color.myRed)), //red and pink merged
+        FilterItem(colorType: .yellow, color: Color(Color.myYellow)),
+        FilterItem(colorType: .none, color: Color(Color.myTransparent))]
     
     @State var selectedTotal = true
     @State var selectedClassificationList: [Bool] = [false, false, false, false]
@@ -43,11 +44,10 @@ struct Filterview : View{
         savedClassificaionList.removeAll()
     }
     
-    
     init(filter: Filter) {
         self.filter = filter
-        self._width = State<CGFloat>(initialValue: CGFloat(self.filter.minDegree) * self.totalWidth / 50)
-        self._width1 = State<CGFloat>(initialValue: CGFloat(self.filter.maxDegree) * self.totalWidth / 50)
+        self._width = State<CGFloat>(initialValue: CGFloat(filter.minDegree) * self.totalWidth / 50)
+        self._width1 = State<CGFloat>(initialValue: CGFloat(filter.maxDegree) * self.totalWidth / 50)
         self.filterViewModel = FilterViewModel(filter: filter)
     }
     
@@ -64,11 +64,18 @@ struct Filterview : View{
                             .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
                         Spacer()
                     }
-                    HStack{
-                        ForEach(Colors){filter in
-                            CardView(filter:filter)
+                    
+                    HStack {
+                        ForEach(colorFirstRow){ color in
+                            ColorItemView(colorFilterItem:color, filter: filter)
                         }
                     }
+                    HStack {
+                        ForEach(colorSecondRow){ color in
+                            ColorItemView(colorFilterItem:color, filter: filter)
+                        }
+                    }
+                    
                 }
                 .padding(.horizontal, 30)
                 .padding(.bottom, 30)
@@ -88,18 +95,18 @@ struct Filterview : View{
                         ZStack(alignment:.leading){
                             
                             Rectangle()
-                                .fill(Color.black.opacity(0.20))
+                                .fill(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
                                 .frame(width: self.totalWidth, height:6)
                             
                             Rectangle()
-                                .fill(Color.black)
+                                .fill(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
                                 .frame(width: self.width1 - self.width, height: 6)
                                 .offset(x: self.width)
                             
                             HStack(spacing: 0){
                                 
                                 Circle()
-                                    .fill(Color.black)
+                                    .fill(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
                                     .frame(width: 18, height: 18)
                                     .offset(x: self.width)
                                     .gesture(
@@ -117,7 +124,7 @@ struct Filterview : View{
                                     )
                                 
                                 Circle()
-                                    .fill(Color.black)
+                                    .fill(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
                                     .frame(width: 18, height: 18)
                                     .offset(x: self.width1 - self.totalWidth/10)
                                     .gesture(
@@ -264,46 +271,40 @@ struct Filterview : View{
         return String(format:"%.2f",val)
     }
     
-}
-
-
-
-struct CardView: View{
-    @State var filter: FilterItem
-    
-    var body : some View{
+    struct ColorItemView: View{
+        @State var colorFilterItem: FilterItem
+        @ObservedObject var filter: Filter
         
-        HStack{
-
-            ZStack{
-                Circle()
-                    .stroke(filter.checked ? Color(filter.color) :Color(filter.color), lineWidth: 5)
-                    .frame(width: 25, height: 25)
-                
-                if filter.checked{
-                    Image(systemName: "checkmark.circle.fill")
-                        .font(.system(size: 24))
-                        .foregroundColor(Color(filter.color))
+        var body : some View {
+            HStack{
+                ZStack{
+                    Circle()
+                        .stroke(colorFilterItem.color, lineWidth: 5)
+                        .frame(width: 25, height: 25)
+                    
+                    if (colorFilterItem.checked) {
+                        Image(systemName: "checkmark.circle.fill")
+                            .font(.system(size: 24))
+                            .foregroundColor(colorFilterItem.color)
+                    }
                 }
-                
-            }
-
-            
-        }.padding(.horizontal)
-        .contentShape(Rectangle())
-        .onTapGesture(perform: {
-            filter.checked.toggle()
-        })
+            }.padding(.horizontal)
+            .contentShape(Rectangle())
+            .onTapGesture(perform: {
+                colorFilterItem.checked.toggle()
+                filter.updateSelectedColor(color: colorFilterItem.colorType, isChecked: colorFilterItem.checked)
+            })
+        }
+        
     }
-    
 }
 
-struct FilterItem : Identifiable{
+struct FilterItem : Identifiable {
     
     var id = UUID().uuidString
-    var title: String
-    var checked: Bool
-    var color: String
+    var checked: Bool = true
+    var colorType: LiquidColorType
+    var color: Color
     
 }
 

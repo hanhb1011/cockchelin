@@ -57,15 +57,28 @@ struct RecipeSearchView: View {
                 //Item list view..
                 ScrollView(.vertical, showsIndicators: false){
                     LazyVStack(spacing: 0){
+                        /* Filter */
                         ForEach((self.recipeSearchViewModel.recipes)
-                                    .filter{"\($0)".lowercased().trimmingCharacters(in: .whitespaces).contains(searchText.lowercased() .trimmingCharacters(in: .whitespaces)) || searchText.isEmpty}
-                                    .filter {
-                                        return $0.alcoholDegree <= Int(self.filter.maxDegree) && $0.alcoholDegree >= Int(self.filter.minDegree)
-                                    }
-                                    .filter {
+                                    .filter{"\($0)".lowercased().trimmingCharacters(in: .whitespaces).contains(searchText.lowercased() .trimmingCharacters(in: .whitespaces)) || searchText.isEmpty
+                                        
+                                    }.filter {
                                         if (filter.isEnabled) {
-                                            return recipeSearchViewModel.isMakeableRecipe(recipe: $0, givenIngredients: filter.ingredients)
+                                            return $0.alcoholDegree <= Int(self.filter.maxDegree) && $0.alcoholDegree >= Int(self.filter.minDegree)
+                                        }
+                                        else {
+                                            return true
+                                        }
+                                    }.filter {
+                                        if (filter.isEnabled) {
+                                            return filter.isMakeableRecipe(recipe: $0, givenIngredients: filter.ingredients)
                                             
+                                        }
+                                        else {
+                                            return true
+                                        }
+                                    }.filter {
+                                        if (filter.isEnabled) {
+                                            return filter.isSelectedColor(color:$0.liquidColor)
                                         }
                                         else {
                                             return true
