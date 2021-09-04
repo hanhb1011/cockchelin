@@ -18,15 +18,15 @@ struct Filterview : View{
     let totalWidth: CGFloat = 300
     
     @State var colorFirstRow = [
-        FilterItem(colorType: .black, color: Color(Color.myBlack)),
-        FilterItem(colorType: .blue, color: Color(Color.myBlue)),
-        FilterItem(colorType: .brown, color: Color(Color.myBrown)), // beige and brown merged
-        FilterItem(colorType: .green, color: Color(Color.myGreen))]
+        ColorFilterItem(colorType: .black, color: Color(Color.myBlack)),
+        ColorFilterItem(colorType: .blue, color: Color(Color.myBlue)),
+        ColorFilterItem(colorType: .brown, color: Color(Color.myBrown)), // beige and brown merged
+        ColorFilterItem(colorType: .green, color: Color(Color.myGreen))]
     @State var colorSecondRow = [
-        FilterItem(colorType: .mixed, color: Color(Color.myMixed)),
-        FilterItem(colorType: .red, color: Color(Color.myRed)), //red and pink merged
-        FilterItem(colorType: .yellow, color: Color(Color.myYellow)),
-        FilterItem(colorType: .none, color: Color(Color.myTransparent))]
+        ColorFilterItem(colorType: .mixed, color: Color(Color.myMixed)),
+        ColorFilterItem(colorType: .red, color: Color(Color.myRed)), //red and pink merged
+        ColorFilterItem(colorType: .yellow, color: Color(Color.myYellow)),
+        ColorFilterItem(colorType: .none, color: Color(Color.myTransparent))]
     
     @State var selectedTotal = true
     @State var selectedClassificationList: [Bool] = [false, false, false, false]
@@ -67,12 +67,12 @@ struct Filterview : View{
                     
                     HStack {
                         ForEach(colorFirstRow){ color in
-                            ColorItemView(colorFilterItem:color, filter: filter)
+                            ColorItemView(colorFilterItem:color, filter: filter, checked: filter.isSelectedColor(color: color.colorType))
                         }
                     }
                     HStack {
                         ForEach(colorSecondRow){ color in
-                            ColorItemView(colorFilterItem:color, filter: filter)
+                            ColorItemView(colorFilterItem:color, filter: filter, checked: filter.isSelectedColor(color: color.colorType))
                         }
                     }
                     
@@ -264,6 +264,8 @@ struct Filterview : View{
         .onAppear() {
             width = CGFloat(self.filter.minDegree) * self.totalWidth / 50
             width1 = CGFloat(self.filter.maxDegree) * self.totalWidth / 50
+            
+            
         }
     }
     func getValue(val: CGFloat)->String{
@@ -271,8 +273,9 @@ struct Filterview : View{
     }
     
     struct ColorItemView: View{
-        @State var colorFilterItem: FilterItem
+        var colorFilterItem: ColorFilterItem
         @ObservedObject var filter: Filter
+        @State var checked: Bool
         
         var body : some View {
             HStack{
@@ -281,7 +284,7 @@ struct Filterview : View{
                         .stroke(colorFilterItem.color, lineWidth: 5)
                         .frame(width: 25, height: 25)
                     
-                    if (colorFilterItem.checked) {
+                    if (checked) {
                         Image(systemName: "checkmark.circle.fill")
                             .font(.system(size: 24))
                             .foregroundColor(colorFilterItem.color)
@@ -290,20 +293,19 @@ struct Filterview : View{
             }.padding(.horizontal)
             .contentShape(Rectangle())
             .onTapGesture(perform: {
-                colorFilterItem.checked.toggle()
-                filter.updateSelectedColor(color: colorFilterItem.colorType, isChecked: colorFilterItem.checked)
+                checked.toggle()
+                filter.updateSelectedColor(color: colorFilterItem.colorType, isChecked: checked)
             })
         }
         
     }
 }
 
-struct FilterItem : Identifiable {
-    
+struct ColorFilterItem : Identifiable {
     var id = UUID().uuidString
-    var checked: Bool = true
     var colorType: LiquidColorType
     var color: Color
+    var checked: Bool = true
     
 }
 
