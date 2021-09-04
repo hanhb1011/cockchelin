@@ -30,30 +30,30 @@ struct RecipeSearchView: View {
                 HStack{
                     TextField("Search here", text: $searchText)
                         .padding(.leading, 24)
-                    .padding(10)
-                    .background(Color(red: 241/255, green: 241/255, blue: 245/255, opacity: 100))
-                    .cornerRadius(12)
-                    .onTapGesture(perform: {
-                     isSearching = true
-                    })
-                    .overlay(
-                        HStack{
-                            Image(systemName: "magnifyingglass")
-                            Spacer()
-                            if isSearching{
-                                Button(action: {searchText = ""}, label:{                    Image(systemName: "xmark.circle.fill")
-                                    .padding(.vertical)
-                                })
+                        .padding(10)
+                        .background(Color(red: 241/255, green: 241/255, blue: 245/255, opacity: 100))
+                        .cornerRadius(12)
+                        .onTapGesture(perform: {
+                            isSearching = true
+                        })
+                        .overlay(
+                            HStack{
+                                Image(systemName: "magnifyingglass")
+                                Spacer()
+                                if isSearching{
+                                    Button(action: {searchText = ""}, label:{Image(systemName: "xmark.circle.fill")
+                                        .padding(.vertical)
+                                    })
+                                }
                             }
-                        }
-                        .padding(.horizontal, 12)
-                        .foregroundColor(Color.gray)
-                    )
-                        NavigationLink(destination:Filterview(filter: filter)){Image(systemName: "slider.vertical.3")}
+                            .padding(.horizontal, 12)
+                            .foregroundColor(Color.gray)
+                        )
+                    NavigationLink(destination:Filterview(filter: filter)){Image(systemName: "slider.vertical.3")}
                     
                 }
                 .padding(.vertical, 5)
-                 
+                
                 //Item list view..
                 ScrollView(.vertical, showsIndicators: false){
                     LazyVStack(spacing: 0){
@@ -70,8 +70,7 @@ struct RecipeSearchView: View {
                                         }
                                     }.filter {
                                         if (filter.isEnabled) {
-                                            return filter.isMakeableRecipe(recipe: $0, givenIngredients: filter.ingredients)
-                                            
+                                            return filter.isMakeableRecipe(recipe: $0)
                                         }
                                         else {
                                             return true
@@ -84,14 +83,14 @@ struct RecipeSearchView: View {
                                             return true
                                         }
                                     }
-                        
+                                
                         ){section in
                             RecipeItemView(recipe: section)
                             Spacer()
                         }
                         .background(Color.white)
                         .cornerRadius(12)
-                      
+                        
                     }
                 }//ScrollView
                 

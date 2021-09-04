@@ -12,7 +12,7 @@ import SwiftUI
 class RecipeModel {
     
     static func loadSavedRecipes() -> [Recipe] {
-
+        
         let recipesFromUserDefaults = getSavedRecipesFromUserDefaults()
         let recipesFromJSONFile = getSavedRecipesFromJSONFile()
         
@@ -77,7 +77,7 @@ class RecipeModel {
         }
         
     }
-        
+    
     static func findRecipeById(id: UUID) -> Recipe {
         let savedRecipes: [Recipe] = loadSavedRecipes()
         var foundedRecipe: Recipe!

@@ -8,7 +8,7 @@
 import Foundation
 
 func getIngredientsFromJSONFile() -> [String] {
-
+    
     guard let documentDirectoryUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return [] }
     let fileLocation = documentDirectoryUrl.appendingPathComponent("Ingredients.json")
     
@@ -37,10 +37,10 @@ func saveIngredientsToJSONFile(ingredients: [String]) {
     }
     
     //print(jsonString)
-
+    
     // Create data to be saved
     let data = jsonString.data(using: .utf8)!
-
+    
     guard let documentDirectoryUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
     let fileUrl = documentDirectoryUrl.appendingPathComponent("Ingredients.json")
     
@@ -127,4 +127,4 @@ func saveClassificationsToUserDefaults(classifications: [Classification]) {
     }
     
 }
-    
+

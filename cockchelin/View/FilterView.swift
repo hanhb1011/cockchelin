@@ -54,7 +54,7 @@ struct Filterview : View{
     var body: some View{
         ScrollView {
             VStack {
-
+                
                 VStack {
                     HStack {
                         Text("색상")
@@ -79,70 +79,70 @@ struct Filterview : View{
                 }
                 .padding(.horizontal, 30)
                 .padding(.bottom, 30)
-            
+                
                 VStack {
                     HStack {
-                    Text("도수")
-                        .bold()
-                        .font(.system(size: 23, weight: .bold))
-                        .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
+                        Text("도수")
+                            .bold()
+                            .font(.system(size: 23, weight: .bold))
+                            .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
                         
-                    Text("\(self.getValue(val: round(50*self.width/self.totalWidth)))-\(self.getValue(val:round(50*self.width1/self.totalWidth)))도")
-                        .fontWeight(.bold)
-                    
+                        Text("\(self.getValue(val: round(50*self.width/self.totalWidth)))-\(self.getValue(val:round(50*self.width1/self.totalWidth)))도")
+                            .fontWeight(.bold)
+                        
                         Spacer()
                     }
-                        ZStack(alignment:.leading){
+                    ZStack(alignment:.leading){
+                        
+                        Rectangle()
+                            .fill(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
+                            .frame(width: self.totalWidth, height:6)
+                        
+                        Rectangle()
+                            .fill(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
+                            .frame(width: self.width1 - self.width, height: 6)
+                            .offset(x: self.width)
+                        
+                        HStack(spacing: 0){
                             
-                            Rectangle()
+                            Circle()
                                 .fill(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
-                                .frame(width: self.totalWidth, height:6)
-                            
-                            Rectangle()
-                                .fill(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
-                                .frame(width: self.width1 - self.width, height: 6)
+                                .frame(width: 18, height: 18)
                                 .offset(x: self.width)
+                                .gesture(
+                                    
+                                    DragGesture()
+                                        .onChanged({
+                                            (value) in
+                                            
+                                            if value.location.x>=0 && value.location.x<=self.width1{
+                                                self.width = value.location.x
+                                                self.filter.minDegree = Double(100 * self.width / self.totalWidth)/2
+                                            }
+                                        })
+                                    
+                                )
                             
-                            HStack(spacing: 0){
-                                
-                                Circle()
-                                    .fill(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
-                                    .frame(width: 18, height: 18)
-                                    .offset(x: self.width)
-                                    .gesture(
+                            Circle()
+                                .fill(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
+                                .frame(width: 18, height: 18)
+                                .offset(x: self.width1 - self.totalWidth/10)
+                                .gesture(
                                     
-                                        DragGesture()
-                                            .onChanged({
-                                                (value) in
-                                                
-                                                if value.location.x>=0 && value.location.x<=self.width1{
-                                                    self.width = value.location.x
-                                                    self.filter.minDegree = Double(100 * self.width / self.totalWidth)/2
-                                                }
-                                            })
-                                        
-                                    )
-                                
-                                Circle()
-                                    .fill(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
-                                    .frame(width: 18, height: 18)
-                                    .offset(x: self.width1 - self.totalWidth/10)
-                                    .gesture(
+                                    DragGesture()
+                                        .onChanged({
+                                            (value) in
+                                            
+                                            print("\(filter.maxDegree)")
+                                            
+                                            if value.location.x<=self.totalWidth && value.location.x>=self.width{
+                                                self.width1 = value.location.x
+                                                self.filter.maxDegree = Double(100 * self.width1 / self.totalWidth)/2
+                                            }
+                                        })
                                     
-                                        DragGesture()
-                                            .onChanged({
-                                                (value) in
-                                                
-                                                print("\(filter.maxDegree)")
-                                                
-                                                if value.location.x<=self.totalWidth && value.location.x>=self.width{
-                                                    self.width1 = value.location.x
-                                                    self.filter.maxDegree = Double(100 * self.width1 / self.totalWidth)/2
-                                                }
-                                            })
-                                        
-                                    )
-                            }
+                                )
+                        }
                         
                     }
                     .padding(.horizontal, 25)
@@ -181,11 +181,11 @@ struct Filterview : View{
                                 
                             }, label: {
                                 Text("전체")
-                                .font(.system(size: 20, weight: .bold))
+                                    .font(.system(size: 20, weight: .bold))
                                     .foregroundColor(self.selectedTotal == true ? Color.selectedButtonColor : Color(red: 80/255, green: 80/255, blue: 80/255, opacity: 100))
                             })
                             Spacer()
-                        
+                            
                             ForEach(self.filterViewModel.classificationList) { classification in
                                 HStack {
                                     Button(action: {
@@ -197,7 +197,7 @@ struct Filterview : View{
                                         
                                     }, label: {
                                         Text(classification.name)
-                                        .font(.system(size: 20, weight: .bold))
+                                            .font(.system(size: 20, weight: .bold))
                                             .foregroundColor(self.selectedClassificationList[classification.index] == true ? Color.selectedButtonColor : Color(red: 80/255, green: 80/255, blue: 80/255, opacity: 100))
                                     })
                                 }
@@ -213,7 +213,6 @@ struct Filterview : View{
                             ForEach(filterViewModel.classificationList) { classification in
                                 ForEach(classification.ingredientSearchItems) { searchItem in
                                     if (selectedTotal == true || selectedClassificationList[classification.index] == true) {
-                                        
                                         
                                         HStack {
                                             Text(searchItem.ingredientName)
@@ -261,7 +260,7 @@ struct Filterview : View{
                                         Text("적용")
                                     }
                                 }
-                            )
+        )
         .onAppear() {
             width = CGFloat(self.filter.minDegree) * self.totalWidth / 50
             width1 = CGFloat(self.filter.maxDegree) * self.totalWidth / 50

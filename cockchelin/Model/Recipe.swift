@@ -35,7 +35,7 @@ struct Ingredient: Codable, Identifiable {
         self.type = type
     }
 }
-    
+
 struct RecipeProcess: Codable, Identifiable {
     var id = UUID()
     var ingredientIndex: Int

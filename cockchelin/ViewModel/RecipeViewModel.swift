@@ -49,16 +49,16 @@ class RecipeViewModel: ObservableObject {
     
     func getTechniqueKorean(type: TechniqueType) -> String {
         switch type {
-            case .blend:
-                return "블렌드"
-            case .build:
-                return "빌드"
-            case .float:
-                return "플로트"
-            case .stir:
-                return "스터"
-            case .shake:
-                return "쉐이크"
+        case .blend:
+            return "블렌드"
+        case .build:
+            return "빌드"
+        case .float:
+            return "플로트"
+        case .stir:
+            return "스터"
+        case .shake:
+            return "쉐이크"
         }
     }
     
@@ -83,24 +83,24 @@ class RecipeViewModel: ObservableObject {
     func getBehaviorKorean(type: BehaviorType) -> String {
         
         switch type {
-            case .addIceCubes:
-                return "얼음을 채운다."
-            case .build:
-                return "빌드한다."
-            case .stir:
-                return "젓는다."
-            case .shake:
-                return "얼음과 함께 쉐이크한다."
-            case .float:
-                return "플로팅한다."
-            case .blend:
-                return "섞는다."
-            case .pour:
-                return "넣는다."
-            case .crush:
-                return "으깬다."
-            case .fillup:
-                return "채운다."
+        case .addIceCubes:
+            return "얼음을 채운다."
+        case .build:
+            return "빌드한다."
+        case .stir:
+            return "젓는다."
+        case .shake:
+            return "얼음과 함께 쉐이크한다."
+        case .float:
+            return "플로팅한다."
+        case .blend:
+            return "블렌딩한다."
+        case .pour:
+            return "넣는다."
+        case .crush:
+            return "으깬다."
+        case .fillup:
+            return "채운다."
         }
         
     }

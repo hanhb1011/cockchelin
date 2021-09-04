@@ -22,7 +22,7 @@ struct RecipeItemView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 100, height: 100, alignment: .center)
-
+                
                 VStack(alignment: .leading) {
                     Text(recipe.names[0])
                         .bold()
@@ -37,13 +37,13 @@ struct RecipeItemView: View {
                             .foregroundColor(Color(red: 150/255, green: 150/255, blue: 150/255, opacity: 100))
                             .lineLimit(2)
                     }
-
+                    
                     Text("\(recipe.alcoholDegree)%")
                         .font(.system(size: 13))
                         .foregroundColor(Color(red: 150/255, green: 150/255, blue: 150/255, opacity: 100))
-
+                    
                 }.padding(.leading, 8)
-            
+                
                 Spacer()
             }
         }
@@ -70,13 +70,13 @@ struct RecipeItemView_Previews: PreviewProvider {
 
 #if DEBUG
 let test = Recipe(names: ["Recipe name"],
-                        alcoholDegree: 25,
-                        ingredients: [Ingredient(names: ["ingredient0"], volume: 60, type: .ml), Ingredient(names: ["ingredient1"], volume: 1, type: .oz), Ingredient(names: ["ingredient2"], volume: 1, type: .oz), Ingredient(names: ["ingredient3"], volume: 1, type: .oz)],
-                        favoriteChecked: false,
-                        RecipeInformation: [RecipeProcess(ingredientIndex: 0, behavior: .pour)],
-                        techniqueTypes: [.build],
-                        lastTimeRecipeOpened: Date(),
-                        latitude: 0.0, longitude: 1.1,
-                        liquidColor: .blue,
-                        glassType: .stemmedLiqueurGlass)
+                  alcoholDegree: 25,
+                  ingredients: [Ingredient(names: ["ingredient0"], volume: 60, type: .ml), Ingredient(names: ["ingredient1"], volume: 1, type: .oz), Ingredient(names: ["ingredient2"], volume: 1, type: .oz), Ingredient(names: ["ingredient3"], volume: 1, type: .oz)],
+                  favoriteChecked: false,
+                  RecipeInformation: [RecipeProcess(ingredientIndex: 0, behavior: .pour)],
+                  techniqueTypes: [.build],
+                  lastTimeRecipeOpened: Date(),
+                  latitude: 0.0, longitude: 1.1,
+                  liquidColor: .blue,
+                  glassType: .stemmedLiqueurGlass)
 #endif

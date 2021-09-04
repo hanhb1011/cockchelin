@@ -15,8 +15,8 @@ class Filter: ObservableObject {
     @Published var isEnabled: Bool = false
     @Published var ingredients: [String] = []
     @Published var colorsFilterItems: [LiquidColorType:Bool] = [
-        .red : false, .blue : false, .pink : false, .yellow : false, .brown : false, .mixed : false,
-        .none : false, .beige : false, .green : false, .black : false
+        .red : true, .blue : true, .pink : true, .yellow : true, .brown : true, .mixed : true,
+        .none : true, .beige : true, .green : true, .black : true
     ]
     
     init() {
@@ -34,14 +34,14 @@ class Filter: ObservableObject {
         print(ingredients)
     }
     
-    func isMakeableRecipe(recipe: Recipe, givenIngredients: [String]) -> Bool {
+    func isMakeableRecipe(recipe: Recipe) -> Bool {
         var isMakeable = true
         
         recipe.ingredients.forEach { ingredient in
             let ingredientInRecipe: String = ingredient.names[0]
             var found = false
             
-            givenIngredients.forEach { givenIngredient in
+            ingredients.forEach { givenIngredient in
                 if (ingredientInRecipe == givenIngredient) {
                     found = true
                 }
@@ -70,7 +70,7 @@ class Filter: ObservableObject {
         else {
             colorsFilterItems[color] = isChecked
         }
-
+        
         print(colorsFilterItems)
     }
 }

@@ -16,8 +16,10 @@ class FilterViewModel: ObservableObject {
     @Published var classificationList: [Classification]
     
     init(filter: Filter) {
-        classificationList = loadClassifications()!
         self.filter = filter
+        classificationList = loadClassifications()!
+        //filter.updateIngredients(givenIngredients: getIngredientsFromClassificationList())
+        
     }
     
     func toggleSelectedVariable(id: UUID, classificationIdx: Int) {

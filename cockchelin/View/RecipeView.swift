@@ -69,9 +69,9 @@ struct RecipeView: View {
                 }
                 .padding(.horizontal, 30)
                 /*
-                Text("(\(recipe.alcoholDegree) %)")
-                Text(recipeViewModel.recipe.lastTimeRecipeOpened.description).foregroundColor(.gray)
-                */
+                 Text("(\(recipe.alcoholDegree) %)")
+                 Text(recipeViewModel.recipe.lastTimeRecipeOpened.description).foregroundColor(.gray)
+                 */
                 
                 HStack {
                     Text("수량")
@@ -123,8 +123,8 @@ struct RecipeView: View {
                             .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
                         if (ingredient.type != .none) {
                             Text(String(self.recipeViewModel.getLiquidVolume(ingredient: ingredient, liquidUnitType: self.units[unitSelectorIndex], numberOfServings: self.numbers[numberSelectorIndex])))
-                                    .font(.system(size: 16))
-                                    .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
+                                .font(.system(size: 16))
+                                .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
                         }
                         
                         if (ingredient.type == .oz || ingredient.type == .ml) {
@@ -180,18 +180,18 @@ struct RecipeView: View {
         .navigationBarTitle(Text(recipeViewModel.recipe.names[0]))
         .background(Color.themeBackground.edgesIgnoringSafeArea(.all))
         .navigationBarItems(trailing:
-            Button(action: {
-                recipeViewModel.checkFavorite()
-            }) {
-                if (true == recipeViewModel.recipe.favoriteChecked) {
-                    Image(systemName: "star.fill")
-                        .foregroundColor(Color(red: 255/255, green: 100/255, blue: 168/255, opacity: 100))
-                }
-                else {
-                    Image(systemName: "star")
-                        .foregroundColor(Color(red: 255/255, green: 100/255, blue: 168/255, opacity: 100))
-                }
-            }
+                                Button(action: {
+                                    recipeViewModel.checkFavorite()
+                                }) {
+                                    if (true == recipeViewModel.recipe.favoriteChecked) {
+                                        Image(systemName: "star.fill")
+                                            .foregroundColor(Color(red: 255/255, green: 100/255, blue: 168/255, opacity: 100))
+                                    }
+                                    else {
+                                        Image(systemName: "star")
+                                            .foregroundColor(Color(red: 255/255, green: 100/255, blue: 168/255, opacity: 100))
+                                    }
+                                }
         )
     }
     

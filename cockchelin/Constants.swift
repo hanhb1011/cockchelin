@@ -42,11 +42,11 @@ struct Constants {
 }
 
 /*
-struct Constants_Previews: PreviewProvider {
-    static var previews: some View {
-        Constants()
-    }
-}*/
+ struct Constants_Previews: PreviewProvider {
+ static var previews: some View {
+ Constants()
+ }
+ }*/
 
 struct Constants_Previews: PreviewProvider {
     static var previews: some View {
