@@ -7,11 +7,16 @@
 
 import Foundation
 
-class HomeViewModel {
-    var recipes: [Recipe]
-    var classificationList: [Classification]
+class HomeViewModel: ObservableObject {
+    @Published var recipes: [Recipe]
+    @Published var classificationList: [Classification]
     
     init(){
+        self.recipes = RecipeModel.loadSavedRecipes()
+        self.classificationList = loadClassifications()!
+    }
+    
+    func refresh() {
         self.recipes = RecipeModel.loadSavedRecipes()
         self.classificationList = loadClassifications()!
     }

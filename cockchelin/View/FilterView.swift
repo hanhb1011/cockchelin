@@ -133,8 +133,6 @@ struct Filterview : View{
                                         .onChanged({
                                             (value) in
                                             
-                                            print("\(filter.maxDegree)")
-                                            
                                             if value.location.x<=self.totalWidth && value.location.x>=self.width{
                                                 self.width1 = value.location.x
                                                 self.filter.maxDegree = Double(100 * self.width1 / self.totalWidth)/2
@@ -232,7 +230,7 @@ struct Filterview : View{
                                         .padding(.vertical, 2)
                                         .onTapGesture {
                                             filterViewModel.toggleSelectedVariable(id: searchItem.id, classificationIdx: classification.index)
-                                            filter.updateIngredients(givenIngredients: filterViewModel.getIngredientsFromClassificationList())
+                                            filter.updateIngredients(givenIngredients: getIngredientsFromClassificationList())
                                         }
                                         
                                     }
@@ -262,9 +260,6 @@ struct Filterview : View{
                                 }
         )
         .onAppear() {
-            width = CGFloat(self.filter.minDegree) * self.totalWidth / 50
-            width1 = CGFloat(self.filter.maxDegree) * self.totalWidth / 50
-            
             
         }
     }

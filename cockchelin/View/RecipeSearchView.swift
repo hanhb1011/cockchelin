@@ -22,6 +22,7 @@ struct RecipeSearchView: View {
     init() {
         self.recipeSearchViewModel = RecipeSearchViewModel()
         self.filter = Filter()
+        
     }
     
     var body: some View {

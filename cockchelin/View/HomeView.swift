@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct HomeView: View {
-    var homeViewModel: HomeViewModel
+    @ObservedObject var homeViewModel: HomeViewModel
     
     init(){
         self.homeViewModel = HomeViewModel()
@@ -36,15 +36,9 @@ struct HomeView: View {
                 //best 칵테일 (조회수 기준?)
                 ScrollView{
                     Group{
-                        //오늘의 칵테일
                         TodayCocktailView(recipe: homeViewModel.getTodaysCocktail())
                         
-                        //best cocktail list
-                        //BestCocktailView(title: "Cocktails For you", recipes: homeViewModel.getRecentlyViewedCocktails())
-                        
                         BestCocktailView(title: "Recently Viewed cocktails", recipes: homeViewModel.getRecentlyViewedCocktails(maxCount: 5))
-                        
-                        //IngredientsView()
                         
                         NewUpdatedView()
                         
@@ -52,7 +46,7 @@ struct HomeView: View {
                     .padding(.horizontal)
                 }
                 .onAppear {
-                    //print("home view onAppear")
+                    homeViewModel.refresh()
                 }
             }//VStack
         }//ZStack
@@ -66,35 +60,31 @@ struct RecipeCardView: View{
     var body: some View{
         VStack(alignment: .leading) {
             Text("Today's Cocktail")
-                .font(.system(.title, design:.serif))
-                .fontWeight(.bold)
-                .font(.headline)
-                .foregroundColor(Color("PointColor"))
+                .bold()
+                .font(.system(size: 25, weight: .bold))
+                .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
             
             //.font(Font.system(size: 40))
         }
         VStack{
-            /* 추천 칵테일 기준: 현재 주어진 재료로 만들 수 있는 칵테일? */
             Image("todayCocktail")
                 .resizable()
                 .scaledToFit()
-                .frame(width: 290, height: 200, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                .padding(.top, 10)
+                .frame(width: 200, height: 200, alignment: .center)
             
-            VStack(alignment: .leading, spacing: 12){
-                Text(recipe.names[0])//여기 변수 넣어야
-                    .font(.system(.title, design:.serif))
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                    .foregroundColor(Color("PointColor"))
+            VStack(alignment: .leading, spacing: 5){
+                Text(recipe.names[0])
+                    .font(.system(size: 25, weight: .bold))
+                    .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
                     .lineLimit(1)
                 
                 Text("지친 마음, \(recipe.names[0]) 한잔으로 쓸어내리는 건 어때요?")
                     .font(.system(.body, design:.serif))
-                    .foregroundColor(Color.gray)
+                    .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
                     .italic()
             }
             .padding()
-            .padding(.bottom, 8)
+            .padding(.top, -15)
         }
         .background(Color.white)
         .cornerRadius(12)
@@ -104,10 +94,10 @@ struct RecipeCardView: View{
 struct TodayCocktailView: View{
     var recipe: Recipe
     var body: some View{
-        VStack(alignment: .leading, spacing:20){
+        VStack(alignment: .leading){
             RecipeCardView(recipe: recipe)
         }
-    }//VIEW
+    }
 }
 
 //today's cocktail list
@@ -122,21 +112,12 @@ struct GroupView: View{
                 .padding(.top, 5)
             
             VStack(alignment: .leading, spacing: 5){
-                Text(recipe.names[0])//여기 베스트순으로 indexing 넣어야
-                    //.font(.system(.title, design:.serif))
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                    .font(Font.system(size: 15))
-                    .foregroundColor(Color("PointColor"))
-                    .lineLimit(1)
-                
-                Text("베스트 n등에 걸맞는 멋진멘트")
-                    //.font(.system(.body, design:.serif))
-                    .font(Font.system(size: 10))
-                    .foregroundColor(Color.gray)
-                    .italic()
+                Text(recipe.names[0])
+                    .font(.system(size: 15, weight: .bold))
+                    .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
             }
-            .padding()
-            .padding(.top, -15)
+            .padding(10)
+            .padding(.top, -17)
             //.padding(.bottom, 4)
         }
         .background(Color.white)
@@ -156,9 +137,9 @@ struct BestCocktailView: View{
     
     var body: some View{
         VStack(alignment: .leading){
-            Text(title)
-                .font(.headline)
-                .foregroundColor(Color("PointColor"))
+            Text(title).bold()
+                .font(.system(size: 20, weight: .bold))
+                .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
             ScrollView(.horizontal){
                 VStack(alignment: .leading){
                     HStack{
@@ -256,8 +237,8 @@ struct NewUpdatedView: View{
         
         VStack(alignment: .leading){
             Text("Updated Cocktails")
-                .font(.headline)
-                .foregroundColor(Color("PointColor"))
+                .font(.system(size: 20, weight: .bold))
+                .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
             
             //Item list view..
             ScrollView(.vertical, showsIndicators: false){

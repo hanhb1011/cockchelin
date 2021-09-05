@@ -9,7 +9,6 @@
 import SwiftUI
 
 struct RecipeView: View {
-    
     var recipe: Recipe
     @ObservedObject var recipeViewModel: RecipeViewModel
     

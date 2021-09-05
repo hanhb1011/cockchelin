@@ -18,8 +18,6 @@ class FilterViewModel: ObservableObject {
     init(filter: Filter) {
         self.filter = filter
         classificationList = loadClassifications()!
-        //filter.updateIngredients(givenIngredients: getIngredientsFromClassificationList())
-        
     }
     
     func toggleSelectedVariable(id: UUID, classificationIdx: Int) {
@@ -67,20 +65,6 @@ class FilterViewModel: ObservableObject {
         }
         
         return ret
-    }
-    
-    func getIngredientsFromClassificationList() -> [String] {
-        var ingredients: [String] = []
-        
-        classificationList.forEach { classification in
-            classification.ingredientSearchItems.forEach { ingredientSearchItem in
-                if (ingredientSearchItem.selected) {
-                    ingredients.append(ingredientSearchItem.ingredientName)
-                }
-            }
-        }
-        
-        return ingredients
     }
     
 }

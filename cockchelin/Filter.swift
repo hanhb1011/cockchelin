@@ -20,7 +20,7 @@ class Filter: ObservableObject {
     ]
     
     init() {
-        
+        ingredients = getIngredientsFromClassificationList()
     }
     
     func printIngredients() {

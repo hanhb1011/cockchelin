@@ -91,6 +91,20 @@ func loadClassifications() -> [Classification]? {
     return nil
 }
 
+func getIngredientsFromClassificationList() -> [String] {
+    var ingredients: [String] = []
+    let classificationList = loadClassifications()!
+    classificationList.forEach { classification in
+        classification.ingredientSearchItems.forEach { ingredientSearchItem in
+            if (ingredientSearchItem.selected) {
+                ingredients.append(ingredientSearchItem.ingredientName)
+            }
+        }
+    }
+    
+    return ingredients
+}
+
 func getClassificationsFromJSONFile() -> [Classification]? {
     
     if let fileLocation = Bundle.main.url(forResource: "Classifications", withExtension: "json") {
