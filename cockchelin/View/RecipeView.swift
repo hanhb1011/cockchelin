@@ -14,7 +14,7 @@ struct RecipeView: View {
     @ObservedObject var recipeViewModel: RecipeViewModel
     
     @State private var numberSelectorIndex = 0
-    @State private var numbers: [Int] = [1, 2, 3, 4, 5]
+    @State private var numbers: [Int] = [1, 2, 3, 4]
     
     @State private var unitSelectorIndex = 0
     @State private var units: [LiquidUnitType] = [.ml, .oz]
@@ -193,6 +193,9 @@ struct RecipeView: View {
                                     }
                                 }
         )
+        .onAppear {
+            recipeViewModel.updateCurrentTimestamp()
+        }
     }
     
     init(recipe: Recipe) {

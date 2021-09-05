@@ -9,7 +9,11 @@
 import SwiftUI
 
 struct HomeView: View {
-    @State var searchText = ""
+    var homeViewModel: HomeViewModel
+    
+    init(){
+        self.homeViewModel = HomeViewModel()
+    }
     
     var body: some View {
         ZStack{
@@ -33,17 +37,22 @@ struct HomeView: View {
                 ScrollView{
                     Group{
                         //오늘의 칵테일
-                        TodayCocktailView()
+                        TodayCocktailView(recipe: homeViewModel.getTodaysCocktail())
                         
                         //best cocktail list
-                        BestCocktailView()
+                        //BestCocktailView(title: "Cocktails For you", recipes: homeViewModel.getRecentlyViewedCocktails())
                         
-                        IngredientsView()
+                        BestCocktailView(title: "Recently Viewed cocktails", recipes: homeViewModel.getRecentlyViewedCocktails(maxCount: 5))
+                        
+                        //IngredientsView()
                         
                         NewUpdatedView()
                         
                     }.foregroundColor(Color.themeForeground)
                     .padding(.horizontal)
+                }
+                .onAppear {
+                    //print("home view onAppear")
                 }
             }//VStack
         }//ZStack
@@ -52,6 +61,8 @@ struct HomeView: View {
 }
 
 struct RecipeCardView: View{
+    var recipe: Recipe
+    
     var body: some View{
         VStack(alignment: .leading) {
             Text("Today's Cocktail")
@@ -71,13 +82,13 @@ struct RecipeCardView: View{
                 .padding(.top, 10)
             
             VStack(alignment: .leading, spacing: 12){
-                Text("칵테일 이름")//여기 변수 넣어야
+                Text(recipe.names[0])//여기 변수 넣어야
                     .font(.system(.title, design:.serif))
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                     .foregroundColor(Color("PointColor"))
                     .lineLimit(1)
                 
-                Text("지친 마음, ㅇㅇㅇ 한잔으로 쓸어내리는 건 어때요?")
+                Text("지친 마음, \(recipe.names[0]) 한잔으로 쓸어내리는 건 어때요?")
                     .font(.system(.body, design:.serif))
                     .foregroundColor(Color.gray)
                     .italic()
@@ -91,22 +102,17 @@ struct RecipeCardView: View{
     }
 }
 struct TodayCocktailView: View{
+    var recipe: Recipe
     var body: some View{
         VStack(alignment: .leading, spacing:20){
-            RecipeCardView()
+            RecipeCardView(recipe: recipe)
         }
     }//VIEW
 }
 
-//Button Click event
-struct GroupDetailView: View{
-    var body: some View{
-        Text("이미지 클릭 시 여기로")
-    }
-}
-
 //today's cocktail list
 struct GroupView: View{
+    var recipe: Recipe
     var body: some View{
         VStack{
             Image("temp")
@@ -116,7 +122,7 @@ struct GroupView: View{
                 .padding(.top, 5)
             
             VStack(alignment: .leading, spacing: 5){
-                Text("베스트 n등")//여기 베스트순으로 indexing 넣어야
+                Text(recipe.names[0])//여기 베스트순으로 indexing 넣어야
                     //.font(.system(.title, design:.serif))
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                     .font(Font.system(size: 15))
@@ -144,22 +150,21 @@ struct bestItem{
     let image, title, content : String
 }
 struct BestCocktailView: View{
+    
+    var title: String
+    var recipes: [Recipe]
+    
     var body: some View{
         VStack(alignment: .leading){
-            Text("BEST Cocktail")
+            Text(title)
                 .font(.headline)
                 .foregroundColor(Color("PointColor"))
             ScrollView(.horizontal){
                 VStack(alignment: .leading){
                     HStack{
-                        NavigationLink(destination:
-                                        GroupDetailView()){
-                            GroupView()
+                        ForEach(recipes) { recipe in
+                            GroupView(recipe: recipe)
                         }
-                        GroupView()
-                        GroupView()
-                        GroupView()
-                        GroupView()
                     }
                 }
             }
@@ -240,7 +245,6 @@ struct NewUpdatedView: View{
     @StateObject var listData = ListViewModel()
     @ObservedObject var recipeSearchViewModel: RecipeSearchViewModel
     @ObservedObject var filter: Filter
-    @State var searchText = ""
     @State var isSearching = false
     
     init() {
@@ -251,7 +255,7 @@ struct NewUpdatedView: View{
     var body: some View{
         
         VStack(alignment: .leading){
-            Text("Updated Cocktail!")
+            Text("Updated Cocktails")
                 .font(.headline)
                 .foregroundColor(Color("PointColor"))
             

@@ -30,6 +30,7 @@
 		66E5D7C625FDFAED00700367 /* IngredientManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E5D7C525FDFAED00700367 /* IngredientManager.swift */; };
 		66E5D7C925FE0E2400700367 /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E5D7C825FE0E2400700367 /* FilterViewModel.swift */; };
 		66E5D7CC25FE0E4100700367 /* Ingredients.json in Resources */ = {isa = PBXBuildFile; fileRef = 66E5D7CB25FE0E4100700367 /* Ingredients.json */; };
+		66FA441C26E37C65003C7B42 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FA441B26E37C65003C7B42 /* HomeViewModel.swift */; };
 		A25583B425868EAB0087FEAD /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25583B325868EAB0087FEAD /* FilterView.swift */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +60,7 @@
 		66E5D7C525FDFAED00700367 /* IngredientManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngredientManager.swift; sourceTree = "<group>"; };
 		66E5D7C825FE0E2400700367 /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
 		66E5D7CB25FE0E4100700367 /* Ingredients.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Ingredients.json; sourceTree = "<group>"; };
+		66FA441B26E37C65003C7B42 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		A25583B325868EAB0087FEAD /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 		A2C7C525259F0C2A0041E6E2 /* cockchelin copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "cockchelin copy-Info.plist"; path = "/Users/khs/Documents/cockchelin/cockchelin copy-Info.plist"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
@@ -150,6 +152,7 @@
 			children = (
 				665E03F8254B122C00F62F66 /* RecipeViewModel.swift */,
 				6690C696254D27C100F5031E /* RecipeSearchViewModel.swift */,
+				66FA441B26E37C65003C7B42 /* HomeViewModel.swift */,
 				66E5D7C825FE0E2400700367 /* FilterViewModel.swift */,
 			);
 			path = ViewModel;
@@ -230,6 +233,7 @@
 				6653B4952620A6490096A0A5 /* Classification.swift in Sources */,
 				665E03FB254B122C00F62F66 /* RecipeView.swift in Sources */,
 				A25583B425868EAB0087FEAD /* FilterView.swift in Sources */,
+				66FA441C26E37C65003C7B42 /* HomeViewModel.swift in Sources */,
 				665E03E1254B11D700F62F66 /* HomeView.swift in Sources */,
 				665E03D3254B117D00F62F66 /* ContentView.swift in Sources */,
 				665E03EB254B11EB00F62F66 /* Helper.swift in Sources */,

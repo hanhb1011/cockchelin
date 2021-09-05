@@ -13,7 +13,6 @@ class RecipeViewModel: ObservableObject {
     
     init(recipe: Recipe){
         self.recipe = recipe
-        updateCurrentTimestamp()
     }
     
     func checkFavorite() {
@@ -23,7 +22,7 @@ class RecipeViewModel: ObservableObject {
     
     func updateCurrentTimestamp() {
         recipe.lastTimeRecipeOpened = Date()
-        //print(recipe.lastTimeRecipeOpened.description)
+        print(recipe.lastTimeRecipeOpened)
         RecipeModel.updateRecipe(recipe: recipe)
     }
     
