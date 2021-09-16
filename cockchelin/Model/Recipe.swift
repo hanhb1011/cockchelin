@@ -66,6 +66,7 @@ enum LiquidColorType: String, Codable, CaseIterable {
     case beige
     case green
     case black
+    case white
 }
 
 enum LiquidUnitType: String, Codable, CaseIterable {
