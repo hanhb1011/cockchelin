@@ -97,7 +97,7 @@ struct RecipeSearchView: View {
                 
                 
             }.navigationBarTitle(Text("레시피"))
-            .padding(.horizontal)
+            .padding(.horizontal, 15)
             .background(Color.themeBackground.edgesIgnoringSafeArea(.all))
         }
     }

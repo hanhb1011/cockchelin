@@ -16,41 +16,29 @@ struct HomeView: View {
     }
     
     var body: some View {
-        ZStack{
-            Color.themeBackground
-                .edgesIgnoringSafeArea(.all)
+        NavigationView {
+            ZStack{
+                VStack{
+                    ScrollView{
+                        Group{
+                            RecipeCardView(recipe: homeViewModel.getTodaysCocktail())
+                            
+                            BestCocktailView(title: "Recently Viewed cocktails", recipes: homeViewModel.getRecentlyViewedCocktails(maxCount: 5))
+                            
+                            NewUpdatedView()
+                        }
+                        .foregroundColor(Color.themeForeground)
+                        .padding(.horizontal, 15)
+                    }
+                    .onAppear {
+                        homeViewModel.refresh()
+                    }
+                }
+            }
+            .navigationTitle("Cockchelin")
+            .background(Color.themeBackground.edgesIgnoringSafeArea(.all))
             
-            VStack{
-                Rectangle()
-                    .fill(Color.themeBackground)
-                    .frame(height:100.0)
-                    .edgesIgnoringSafeArea(.top)
-                    .edgesIgnoringSafeArea(.bottom)
-                    .overlay(Text("Cockchelin")
-                                .font(Font.system(size: 35))
-                                .fontWeight(.bold)
-                                .padding(.bottom,20.0))
-                    .frame(height:60.0)
-                Spacer()
-                
-                //best 칵테일 (조회수 기준?)
-                ScrollView{
-                    Group{
-                        TodayCocktailView(recipe: homeViewModel.getTodaysCocktail())
-                        
-                        BestCocktailView(title: "Recently Viewed cocktails", recipes: homeViewModel.getRecentlyViewedCocktails(maxCount: 5))
-                        
-                        NewUpdatedView()
-                        
-                    }.foregroundColor(Color.themeForeground)
-                    .padding(.horizontal)
-                }
-                .onAppear {
-                    homeViewModel.refresh()
-                }
-            }//VStack
-        }//ZStack
-        
+        }
     }
 }
 
@@ -58,44 +46,42 @@ struct RecipeCardView: View{
     var recipe: Recipe
     
     var body: some View{
-        VStack(alignment: .leading) {
+        HStack{
             Text("Today's Cocktail")
                 .bold()
                 .font(.system(size: 25, weight: .bold))
                 .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
+                .padding(.horizontal, 5)
             
-            //.font(Font.system(size: 40))
+            Spacer()
         }
-        VStack{
-            Image("todayCocktail")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 200, height: 200, alignment: .center)
-            
-            VStack(alignment: .leading, spacing: 5){
-                Text(recipe.names[0])
-                    .font(.system(size: 25, weight: .bold))
-                    .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
-                    .lineLimit(1)
-                
-                Text("지친 마음, \(recipe.names[0]) 한잔으로 쓸어내리는 건 어때요?")
-                    .font(.system(.body, design:.serif))
-                    .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
-                    .italic()
+        NavigationLink(destination: RecipeView(recipe: recipe)){
+            VStack{
+                HStack {
+                    Spacer()
+                    Image("todayCocktail")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 200, height: 200, alignment: .center)
+                    Spacer()
+                }
+                VStack(alignment: .leading, spacing: 5){
+                    Text(recipe.names[0])
+                        .font(.system(size: 25, weight: .bold))
+                        .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
+                        .lineLimit(1)
+                    
+                    Text("지친 마음, \(recipe.names[0]) 한잔으로 쓸어내리는 건 어때요?")
+                        .font(.system(.body, design:.serif))
+                        .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
+                        .italic()
+                }
+                .padding()
+                .padding(.top, -15)
             }
-            .padding()
-            .padding(.top, -15)
-        }
-        .background(Color.white)
-        .cornerRadius(12)
-        .shadow(color:Color("BackgroundColor"), radius: 8, x:0, y:0)
-    }
-}
-struct TodayCocktailView: View{
-    var recipe: Recipe
-    var body: some View{
-        VStack(alignment: .leading){
-            RecipeCardView(recipe: recipe)
+            .background(Color.white)
+            .cornerRadius(12)
+            .shadow(color:Color("BackgroundColor"), radius: 8, x:0, y:0)
         }
     }
 }
@@ -104,42 +90,42 @@ struct TodayCocktailView: View{
 struct GroupView: View{
     var recipe: Recipe
     var body: some View{
-        VStack{
-            Image("temp")
-                .resizable()
-                //.scaledToFit()
-                .frame(width: 130, height: 110, alignment: .center)
-                .padding(.top, 5)
-            
-            VStack(alignment: .leading, spacing: 5){
-                Text(recipe.names[0])
-                    .font(.system(size: 15, weight: .bold))
-                    .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
+        NavigationLink(destination: RecipeView(recipe: recipe)){
+            VStack{
+                Image("temp")
+                    .resizable()
+                    //.scaledToFit()
+                    .frame(width: 130, height: 110, alignment: .center)
+                    .padding(.top, 5)
+                
+                VStack(alignment: .leading, spacing: 5){
+                    Text(recipe.names[0])
+                        .font(.system(size: 15, weight: .bold))
+                        .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
+                }
+                .padding(10)
+                .padding(.top, -17)
+                //.padding(.bottom, 4)
             }
-            .padding(10)
-            .padding(.top, -17)
-            //.padding(.bottom, 4)
+            .background(Color.white)
+            .cornerRadius(12)
+            .shadow(color:Color("BackgroundColor"), radius: 8, x:0, y:0)
         }
-        .background(Color.white)
-        .cornerRadius(12)
-        .shadow(color:Color("BackgroundColor"), radius: 8, x:0, y:0)
     }
 }
 
-struct bestItem{
-    var id : Int
-    let image, title, content : String
-}
 struct BestCocktailView: View{
     
     var title: String
     var recipes: [Recipe]
     
     var body: some View{
+        
         VStack(alignment: .leading){
             Text(title).bold()
                 .font(.system(size: 20, weight: .bold))
                 .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
+                .padding(.horizontal, 5)
             ScrollView(.horizontal){
                 VStack(alignment: .leading){
                     HStack{
@@ -225,12 +211,9 @@ class ListViewModel: ObservableObject{
 struct NewUpdatedView: View{
     @StateObject var listData = ListViewModel()
     @ObservedObject var recipeSearchViewModel: RecipeSearchViewModel
-    @ObservedObject var filter: Filter
-    @State var isSearching = false
     
     init() {
         self.recipeSearchViewModel = RecipeSearchViewModel()
-        self.filter = Filter()
     }
     
     var body: some View{
