@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		562B2A2E258FA6F00014A558 /* BookmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562B2A2D258FA6F00014A558 /* BookmarkView.swift */; };
 		562B2A43259F04830014A558 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562B2A42259F04830014A558 /* Item.swift */; };
+		66517CAE26F7074400BC69DB /* RecipeData.json in Resources */ = {isa = PBXBuildFile; fileRef = 66517CAD26F7074400BC69DB /* RecipeData.json */; };
 		6653B4952620A6490096A0A5 /* Classification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6653B4942620A6490096A0A5 /* Classification.swift */; };
 		665E03D1254B117D00F62F66 /* cockchelinApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665E03D0254B117D00F62F66 /* cockchelinApp.swift */; };
 		665E03D3254B117D00F62F66 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665E03D2254B117D00F62F66 /* ContentView.swift */; };
@@ -29,7 +30,6 @@
 		66E5D7C625FDFAED00700367 /* IngredientManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E5D7C525FDFAED00700367 /* IngredientManager.swift */; };
 		66E5D7C925FE0E2400700367 /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E5D7C825FE0E2400700367 /* FilterViewModel.swift */; };
 		66E5D7CC25FE0E4100700367 /* Ingredients.json in Resources */ = {isa = PBXBuildFile; fileRef = 66E5D7CB25FE0E4100700367 /* Ingredients.json */; };
-		66FA3E8326F33EDE00CF5F4F /* RecipeData.json in Resources */ = {isa = PBXBuildFile; fileRef = 66FA3E8226F33EDE00CF5F4F /* RecipeData.json */; };
 		66FA441C26E37C65003C7B42 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FA441B26E37C65003C7B42 /* HomeViewModel.swift */; };
 		A25583B425868EAB0087FEAD /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25583B325868EAB0087FEAD /* FilterView.swift */; };
 /* End PBXBuildFile section */
@@ -37,6 +37,7 @@
 /* Begin PBXFileReference section */
 		562B2A2D258FA6F00014A558 /* BookmarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkView.swift; sourceTree = "<group>"; };
 		562B2A42259F04830014A558 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		66517CAD26F7074400BC69DB /* RecipeData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = RecipeData.json; sourceTree = "<group>"; };
 		6653B4942620A6490096A0A5 /* Classification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Classification.swift; sourceTree = "<group>"; };
 		665E03CD254B117D00F62F66 /* cockchelin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cockchelin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		665E03D0254B117D00F62F66 /* cockchelinApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cockchelinApp.swift; sourceTree = "<group>"; };
@@ -59,7 +60,6 @@
 		66E5D7C525FDFAED00700367 /* IngredientManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngredientManager.swift; sourceTree = "<group>"; };
 		66E5D7C825FE0E2400700367 /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
 		66E5D7CB25FE0E4100700367 /* Ingredients.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Ingredients.json; sourceTree = "<group>"; };
-		66FA3E8226F33EDE00CF5F4F /* RecipeData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = RecipeData.json; sourceTree = "<group>"; };
 		66FA441B26E37C65003C7B42 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		A25583B325868EAB0087FEAD /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 		A2C7C525259F0C2A0041E6E2 /* cockchelin copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "cockchelin copy-Info.plist"; path = "/Users/khs/Documents/cockchelin/cockchelin copy-Info.plist"; sourceTree = "<absolute>"; };
@@ -104,7 +104,7 @@
 				66CA2A8725A0D19000CEB149 /* Filter.swift */,
 				665E03E7254B11EB00F62F66 /* Constants.swift */,
 				665E03E6254B11EB00F62F66 /* Helper.swift */,
-				66FA3E8226F33EDE00CF5F4F /* RecipeData.json */,
+				66517CAD26F7074400BC69DB /* RecipeData.json */,
 				66E5D7CB25FE0E4100700367 /* Ingredients.json */,
 				66A5ADBA266CD244004F3532 /* Classifications.json */,
 				665E03D4254B117E00F62F66 /* Assets.xcassets */,
@@ -218,7 +218,7 @@
 				66A5ADBB266CD244004F3532 /* Classifications.json in Resources */,
 				66E5D7CC25FE0E4100700367 /* Ingredients.json in Resources */,
 				665E03D8254B117E00F62F66 /* Preview Assets.xcassets in Resources */,
-				66FA3E8326F33EDE00CF5F4F /* RecipeData.json in Resources */,
+				66517CAE26F7074400BC69DB /* RecipeData.json in Resources */,
 				665E03D5254B117E00F62F66 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

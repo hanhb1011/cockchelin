@@ -21,6 +21,7 @@ class RecipeModel {
         }
         
         if (recipesFromUserDefaults!.count < recipesFromJSONFile!.count) {
+            updateAllRecipesToUserDefaults(recipes: recipesFromJSONFile!) //todo: delete this code before release...
             return recipesFromJSONFile!
         }
         
@@ -76,6 +77,14 @@ class RecipeModel {
             defaults.set(encoded, forKey: "SavedRecipes")
         }
         
+    }
+    
+    static func updateAllRecipesToUserDefaults(recipes: [Recipe]) {
+        let encoder = JSONEncoder()
+        if let encoded = try? encoder.encode(recipes) {
+            let defaults = UserDefaults.standard
+            defaults.set(encoded, forKey: "SavedRecipes")
+        }
     }
     
     static func findRecipeById(id: UUID) -> Recipe {
