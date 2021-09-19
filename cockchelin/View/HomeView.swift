@@ -121,21 +121,23 @@ struct BestCocktailView: View{
     
     var body: some View{
         
-        VStack(alignment: .leading){
-            Text(title).bold()
-                .font(.system(size: 20, weight: .bold))
-                .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
-                .padding(.horizontal, 5)
-            ScrollView(.horizontal){
-                VStack(alignment: .leading){
-                    HStack{
-                        ForEach(recipes) { recipe in
-                            GroupView(recipe: recipe)
+        if (recipes.count > 0) {
+            VStack(alignment: .leading){
+                Text(title).bold()
+                    .font(.system(size: 20, weight: .bold))
+                    .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
+                    .padding(.horizontal, 5)
+                ScrollView(.horizontal){
+                    VStack(alignment: .leading){
+                        HStack{
+                            ForEach(recipes) { recipe in
+                                GroupView(recipe: recipe)
+                            }
                         }
                     }
                 }
-            }
-        }.padding(.top, 5)
+            }.padding(.top, 5)
+        }
     }
 }
 
