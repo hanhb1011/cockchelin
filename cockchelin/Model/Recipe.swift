@@ -21,6 +21,7 @@ struct Recipe: Codable, Identifiable {
     var longitude: Double
     var liquidColor: LiquidColorType
     var glassType: GlassType
+    var garnish: String?
 }
 
 struct Ingredient: Codable, Identifiable {
