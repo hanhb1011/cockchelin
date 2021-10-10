@@ -103,13 +103,28 @@ class RecipeViewModel: ObservableObject {
         
     }
     
+    func postPositionText(_ name: String) -> String {
+        guard let lastText = name.last else { return name }
+
+        let unicodeVal = UnicodeScalar(String(lastText))?.value
+
+        guard let value = unicodeVal else { return name }
+
+        if (value < 0xAC00 || value > 0xD7A3) { return name + " " }
+
+        let last = (value - 0xAC00) % 28
+
+        let str = last > 0 ? "을 " : "를 "
+
+        return name + str
+    }
+    
     func getRecipeProcessString(recipeProcess: RecipeProcess) -> String {
         var res: String = ""
         
         if (recipeProcess.ingredientIndex != -1)
         {
-            res.append(recipe.ingredients[recipeProcess.ingredientIndex].names[0])
-            res.append(" 을(를)") /* TODO: differentiate 을, 를 */
+            res.append(postPositionText(recipe.ingredients[recipeProcess.ingredientIndex].names[0]))
         }
         
         res.append(getBehaviorKorean(type: recipeProcess.behavior))
