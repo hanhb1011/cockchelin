@@ -15,7 +15,7 @@ struct RecipeView: View {
     @State private var numberSelectorIndex = 0
     @State private var numbers: [Int] = [1, 2, 3, 4]
     
-    @State private var unitSelectorIndex = 0
+    @State private var unitSelectorIndex = RecipeViewModel.getSelectedUnitIndex()
     @State private var units: [LiquidUnitType] = [.ml, .oz]
     
     var body: some View {
@@ -104,6 +104,9 @@ struct RecipeView: View {
                             Text(self.units[index].rawValue).tag(index)
                         }
                     }
+                    .onChange(of: unitSelectorIndex, perform: { value in
+                        RecipeViewModel.updateSelectedUnitIndex(selectedUnitIndex: unitSelectorIndex)
+                    })
                     .pickerStyle(SegmentedPickerStyle())
                     .fixedSize()
                     .padding(.horizontal, 30)
@@ -140,10 +143,37 @@ struct RecipeView: View {
                     }
                     .padding(.horizontal, 30)
                     .padding(.vertical, 2)
-                    
-                    
                 }
                 
+                if (recipe.garnish != nil) {
+                    HStack {
+                        Text("가니쉬")
+                            .bold()
+                            .font(.system(size: 20, weight: .bold))
+                            .padding(.horizontal, 30)
+                            .padding(.vertical, 10)
+                            .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
+                        Spacer()
+                    }
+                    
+                    HStack {
+                        Image(systemName: "checkmark.square")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 20, height: 20, alignment: .center)
+                            .foregroundColor(Color(red: 255/255, green: 100/255, blue: 168/255, opacity: 100))
+                            .padding(.horizontal, 5)
+                        
+                        Text(recipeViewModel.getGarnishString())
+                            .font(.system(size: 16))
+                            .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
+                        
+                        Spacer()
+                    }
+                    .padding(.horizontal, 30)
+                    .padding(.vertical, 2)
+                    
+                }
                 HStack {
                     Text("레시피")
                         .bold()
@@ -180,17 +210,17 @@ struct RecipeView: View {
         .background(Color.themeBackground.edgesIgnoringSafeArea(.all))
         .navigationBarItems(trailing:
                                 Button(action: {
-                                    recipeViewModel.checkFavorite()
-                                }) {
-                                    if (true == recipeViewModel.recipe.favoriteChecked) {
-                                        Image(systemName: "star.fill")
-                                            .foregroundColor(Color(red: 255/255, green: 100/255, blue: 168/255, opacity: 100))
-                                    }
-                                    else {
-                                        Image(systemName: "star")
-                                            .foregroundColor(Color(red: 255/255, green: 100/255, blue: 168/255, opacity: 100))
-                                    }
-                                }
+            recipeViewModel.checkFavorite()
+        }) {
+            if (true == recipeViewModel.recipe.favoriteChecked) {
+                Image(systemName: "star.fill")
+                    .foregroundColor(Color(red: 255/255, green: 100/255, blue: 168/255, opacity: 100))
+            }
+            else {
+                Image(systemName: "star")
+                    .foregroundColor(Color(red: 255/255, green: 100/255, blue: 168/255, opacity: 100))
+            }
+        }
         )
         .onAppear {
             recipeViewModel.updateCurrentTimestamp()
@@ -214,7 +244,8 @@ let testRecipe = Recipe(names: ["Recipe name"],
                         lastTimeRecipeOpened: Date(),
                         latitude: 0.0, longitude: 1.1,
                         liquidColor: .blue,
-                        glassType: .stemmedLiqueurGlass)
+                        glassType: .stemmedLiqueurGlass,
+                        garnish: "가니쉬")
 #endif
 
 struct RecipeView_Previews: PreviewProvider {

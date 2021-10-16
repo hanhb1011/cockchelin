@@ -43,12 +43,12 @@ struct RecipeSearchView: View {
                                 Spacer()
                                 if isSearching{
                                     Button(action: {searchText = ""}, label:{Image(systemName: "xmark.circle.fill")
-                                        .padding(.vertical)
+                                            .padding(.vertical)
                                     })
                                 }
                             }
-                            .padding(.horizontal, 12)
-                            .foregroundColor(Color.gray)
+                                .padding(.horizontal, 12)
+                                .foregroundColor(Color.gray)
                         )
                     NavigationLink(destination:Filterview(filter: filter)){Image(systemName: "slider.vertical.3")}
                     
@@ -61,44 +61,45 @@ struct RecipeSearchView: View {
                         /* Filter */
                         ForEach((self.recipeSearchViewModel.recipes)
                                     .filter{"\($0)".lowercased().trimmingCharacters(in: .whitespaces).contains(searchText.lowercased() .trimmingCharacters(in: .whitespaces)) || searchText.isEmpty
-                                        
-                                    }.filter {
-                                        if (filter.isEnabled) {
-                                            return $0.alcoholDegree <= Int(self.filter.maxDegree) && $0.alcoholDegree >= Int(self.filter.minDegree)
-                                        }
-                                        else {
-                                            return true
-                                        }
-                                    }.filter {
-                                        if (filter.isEnabled) {
-                                            return filter.isMakeableRecipe(recipe: $0)
-                                        }
-                                        else {
-                                            return true
-                                        }
-                                    }.filter {
-                                        if (filter.isEnabled) {
-                                            return filter.isSelectedColor(color:$0.liquidColor)
-                                        }
-                                        else {
-                                            return true
-                                        }
-                                    }
-                                
+                            
+                        }.filter {
+                            if (filter.isEnabled) {
+                                return $0.alcoholDegree <= Int(self.filter.maxDegree) && $0.alcoholDegree >= Int(self.filter.minDegree)
+                            }
+                            else {
+                                return true
+                            }
+                        }.filter {
+                            if (filter.isEnabled) {
+                                return filter.isMakeableRecipe(recipe: $0)
+                            }
+                            else {
+                                return true
+                            }
+                        }.filter {
+                            if (filter.isEnabled) {
+                                return filter.isSelectedColor(color:$0.liquidColor)
+                            }
+                            else {
+                                return true
+                            }
+                        }.sorted(by: { recipe0, recipe1 in
+                            recipe0.names[0] < recipe1.names[0]
+                        })
                         ){section in
                             RecipeItemView(recipe: section)
                             Spacer()
                         }
                         .background(Color.white)
-                        .cornerRadius(12)
+                        .cornerRadius(15)
                         
                     }
                 }//ScrollView
                 
                 
             }.navigationBarTitle(Text("레시피"))
-            .padding(.horizontal, 15)
-            .background(Color.themeBackground.edgesIgnoringSafeArea(.all))
+                .padding(.horizontal, 15)
+                .background(Color.themeBackground.edgesIgnoringSafeArea(.all))
         }
     }
 }

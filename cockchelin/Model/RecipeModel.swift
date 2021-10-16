@@ -16,9 +16,9 @@ class RecipeModel {
         let recipesFromUserDefaults = getSavedRecipesFromUserDefaults()
         let recipesFromJSONFile = getSavedRecipesFromJSONFile()
         
-        if (recipesFromUserDefaults == nil) {
+        //if (recipesFromUserDefaults == nil) {
             return recipesFromJSONFile!
-        }
+       // }
         
         if (recipesFromUserDefaults!.count < recipesFromJSONFile!.count) {
             updateAllRecipesToUserDefaults(recipes: recipesFromJSONFile!) //todo: delete this code before release...

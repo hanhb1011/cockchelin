@@ -58,7 +58,7 @@ struct Filterview : View{
                 VStack {
                     HStack {
                         Text("색상")
-                            
+                        
                             .bold()
                             .font(.system(size: 23, weight: .bold))
                             .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
@@ -248,16 +248,16 @@ struct Filterview : View{
         .background(Color.themeBackground.edgesIgnoringSafeArea(.all))
         .navigationBarItems(trailing:
                                 Button(action: {
-                                    filter.isEnabled.toggle()
-                                    filter.printIngredients()
-                                }) {
-                                    if (true == filter.isEnabled) {
-                                        Text("해제")
-                                    }
-                                    else {
-                                        Text("적용")
-                                    }
-                                }
+            filter.isEnabled.toggle()
+            filter.printIngredients()
+        }) {
+            if (true == filter.isEnabled) {
+                Text("해제")
+            }
+            else {
+                Text("적용")
+            }
+        }
         )
         .onAppear() {
             
@@ -286,11 +286,11 @@ struct Filterview : View{
                     }
                 }
             }.padding(.horizontal)
-            .contentShape(Rectangle())
-            .onTapGesture(perform: {
-                checked.toggle()
-                filter.updateSelectedColor(color: colorFilterItem.colorType, isChecked: checked)
-            })
+                .contentShape(Rectangle())
+                .onTapGesture(perform: {
+                    checked.toggle()
+                    filter.updateSelectedColor(color: colorFilterItem.colorType, isChecked: checked)
+                })
         }
         
     }

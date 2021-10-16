@@ -12,7 +12,6 @@ struct RecipeItemView: View {
     
     init(recipe: Recipe) {
         self.recipe = recipe
-        
     }
     
     var body: some View {
@@ -36,6 +35,7 @@ struct RecipeItemView: View {
                             .font(.system(size: 13))
                             .foregroundColor(Color(red: 150/255, green: 150/255, blue: 150/255, opacity: 100))
                             .lineLimit(2)
+                            .multilineTextAlignment(.leading)
                     }
                     
                     Text("\(recipe.alcoholDegree)%")

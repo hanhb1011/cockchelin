@@ -32,13 +32,13 @@ struct ContentView: View{
                 }).tag(0)
                 
                 RecipeSearchView().tabItem({
-                    Image(systemName: Constants.TabBarImageName.tabBar1)
+                    Image(systemName: "list.bullet")
                         .font(.title)
                     Text ("\(Constants.TabBarText.tabBar1)")
                 }).tag(1)
                 
                 BookmarkView().tabItem({
-                    Image(systemName: Constants.TabBarImageName.tabBar2)
+                    Image(systemName: "star")
                         .font(.title)
                     Text ("\(Constants.TabBarText.tabBar2)")
                 }).tag(2)

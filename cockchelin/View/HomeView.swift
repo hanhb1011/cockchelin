@@ -21,9 +21,11 @@ struct HomeView: View {
                 VStack{
                     ScrollView{
                         Group{
-                            RecipeCardView(recipe: homeViewModel.getTodaysCocktail())
+                            TodaysCocktalView(recipe: homeViewModel.getTodaysCocktail())
                             
-                            BestCocktailView(title: "Recently Viewed cocktails", recipes: homeViewModel.getRecentlyViewedCocktails(maxCount: 5))
+                            CocktailCardView(title: "Recently Viewed cocktails", recipes: homeViewModel.getRecentlyViewedCocktails(maxCount: 10))
+                            
+                            CocktailCardView(title: "Cocktails for you", recipes: homeViewModel.getCocktailsForYou(maxCount: 10))
                             
                             NewUpdatedView()
                         }
@@ -42,7 +44,7 @@ struct HomeView: View {
     }
 }
 
-struct RecipeCardView: View{
+struct TodaysCocktalView: View{
     var recipe: Recipe
     
     var body: some View{
@@ -65,22 +67,26 @@ struct RecipeCardView: View{
                         .frame(width: 200, height: 200, alignment: .center)
                     Spacer()
                 }
-                VStack(alignment: .leading, spacing: 5){
-                    Text(recipe.names[0])
-                        .font(.system(size: 25, weight: .bold))
-                        .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
-                        .lineLimit(1)
-                    
-                    Text("지친 마음, \(recipe.names[0]) 한잔으로 쓸어내리는 건 어때요?")
-                        .font(.system(.body, design:.serif))
-                        .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
-                        .italic()
+                VStack{
+                    HStack {
+                        Text(recipe.names[0])
+                            .font(.system(size: 25, weight: .bold))
+                            .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
+                            .lineLimit(1)
+                            .padding(.bottom, 1)
+                        Spacer()
+                    }
+                    HStack {
+                        Text("지친 마음, \(recipe.names[0]) 한잔으로 쓸어내리는 건 어때요?")
+                            .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
+                            .multilineTextAlignment(.leading)
+                        Spacer()
+                    }
                 }
-                .padding()
-                .padding(.top, -15)
+                .padding(15)
             }
             .background(Color.white)
-            .cornerRadius(12)
+            .cornerRadius(15)
             .shadow(color:Color("BackgroundColor"), radius: 8, x:0, y:0)
         }
     }
@@ -94,7 +100,7 @@ struct GroupView: View{
             VStack{
                 Image("temp")
                     .resizable()
-                    //.scaledToFit()
+                //.scaledToFit()
                     .frame(width: 130, height: 110, alignment: .center)
                     .padding(.top, 5)
                 
@@ -108,13 +114,13 @@ struct GroupView: View{
                 //.padding(.bottom, 4)
             }
             .background(Color.white)
-            .cornerRadius(12)
+            .cornerRadius(15)
             .shadow(color:Color("BackgroundColor"), radius: 8, x:0, y:0)
         }
     }
 }
 
-struct BestCocktailView: View{
+struct CocktailCardView: View{
     
     var title: String
     var recipes: [Recipe]
@@ -237,7 +243,7 @@ struct NewUpdatedView: View{
                         Spacer()
                     }
                     .background(Color.white)
-                    .cornerRadius(12)
+                    .cornerRadius(15)
                     .shadow(color:Color("BackgroundColor"), radius: 8, x:0, y:0)
                     
                 }

@@ -71,9 +71,6 @@ class HomeViewModel: ObservableObject {
         //get last visited date
         let lastVisitedDate = getLastVisitedDateFromUserDefaults()
         
-        print("curretn date: \(currentDate)")
-        print("last visited date: \(lastVisitedDate)")
-        
         if (lastVisitedDate == nil) {
             isUpdateNeeded = true
         }
@@ -95,13 +92,15 @@ class HomeViewModel: ObservableObject {
         return recipe!
     }
     
-    func getCocktailsForYou() -> [Recipe] {
+    func getCocktailsForYou(maxCount: Int) -> [Recipe] {
         var recipesForYou: [Recipe] = []
-        
+        var adjustMax = maxCount
         //find makeable recipes
         
         //if not, return random recipes
-        
+        recipes.shuffled()[0..<adjustMax].forEach { recipe in
+            recipesForYou.append(recipe)
+        }
         
         return recipesForYou
     }
@@ -110,7 +109,7 @@ class HomeViewModel: ObservableObject {
         let recentlyViewedCocktails: [Recipe] = recipes
             .filter {$0.lastTimeRecipeOpened != nil}
             .sorted { $0.lastTimeRecipeOpened! > $1.lastTimeRecipeOpened!}
-            
+        
         let adjustedMax = recentlyViewedCocktails.count < maxCount ? recentlyViewedCocktails.count : maxCount
         
         return Array(recentlyViewedCocktails[0..<adjustedMax])

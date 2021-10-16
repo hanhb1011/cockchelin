@@ -61,7 +61,6 @@ class RecipeViewModel: ObservableObject {
     }
     
     func getTechniqueTypes() -> String {
-        
         var res: String = ""
         var count = 0
         recipe.techniqueTypes.forEach { type in
@@ -74,12 +73,10 @@ class RecipeViewModel: ObservableObject {
             count += 1
         }
         
-        
         return res
     }
     
     func getBehaviorKorean(type: BehaviorType) -> String {
-        
         switch type {
         case .addIceCubes:
             return "얼음을 채운다."
@@ -119,6 +116,57 @@ class RecipeViewModel: ObservableObject {
         return name + str
     }
     
+    static func updateSelectedUnitIndex(selectedUnitIndex: Int) -> Void {
+        let encoder = JSONEncoder()
+        
+        if let encoded = try? encoder.encode(selectedUnitIndex) {
+            let defaults = UserDefaults.standard
+            defaults.set(encoded, forKey: "SelectedUnitIndex")
+        }
+    }
+    
+    static func getSelectedUnitIndex() -> Int {
+        let defaults = UserDefaults.standard
+        
+        if let selectedUnitIndex = defaults.object(forKey: "SelectedUnitIndex") as? Data {
+            let decoder = JSONDecoder()
+            if let savedRecipes = try? decoder.decode(Int.self, from: selectedUnitIndex) {
+                return savedRecipes
+            }
+        }
+        
+        //if nil, initialize to zero.
+        RecipeViewModel.updateSelectedUnitIndex(selectedUnitIndex: 0)
+        
+        return 0
+    }
+    
+    func isPourIntoShaker(recipeProcess: RecipeProcess) -> Bool {
+        var ret = false
+        var found = false
+        
+        if (recipeProcess.behavior != .pour) {
+            return false
+        }
+        
+        self.recipe.RecipeInformation.forEach { process in
+            
+            if (process.id == recipeProcess.id) {
+                found = true
+            }
+            
+            if (found == true && process.behavior == .shake) {
+                ret = true
+            }
+        }
+        
+        return ret
+    }
+    
+    func getGarnishString() -> String {
+        return recipe.garnish!
+    }
+    
     func getRecipeProcessString(recipeProcess: RecipeProcess) -> String {
         var res: String = ""
         
@@ -127,6 +175,11 @@ class RecipeViewModel: ObservableObject {
             res.append(postPositionText(recipe.ingredients[recipeProcess.ingredientIndex].names[0]))
         }
         
+        if (isPourIntoShaker(recipeProcess: recipeProcess) == true)
+        {
+            res.append("쉐이커에 ")
+        }
+                
         res.append(getBehaviorKorean(type: recipeProcess.behavior))
         
         return res
