@@ -16,7 +16,7 @@ class Filter: ObservableObject {
     @Published var ingredients: [String] = []
     @Published var colorsFilterItems: [LiquidColorType:Bool] = [
         .red : true, .blue : true, .pink : true, .yellow : true, .brown : true, .mixed : true,
-        .none : true, .beige : true, .green : true, .black : true
+        .none : true, .beige : true, .green : true, .black : true, .orange : true
     ]
     
     init() {
@@ -66,6 +66,9 @@ class Filter: ObservableObject {
         } else if (.red == color || .pink == color) {
             colorsFilterItems[.red] = isChecked
             colorsFilterItems[.pink] = isChecked
+        } else if (.orange == color || .yellow == color) {
+            colorsFilterItems[.orange] = isChecked
+            colorsFilterItems[.yellow] = isChecked
         }
         else {
             colorsFilterItems[color] = isChecked
