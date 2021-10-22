@@ -92,17 +92,111 @@ class HomeViewModel: ObservableObject {
         return recipe!
     }
     
-    func getCocktailsForYou(maxCount: Int) -> [Recipe] {
-        var recipesForYou: [Recipe] = []
-        var adjustMax = maxCount
-        //find makeable recipes
+    func isMakeableRecipe(recipe: Recipe, ingredients: [String], minDiff: Int) -> Bool {
+        var missCount = 0
         
-        //if not, return random recipes
-        recipes.shuffled()[0..<adjustMax].forEach { recipe in
-            recipesForYou.append(recipe)
+        recipe.ingredients.forEach { ingredient in
+            let ingredientInRecipe: String = ingredient.names[0]
+            var found = false
+            
+            ingredients.forEach { givenIngredient in
+                if (ingredientInRecipe == givenIngredient) {
+                    found = true
+                }
+            }
+            
+            if (false == found) {
+                missCount += 1
+            }
+        }
+         
+        if (missCount <= minDiff) {
+            
+            return true
+        }
+        else {
+            return false
+        }
+    }
+    
+    func getMakebaleRecipes(recipeCount: Int) -> [Recipe] {
+        var makeableRecipes: [Recipe] = []
+        let ingredients: [String] = getIngredientsFromClassificationList()
+        makeableRecipes = recipes.filter { isMakeableRecipe(recipe: $0, ingredients: ingredients, minDiff: 1) }
+        
+        makeableRecipes.shuffle()
+        
+        if (recipeCount < makeableRecipes.count) {
+            makeableRecipes.removeSubrange(recipeCount..<makeableRecipes.count)
         }
         
-        return recipesForYou
+        return makeableRecipes
+    }
+    
+    func getFavoriteRecipes(recipeCount: Int) -> [Recipe] {
+        var favoriteRecipes: [Recipe] = recipes.filter { $0.favoriteChecked == true }
+        
+        favoriteRecipes.shuffle()
+        
+        if (recipeCount < favoriteRecipes.count) {
+            favoriteRecipes.removeSubrange(recipeCount..<favoriteRecipes.count)
+        }
+        
+        return favoriteRecipes
+    }
+    
+    func combine(_ left: [Recipe], _ right: [Recipe]) -> [Recipe] {
+        var candidates: [Recipe] = left + right
+        var duplicateIndice: [Int] = []
+        
+        for i in (0..<candidates.count) {
+            var isDuplicated = false
+            for j in (i+1..<candidates.count) {
+                if (candidates[i].id == candidates[j].id) {
+                    isDuplicated = true
+                }
+            }
+            
+            if (isDuplicated == true) {
+                duplicateIndice.append(i)
+            }
+        }
+        
+        duplicateIndice.sorted().reversed().forEach { i in
+            candidates.remove(at: i)
+        }
+        
+        return candidates
+    }
+
+    func getCocktailsForYou(maxCount: Int) -> [Recipe] {
+        /*
+            1. select makeable recipes.
+            2. select recipes that were in the bookmark list.
+            3. select random recipes.
+            4. shuffle and return.
+         */
+        let makeableCocktails = getMakebaleRecipes(recipeCount: 7)
+        let favoriteCocktails = getFavoriteRecipes(recipeCount: 3)
+
+        var candidates: [Recipe] = combine(makeableCocktails, favoriteCocktails)
+        var recipeCount = candidates.count
+        
+        while (recipeCount < maxCount) {
+            let randomElement = recipes.randomElement()!
+            var isDuplicated = false
+            candidates.forEach { recipe in
+                if (recipe.names[0] == randomElement.names[0]) {
+                    isDuplicated = true
+                }
+            }
+            if (isDuplicated == false) {
+                candidates.append(randomElement)
+                recipeCount += 1
+            }
+        }
+        
+        return candidates
     }
     
     func getRecentlyViewedCocktails(maxCount: Int) -> [Recipe] {

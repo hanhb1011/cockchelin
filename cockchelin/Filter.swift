@@ -36,7 +36,6 @@ class Filter: ObservableObject {
     
     func isMakeableRecipe(recipe: Recipe) -> Bool {
         var isMakeable = true
-        
         recipe.ingredients.forEach { ingredient in
             let ingredientInRecipe: String = ingredient.names[0]
             var found = false

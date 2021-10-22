@@ -61,7 +61,6 @@ struct RecipeSearchView: View {
                         /* Filter */
                         ForEach((self.recipeSearchViewModel.recipes)
                                     .filter{"\($0)".lowercased().trimmingCharacters(in: .whitespaces).contains(searchText.lowercased() .trimmingCharacters(in: .whitespaces)) || searchText.isEmpty
-                            
                         }.filter {
                             if (filter.isEnabled) {
                                 return $0.alcoholDegree <= Int(self.filter.maxDegree) && $0.alcoholDegree >= Int(self.filter.minDegree)

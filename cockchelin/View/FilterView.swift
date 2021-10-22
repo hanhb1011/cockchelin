@@ -58,7 +58,6 @@ struct Filterview : View{
                 VStack {
                     HStack {
                         Text("색상")
-                        
                             .bold()
                             .font(.system(size: 23, weight: .bold))
                             .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
@@ -259,9 +258,6 @@ struct Filterview : View{
             }
         }
         )
-        .onAppear() {
-            
-        }
     }
     func getValue(val: CGFloat)->String{
         return String(format:"%.2f",val)

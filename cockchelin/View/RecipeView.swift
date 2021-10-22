@@ -67,11 +67,7 @@ struct RecipeView: View {
                     Spacer()
                 }
                 .padding(.horizontal, 30)
-                /*
-                 Text("(\(recipe.alcoholDegree) %)")
-                 Text(recipeViewModel.recipe.lastTimeRecipeOpened.description).foregroundColor(.gray)
-                 */
-                
+              
                 HStack {
                     Text("수량")
                         .bold()
