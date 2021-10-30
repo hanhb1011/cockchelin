@@ -76,8 +76,9 @@ struct TodaysCocktalView: View{
                             .padding(.bottom, 1)
                         Spacer()
                     }
+                    
                     HStack {
-                        Text("지친 마음, \(recipe.names[0]) 한잔으로 쓸어내리는 건 어때요?")
+                        Text(HomeViewModel.getRecipeInstructionPhrase())
                             .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
                             .multilineTextAlignment(.leading)
                         Spacer()
@@ -108,6 +109,8 @@ struct GroupView: View{
                     Text(recipe.names[0])
                         .font(.system(size: 15, weight: .bold))
                         .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
+                        .lineLimit(1)
+                        .frame(width: 130)
                 }
                 .padding(10)
                 .padding(.top, -17)
