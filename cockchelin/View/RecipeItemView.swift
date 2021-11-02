@@ -57,7 +57,6 @@ struct RecipeItemView: View {
             ret.append("\(ingredient.names[0])  ")
         }
         
-        
         return ret;
     }
 }

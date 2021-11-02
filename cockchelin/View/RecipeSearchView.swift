@@ -29,7 +29,7 @@ struct RecipeSearchView: View {
         NavigationView{
             VStack {
                 HStack{
-                    TextField("Search here", text: $searchText)
+                    TextField("레시피 이름 또는 재료 입력", text: $searchText)
                         .padding(.leading, 24)
                         .padding(10)
                         .background(Color(red: 241/255, green: 241/255, blue: 245/255, opacity: 100))
@@ -100,27 +100,6 @@ struct RecipeSearchView: View {
                 .padding(.horizontal, 15)
                 .background(Color.themeBackground.edgesIgnoringSafeArea(.all))
         }
-    }
-}
-
-//recipe list
-struct CommonRecipeView: View{
-    let post: Post
-    
-    var body: some View{
-        VStack(alignment: .leading, spacing : 16){
-            HStack{
-                Image(post.imgName)
-                    .resizable()
-                    .clipShape(Circle())
-                    .frame(width:80, height:80)
-                    .clipped()
-                VStack(alignment:.leading){
-                    Text(post.recipeName).font(.headline)
-                    Text(post.detail).font(.subheadline)
-                }.padding(.leading, 8)
-            }.padding(.leading, 16).padding(.top, 8)
-        }.padding(.leading, -20).padding(.bottom, 8)
     }
 }
 

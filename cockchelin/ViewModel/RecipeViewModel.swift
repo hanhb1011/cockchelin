@@ -130,8 +130,8 @@ class RecipeViewModel: ObservableObject {
         
         if let selectedUnitIndex = defaults.object(forKey: "SelectedUnitIndex") as? Data {
             let decoder = JSONDecoder()
-            if let savedRecipes = try? decoder.decode(Int.self, from: selectedUnitIndex) {
-                return savedRecipes
+            if let selectedUnitIndex = try? decoder.decode(Int.self, from: selectedUnitIndex) {
+                return selectedUnitIndex
             }
         }
         

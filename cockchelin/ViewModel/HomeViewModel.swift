@@ -238,8 +238,6 @@ class HomeViewModel: ObservableObject {
         var phraseType: PhraseType? = nil
         var isUpdateNeeded: Bool = false
         
-        recipePhraseUnitTest()
-        
         //get today's date
         let currentDate = Date()
         
@@ -291,7 +289,6 @@ class HomeViewModel: ObservableObject {
         }
         
         if (missCount <= minDiff) {
-            
             return true
         }
         else {

@@ -220,6 +220,7 @@ struct RecipeView: View {
         )
         .onAppear {
             recipeViewModel.updateCurrentTimestamp()
+            unitSelectorIndex = RecipeViewModel.getSelectedUnitIndex()
         }
     }
     

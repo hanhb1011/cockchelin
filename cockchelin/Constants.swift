@@ -24,20 +24,10 @@ extension Color{
     static let myBlack = #colorLiteral(red: 0.2605174184, green: 0.2605243921, blue: 0.260520637, alpha: 1)
 }
 struct Constants {
-    struct TabBarImageName{
-        static let tabBar0 = "heart.fill"
-        static let tabBar1 = "heart.fill"
-        static let tabBar2 = "book.fill"
-        static let tabBar3 = "tmp3.fill"
-        
-    }
-    
     struct TabBarText{
-        static let tabBar0 = "home"
-        static let tabBar1 = "recipe"
-        static let tabBar2 = "bookmark"
-        static let tabBar3 = "mypage"
-        
+        static let tabBar0 = "홈"
+        static let tabBar1 = "레시피"
+        static let tabBar2 = "마이페이지"
     }
 }
 

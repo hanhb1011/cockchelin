@@ -23,9 +23,9 @@ struct HomeView: View {
                         Group{
                             TodaysCocktalView(recipe: homeViewModel.getTodaysCocktail())
                             
-                            CocktailCardView(title: "Recently Viewed cocktails", recipes: homeViewModel.getRecentlyViewedCocktails(maxCount: 10))
+                            CocktailCardView(title: "최근에 본 칵테일", recipes: homeViewModel.getRecentlyViewedCocktails(maxCount: 10))
                             
-                            CocktailCardView(title: "Cocktails for you", recipes: homeViewModel.getCocktailsForYou(maxCount: 10))
+                            CocktailCardView(title: "추천 칵테일", recipes: homeViewModel.getCocktailsForYou(maxCount: 10))
                             
                             NewUpdatedView()
                         }
@@ -37,9 +37,8 @@ struct HomeView: View {
                     }
                 }
             }
-            .navigationTitle("Cockchelin")
+            .navigationTitle("칵슐랭")
             .background(Color.themeBackground.edgesIgnoringSafeArea(.all))
-            
         }
     }
 }
@@ -49,9 +48,9 @@ struct TodaysCocktalView: View{
     
     var body: some View{
         HStack{
-            Text("Today's Cocktail")
+            Text("오늘의 칵테일")
                 .bold()
-                .font(.system(size: 25, weight: .bold))
+                .font(.system(size: 20, weight: .bold))
                 .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
                 .padding(.horizontal, 5)
             
@@ -132,7 +131,8 @@ struct CocktailCardView: View{
         
         if (recipes.count > 0) {
             VStack(alignment: .leading){
-                Text(title).bold()
+                Text(title)
+                    .bold()
                     .font(.system(size: 20, weight: .bold))
                     .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
                     .padding(.horizontal, 5)
@@ -230,7 +230,7 @@ struct NewUpdatedView: View{
     var body: some View{
         
         VStack(alignment: .leading){
-            Text("Updated Cocktails")
+            Text("업데이트된 칵테일")
                 .font(.system(size: 20, weight: .bold))
                 .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
             
