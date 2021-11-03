@@ -157,6 +157,7 @@ struct Filterview : View{
                         Spacer()
                     }
                     .padding(.bottom, 1)
+                    
                     HStack {
                         Text("주어진 재료로 만들 수 있는 칵테일 찾기")
                             .bold()
