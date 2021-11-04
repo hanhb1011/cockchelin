@@ -8,8 +8,33 @@
 import SwiftUI
 
 struct MyIngredientShowView: View {
+    var myIngredientShowViewModel: MyIngredientShowViewModel = MyIngredientShowViewModel()
+    
+    
     var body: some View {
-        Text("MyIngredientShowView")
+        
+        ScrollView(.vertical){
+            VStack {
+                /* Filter */
+                ForEach(myIngredientShowViewModel.recipes.filter {
+                    return myIngredientShowViewModel.isMakeableRecipe(recipe: $0)
+                }.sorted(by: { recipe0, recipe1 in
+                    recipe0.names[0] < recipe1.names[0]
+                })
+                ){section in
+                    RecipeItemView(recipe: section)
+                    .background(Color.white)
+                    .cornerRadius(15)
+                }
+                
+                Spacer()
+            }
+        }
+        .background(Color.themeBackground.edgesIgnoringSafeArea(.all))
+        .onAppear {
+            myIngredientShowViewModel.refresh()
+        }
+        
     }
 }
 

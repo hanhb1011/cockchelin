@@ -105,4 +105,11 @@ class RecipeModel {
         
         return randomCocktailImages.randomElement()!
     }
+    
+    static func getCocktailImageName(recipe: Recipe) -> String {
+        let glassType: String = recipe.glassType.rawValue
+        let liquidColor: String = recipe.liquidColor.rawValue
+        
+        return glassType + "_" + liquidColor //todo check this name.
+    }
 }

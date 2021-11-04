@@ -9,5 +9,38 @@ import Foundation
 
 class MyIngredientShowViewModel: ObservableObject {
     
+    @Published var recipes: [Recipe]
+    @Published var ingredients: [String]
+    
+    init(){
+        self.recipes = RecipeModel.loadSavedRecipes()
+        self.ingredients = getIngredientsFromClassificationList()
+        
+    }
+    
+    func refresh() -> Void {
+        self.recipes = RecipeModel.loadSavedRecipes()
+        self.ingredients = getIngredientsFromClassificationList()
+    }
+    
+    func isMakeableRecipe(recipe: Recipe) -> Bool {
+        var isMakeable = true
+        recipe.ingredients.forEach { ingredient in
+            let ingredientInRecipe: String = ingredient.names[0]
+            var found = false
+            
+            ingredients.forEach { givenIngredient in
+                if (ingredientInRecipe == givenIngredient) {
+                    found = true
+                }
+            }
+            
+            if (false == found) {
+                isMakeable = false
+            }
+        }
+        
+        return isMakeable
+    }
     
 }
