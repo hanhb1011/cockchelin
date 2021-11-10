@@ -37,7 +37,7 @@ struct HomeView: View {
                     }
                 }
             }
-            .navigationTitle("칵슐랭")
+            .navigationBarTitle("칵슐랭")
             .background(Color.themeBackground.edgesIgnoringSafeArea(.all))
         }
     }

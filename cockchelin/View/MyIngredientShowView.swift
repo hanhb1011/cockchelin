@@ -27,6 +27,28 @@ struct MyIngredientShowView: View {
                     .cornerRadius(15)
                 }
                 
+                ForEach(myIngredientShowViewModel.recipes.filter {
+                    return myIngredientShowViewModel.isConditionallyMakeableRecipe(recipe: $0, diff: 1)
+                }.sorted(by: { recipe0, recipe1 in
+                    recipe0.names[0] < recipe1.names[0]
+                })
+                ){section in
+                    RecipeItemView(recipe: section)
+                    .background(Color.white)
+                    .cornerRadius(15)
+                }
+                
+                ForEach(myIngredientShowViewModel.recipes.filter {
+                    return myIngredientShowViewModel.isConditionallyMakeableRecipe(recipe: $0, diff: 2)
+                }.sorted(by: { recipe0, recipe1 in
+                    recipe0.names[0] < recipe1.names[0]
+                })
+                ){section in
+                    RecipeItemView(recipe: section)
+                    .background(Color.white)
+                    .cornerRadius(15)
+                }
+                
                 Spacer()
             }
         }

@@ -9,9 +9,16 @@ import SwiftUI
 
 struct RecipeItemView: View {
     let recipe: Recipe
+    let additionalTitle: String?
     
     init(recipe: Recipe) {
         self.recipe = recipe
+        self.additionalTitle = nil
+    }
+    
+    init(recipe: Recipe, additionalTitle: String) {
+        self.recipe = recipe
+        self.additionalTitle = additionalTitle
     }
     
     var body: some View {
