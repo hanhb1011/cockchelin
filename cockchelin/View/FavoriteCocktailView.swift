@@ -8,12 +8,15 @@
 import SwiftUI
 
 struct FavoriteCocktailView: View {
-    var favoriteCocktailViewModel: FavoriteCocktailViewModel = FavoriteCocktailViewModel()
+    @ObservedObject var favoriteCocktailViewModel: FavoriteCocktailViewModel = FavoriteCocktailViewModel()
     
     var body: some View {
         if (favoriteCocktailViewModel.hasNothingToShow()) {
             CenterTextView(text: "즐겨찾는 칵테일이 없습니다.\n⭐️ 를 눌러 즐겨찾는 칵테일을 추가해주세요.")
                 .navigationBarTitle(Text("즐겨찾는 칵테일"))
+                .onAppear {
+                    favoriteCocktailViewModel.refresh()
+                }
         }
         else {
             ScrollView(.vertical){

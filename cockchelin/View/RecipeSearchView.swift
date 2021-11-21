@@ -68,7 +68,24 @@ struct RecipeSearchView: View {
                             }
                         }.filter {
                             if (filter.isEnabled) {
-                                return filter.isMakeableRecipe(recipe: $0)
+                                if (filter.isMakeableSelected) {
+                                    return filter.isMakeableRecipe(recipe: $0)
+                                }
+                                else {
+                                    return true
+                                }
+                            }
+                            else {
+                                return true
+                            }
+                        }.filter {
+                            if (filter.isEnabled) {
+                                if (filter.isFavoriteSelected) {
+                                    return $0.favoriteChecked
+                                }
+                                else {
+                                    return true
+                                }
                             }
                             else {
                                 return true

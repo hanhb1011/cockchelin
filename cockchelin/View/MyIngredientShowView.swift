@@ -8,13 +8,16 @@
 import SwiftUI
 
 struct MyIngredientShowView: View {
-    var myIngredientShowViewModel: MyIngredientShowViewModel = MyIngredientShowViewModel()
+    @ObservedObject var myIngredientShowViewModel: MyIngredientShowViewModel = MyIngredientShowViewModel()
     
     
     var body: some View {
         if (myIngredientShowViewModel.hasNothingToShow()) {
             CenterTextView(text: "가진 재료가 등록되지 않았습니다.\n가진 재료를 등록해주세요.")
                 .navigationBarTitle(Text("만들 수 있는 칵테일"))
+                .onAppear {
+                    myIngredientShowViewModel.refresh()
+                }
         }
         else {
             ScrollView(.vertical){

@@ -17,6 +17,8 @@ struct Filterview : View{
     @State var width1 : CGFloat
     let totalWidth: CGFloat = 300
     
+    @State var selectedBaseList: [TechniqueType:Bool] = [.build:true, .stir:true, .shake:true, .float: true, .blend:true]
+    
     @State var colorFirstRow = [
         ColorFilterItem(colorType: .black, color: Color(Color.myBlack)),
         ColorFilterItem(colorType: .blue, color: Color(Color.myBlue)),
@@ -26,23 +28,15 @@ struct Filterview : View{
         ColorFilterItem(colorType: .mixed, color: Color(Color.myMixed)),
         ColorFilterItem(colorType: .red, color: Color(Color.myRed)), //red and pink merged
         ColorFilterItem(colorType: .yellow, color: Color(Color.myYellow)),
-        ColorFilterItem(colorType: .none, color: Color(Color.myTransparent))]
+        ColorFilterItem(colorType: .none, color: Color(Color.myTransparent))] // white, transparent, +lightyellow?
     
-    @State var selectedTotal = true
-    @State var selectedClassificationList: [Bool] = [false, false, false, false]
-    @State var temp: String = ""
-    @State var savedClassificaionList: [Bool] = [false, false, false, false]
-    
-    func clearSelectedClassificationList() {
-        savedClassificaionList.removeAll()
-        savedClassificaionList = selectedClassificationList.map {$0}
-        selectedClassificationList = selectedClassificationList.map {_ in false}
-    }
-    
-    func setSelectedClassificationList() {
-        selectedClassificationList = savedClassificaionList.map {$0}
-        savedClassificaionList.removeAll()
-    }
+    @State var techList = [
+        TechItem(tech: .build, techString: RecipeViewModel.getTechniqueKorean(type: .build)),
+        TechItem(tech: .stir, techString: RecipeViewModel.getTechniqueKorean(type:.stir)),
+        TechItem(tech: .shake, techString: RecipeViewModel.getTechniqueKorean(type: .shake)),
+        TechItem(tech: .float, techString: RecipeViewModel.getTechniqueKorean(type: .float)),
+        TechItem(tech: .blend, techString: RecipeViewModel.getTechniqueKorean(type: .blend))
+    ]
     
     init(filter: Filter) {
         self.filter = filter
@@ -54,7 +48,6 @@ struct Filterview : View{
     var body: some View{
         ScrollView {
             VStack {
-                
                 VStack {
                     HStack {
                         Text("색상")
@@ -77,7 +70,8 @@ struct Filterview : View{
                     
                 }
                 .padding(.horizontal, 30)
-                .padding(.bottom, 30)
+                
+                Divider().padding()
                 
                 VStack {
                     HStack {
@@ -145,103 +139,37 @@ struct Filterview : View{
                     .padding(.horizontal, 25)
                 }
                 .padding(.horizontal, 30)
-                .padding(.bottom, 30)
+                
+                Divider().padding()
                 
                 
                 VStack {
                     HStack {
-                        Text("재료 선택")
+                        Text("조주법")
                             .bold()
                             .font(.system(size: 23, weight: .bold))
                             .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
                         Spacer()
                     }
-                    .padding(.bottom, 1)
                     
                     HStack {
-                        Text("주어진 재료로 만들 수 있는 칵테일 찾기")
-                            .bold()
-                            .font(.system(size: 15, weight: .bold))
-                            .foregroundColor(Color(red: 110/255, green: 110/255, blue: 110/255, opacity: 100))
                         Spacer()
-                    }
-                    .padding(.bottom, 5)
-                    VStack {
-                        HStack {
+                        ForEach(techList) { tech in
                             Button(action: {
-                                selectedTotal.toggle()
-                                if (selectedTotal == true) {
-                                    clearSelectedClassificationList()
-                                }
-                                else {
-                                    setSelectedClassificationList()
-                                }
-                                
+                                filter.selectedTechList[tech.tech]!.toggle()
                             }, label: {
-                                Text("전체")
+                                Text(tech.techString)
                                     .font(.system(size: 20, weight: .bold))
-                                    .foregroundColor(self.selectedTotal == true ? Color.selectedButtonColor : Color(red: 80/255, green: 80/255, blue: 80/255, opacity: 100))
+                                    .foregroundColor(filter.selectedTechList[tech.tech]! == true ? Color.selectedButtonColor : Color(red: 80/255, green: 80/255, blue: 80/255, opacity: 100))
                             })
                             Spacer()
-                            
-                            ForEach(self.filterViewModel.classificationList) { classification in
-                                HStack {
-                                    Button(action: {
-                                        self.selectedClassificationList[classification.index].toggle()
-                                        
-                                        if(self.selectedClassificationList[classification.index] == true) {
-                                            selectedTotal = false
-                                        }
-                                        
-                                    }, label: {
-                                        Text(classification.name)
-                                            .font(.system(size: 20, weight: .bold))
-                                            .foregroundColor(self.selectedClassificationList[classification.index] == true ? Color.selectedButtonColor : Color(red: 80/255, green: 80/255, blue: 80/255, opacity: 100))
-                                    })
-                                }
-                                
-                                if (classification.index != self.filterViewModel.classificationList.count - 1) {
-                                    Spacer()
-                                }
-                            }
-                            
-                        }
-                        .padding(.vertical, 5)
-                        VStack {
-                            ForEach(filterViewModel.classificationList) { classification in
-                                ForEach(classification.ingredientSearchItems) { searchItem in
-                                    if (selectedTotal == true || selectedClassificationList[classification.index] == true) {
-                                        
-                                        HStack {
-                                            Text(searchItem.ingredientName)
-                                                .font(.system(size: 17))
-                                                .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
-                                            
-                                            Spacer()
-                                            
-                                            Image(systemName: searchItem.selected ? "checkmark.circle.fill" : "checkmark.circle")
-                                                .resizable()
-                                                .scaledToFit()
-                                                .frame(width: 20, height: 20, alignment: .center)
-                                                .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
-                                                .padding(.horizontal, 5)
-                                            
-                                        }
-                                        .padding(.vertical, 2)
-                                        .onTapGesture {
-                                            filterViewModel.toggleSelectedVariable(id: searchItem.id, classificationIdx: classification.index)
-                                            filter.updateIngredients(givenIngredients: getIngredientsFromClassificationList())
-                                        }
-                                        
-                                    }
-                                }
-                            }
                         }
                     }
+                    .padding(.top, 2)
                 }
                 .padding(.horizontal, 30)
-                .padding(.bottom, 20)
                 
+                Divider().padding()
             }
         }
         .navigationBarTitle(Text("필터"))
@@ -249,7 +177,6 @@ struct Filterview : View{
         .navigationBarItems(trailing:
                                 Button(action: {
             filter.isEnabled.toggle()
-            filter.printIngredients()
         }) {
             if (true == filter.isEnabled) {
                 Text("해제")
@@ -278,7 +205,9 @@ struct Filterview : View{
                     
                     if (checked) {
                         Image(systemName: "checkmark.circle.fill")
-                            .font(.system(size: 24))
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 25, height: 25, alignment: .center)
                             .foregroundColor(colorFilterItem.color)
                     }
                 }
@@ -299,6 +228,12 @@ struct ColorFilterItem : Identifiable {
     var color: Color
     var checked: Bool = true
     
+}
+
+struct TechItem : Identifiable {
+    var id = UUID()
+    var tech: TechniqueType
+    var techString: String
 }
 
 struct FilterView_Previews: PreviewProvider {

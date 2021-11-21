@@ -80,11 +80,31 @@ func printIngredients() {
 
 func loadClassifications() -> [Classification]? {
     
-    if let classificationsFromUserDefaults = getClassificationsFromUserDefaults() {
+    if var classificationsFromUserDefaults = getClassificationsFromUserDefaults() {
+        let count = classificationsFromUserDefaults[3].ingredientSearchItems.count
+        for i in (0..<count) {
+            if (classificationsFromUserDefaults[3].ingredientSearchItems[i].ingredientName == "물") {
+                classificationsFromUserDefaults[3].ingredientSearchItems[i].selected = true
+            }
+            else if (classificationsFromUserDefaults[3].ingredientSearchItems[i].ingredientName == "으깬 얼음") {
+                classificationsFromUserDefaults[3].ingredientSearchItems[i].selected = true
+            }
+        }
+        
         return classificationsFromUserDefaults
     }
     
-    if let classificationsFromJSONFile = getClassificationsFromJSONFile() {
+    if var classificationsFromJSONFile = getClassificationsFromJSONFile() {
+        let count = classificationsFromJSONFile[3].ingredientSearchItems.count
+        for i in (0..<count) {
+            if (classificationsFromJSONFile[3].ingredientSearchItems[i].ingredientName == "물") {
+                classificationsFromJSONFile[3].ingredientSearchItems[i].selected = true
+            }
+            else if (classificationsFromJSONFile[3].ingredientSearchItems[i].ingredientName == "으깬 얼음") {
+                classificationsFromJSONFile[3].ingredientSearchItems[i].selected = true
+            }
+        }
+        
         return classificationsFromJSONFile
     }
     

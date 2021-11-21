@@ -45,7 +45,7 @@ class RecipeViewModel: ObservableObject {
         return liquidVolume
     }
     
-    func getTechniqueKorean(type: TechniqueType) -> String {
+    static func getTechniqueKorean(type: TechniqueType) -> String {
         switch type {
         case .blend:
             return "블렌드"
@@ -64,7 +64,7 @@ class RecipeViewModel: ObservableObject {
         var res: String = ""
         var count = 0
         recipe.techniqueTypes.forEach { type in
-            res.append(getTechniqueKorean(type: type))
+            res.append(RecipeViewModel.getTechniqueKorean(type: type))
             
             if (count < recipe.techniqueTypes.count - 1)
             {

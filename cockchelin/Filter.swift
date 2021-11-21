@@ -13,28 +13,22 @@ class Filter: ObservableObject {
     @Published var maxDegree: Double = 50.0
     
     @Published var isEnabled: Bool = false
-    @Published var ingredients: [String] = []
+    @Published var isMakeableSelected: Bool = false
+    @Published var isFavoriteSelected: Bool = false
     @Published var colorsFilterItems: [LiquidColorType:Bool] = [
         .red : true, .blue : true, .pink : true, .yellow : true, .brown : true, .mixed : true,
-        .none : true, .beige : true, .green : true, .black : true, .orange : true
+        .none : true, .beige : true, .green : true, .black : true, .white: true, .orange : true
     ]
     
+    @Published var selectedTechList: [TechniqueType:Bool] = [.build:true, .stir:true, .shake:true, .float: true, .blend:true]
+    
     init() {
-        ingredients = getIngredientsFromClassificationList()
-    }
-    
-    func printIngredients() {
-        print(ingredients)
-    }
-    
-    func updateIngredients(givenIngredients: [String]) {
         
-        self.ingredients = givenIngredients
-        
-        print(ingredients)
     }
     
     func isMakeableRecipe(recipe: Recipe) -> Bool {
+        let ingredients = getIngredientsFromClassificationList()
+        
         var isMakeable = true
         recipe.ingredients.forEach { ingredient in
             let ingredientInRecipe: String = ingredient.names[0]
@@ -68,6 +62,9 @@ class Filter: ObservableObject {
         } else if (.orange == color || .yellow == color) {
             colorsFilterItems[.orange] = isChecked
             colorsFilterItems[.yellow] = isChecked
+        } else if (.none == color || .white == color) {
+            colorsFilterItems[.none] = isChecked
+            colorsFilterItems[.white] = isChecked
         }
         else {
             colorsFilterItems[color] = isChecked

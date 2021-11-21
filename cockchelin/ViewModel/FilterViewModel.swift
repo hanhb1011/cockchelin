@@ -48,23 +48,5 @@ class FilterViewModel: ObservableObject {
         saveClassificationsToUserDefaults(classifications: newClassificationList)
     }
     
-    func updateFilterIngredients() {
-        let ingredients = getIngredientsFromClassificationList()
-        filter.updateIngredients(givenIngredients: ingredients)
-    }
-    
-    func getSelectedIngredientList(index: Int) -> String {
-        var ret: String = ""
-        var i = 0
-        classificationList[index].ingredientSearchItems.forEach { ingredient in
-            ret.append("[\(i)] \(ingredient)   ")
-            i += 1
-            if ((i % 2) == 0) {
-                ret.append("\n")
-            }
-        }
-        
-        return ret
-    }
     
 }
