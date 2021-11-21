@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct MyIngredientAddView: View {
+    var myIngredientAddViewModel: MyIngredientAddViewModel = MyIngredientAddViewModel()
+    
     var body: some View {
-        Text("MyIngredientAddView")
         
-        
+        Text(".")
         /*
          
          VStack {

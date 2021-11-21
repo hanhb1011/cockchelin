@@ -69,4 +69,15 @@ class MyIngredientShowViewModel: ObservableObject {
         return isMakeable
     }
     
+    func hasNothingToShow() -> Bool {
+        var isFound = false
+        
+        recipes.forEach { recipe in
+            if (isMakeableRecipe(recipe: recipe)) {
+                isFound = true
+            }
+        }
+        
+        return (isFound == false)
+    }
 }

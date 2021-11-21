@@ -245,9 +245,6 @@ struct NewUpdatedView: View{
                         
                         Spacer()
                     }
-                    .background(Color.white)
-                    .cornerRadius(15)
-                    .shadow(color:Color("BackgroundColor"), radius: 8, x:0, y:0)
                     
                 }
             }//ScrollView

@@ -28,14 +28,23 @@ struct RecipeItemView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 100, height: 100, alignment: .center)
+                    .padding(.horizontal, 1)
                 
                 VStack(alignment: .leading) {
-                    Text(recipe.names[0])
-                        .bold()
-                        .font(.system(size: 20, weight: .bold))
-                        .foregroundColor(Color(red: 70/255, green: 70/255, blue: 70/255, opacity: 100))
-                        .padding(.bottom, 0.5)
+                    HStack(alignment: .bottom) {
+                        Text(recipe.names[0])
+                            .bold()
+                            .font(.system(size: 20, weight: .bold))
+                            .foregroundColor(Color(red: 70/255, green: 70/255, blue: 70/255, opacity: 100))
+                            .padding(.bottom, 0.5)
                         .lineLimit(1)
+                        
+                        if (additionalTitle != nil) {
+                            Text(additionalTitle!)
+                                .font(.system(size: 13))
+                                .foregroundColor(Color(red: 200/255, green: 150/255, blue: 150/255, opacity: 100))
+                        }
+                    }
                     
                     HStack {
                         Text(getIngredient())
@@ -49,10 +58,12 @@ struct RecipeItemView: View {
                         .font(.system(size: 13))
                         .foregroundColor(Color(red: 150/255, green: 150/255, blue: 150/255, opacity: 100))
                     
-                }.padding(.leading, 8)
+                }
                 
                 Spacer()
             }
+            .background(Color.white)
+            .cornerRadius(15)
         }
         
     }
@@ -70,7 +81,7 @@ struct RecipeItemView: View {
 
 struct RecipeItemView_Previews: PreviewProvider {
     static var previews: some View {
-        RecipeItemView(recipe: test)
+        RecipeItemView(recipe: test,additionalTitle: "재료 1개 부족")
     }
 }
 

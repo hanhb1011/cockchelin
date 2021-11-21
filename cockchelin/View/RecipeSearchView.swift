@@ -55,10 +55,8 @@ struct RecipeSearchView: View {
                 }
                 .padding(.vertical, 5)
                 
-                //Item list view..
                 ScrollView(.vertical, showsIndicators: false){
                     LazyVStack(spacing: 0){
-                        /* Filter */
                         ForEach((self.recipeSearchViewModel.recipes)
                                     .filter{"\($0)".lowercased().trimmingCharacters(in: .whitespaces).contains(searchText.lowercased() .trimmingCharacters(in: .whitespaces)) || searchText.isEmpty
                         }.filter {
@@ -89,12 +87,9 @@ struct RecipeSearchView: View {
                             RecipeItemView(recipe: section)
                             Spacer()
                         }
-                        .background(Color.white)
-                        .cornerRadius(15)
                         
                     }
                 }//ScrollView
-                
                 
             }.navigationBarTitle(Text("레시피"))
                 .padding(.horizontal, 15)
