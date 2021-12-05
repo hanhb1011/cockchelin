@@ -68,31 +68,21 @@ struct RecipeSearchView: View {
                             }
                         }.filter {
                             if (filter.isEnabled) {
-                                if (filter.isMakeableSelected) {
-                                    return filter.isMakeableRecipe(recipe: $0)
-                                }
-                                else {
-                                    return true
-                                }
-                            }
-                            else {
-                                return true
-                            }
-                        }.filter {
-                            if (filter.isEnabled) {
-                                if (filter.isFavoriteSelected) {
-                                    return $0.favoriteChecked
-                                }
-                                else {
-                                    return true
-                                }
-                            }
-                            else {
-                                return true
-                            }
-                        }.filter {
-                            if (filter.isEnabled) {
                                 return filter.isSelectedColor(color:$0.liquidColor)
+                            }
+                            else {
+                                return true
+                            }
+                        }.filter {
+                            if (filter.isEnabled) {
+                                return filter.isSelectedTech(techtypes: $0.techniqueTypes)
+                            }
+                            else {
+                                return true
+                            }
+                        }.filter {
+                            if (filter.isEnabled) {
+                                return filter.isSelectedBaseContained(ingredients: $0.ingredients)
                             }
                             else {
                                 return true

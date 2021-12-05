@@ -152,24 +152,74 @@ struct Filterview : View{
                         Spacer()
                     }
                     
-                    HStack {
-                        Spacer()
+                    VStack {
                         ForEach(techList) { tech in
-                            Button(action: {
-                                filter.selectedTechList[tech.tech]!.toggle()
-                            }, label: {
+                            HStack {
                                 Text(tech.techString)
-                                    .font(.system(size: 20, weight: .bold))
-                                    .foregroundColor(filter.selectedTechList[tech.tech]! == true ? Color.selectedButtonColor : Color(red: 80/255, green: 80/255, blue: 80/255, opacity: 100))
-                            })
-                            Spacer()
+                                    .font(.system(size: 20))
+                                    .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
+                                
+                                Spacer()
+                                
+                                Image(systemName: filter.selectedTechList[tech.tech]! == true ? "checkmark.circle.fill" : "checkmark.circle")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 25, height: 25, alignment: .center)
+                                    .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
+                                    .padding(.horizontal, 5)
+                                
+                            }
+                            .padding(.vertical, 2)
+                            .onTapGesture {
+                                filter.selectedTechList[tech.tech]!.toggle()
+                            }
                         }
+                        
+                        
                     }
                     .padding(.top, 2)
                 }
                 .padding(.horizontal, 30)
                 
                 Divider().padding()
+                
+                VStack {
+                    HStack {
+                        Text("기주")
+                            .bold()
+                            .font(.system(size: 23, weight: .bold))
+                            .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
+                        Spacer()
+                    }
+                    
+                    VStack {
+                        ForEach(filter.selectedBaseList) { base in
+                            HStack {
+                                Text(base.ingredientName)
+                                    .font(.system(size: 20))
+                                    .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
+                                
+                                Spacer()
+                                
+                                Image(systemName: base.selected == true ? "checkmark.circle.fill" : "checkmark.circle")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 25, height: 25, alignment: .center)
+                                    .foregroundColor(Color(red: 60/255, green: 60/255, blue: 60/255, opacity: 100))
+                                    .padding(.horizontal, 5)
+                                
+                            }
+                            .padding(.vertical, 2)
+                            .onTapGesture {
+                                filter.toggleBaseItem(id: base.id)
+                            }
+                        }
+                        
+                        
+                    }
+                    .padding(.top, 2)
+                }
+                .padding(.horizontal, 30)
             }
         }
         .navigationBarTitle(Text("필터"))

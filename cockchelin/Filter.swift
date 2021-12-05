@@ -22,8 +22,19 @@ class Filter: ObservableObject {
     
     @Published var selectedTechList: [TechniqueType:Bool] = [.build:true, .stir:true, .shake:true, .float: true, .blend:true]
     
+    @Published var selectedBaseList: [IngredientSearchItem] = [
+        IngredientSearchItem(ingredientName: "진", selected: true),
+        IngredientSearchItem(ingredientName: "럼", selected: true),
+        IngredientSearchItem(ingredientName: "보드카", selected: true),
+        IngredientSearchItem(ingredientName: "위스키", selected: true),
+        IngredientSearchItem(ingredientName: "브랜디", selected: true),
+        IngredientSearchItem(ingredientName: "데킬라", selected: true),
+        IngredientSearchItem(ingredientName: "와인", selected: true),
+        IngredientSearchItem(ingredientName: "샴페인", selected: true),
+    
+    ]
+    
     init() {
-        
     }
     
     func isMakeableRecipe(recipe: Recipe) -> Bool {
@@ -71,5 +82,51 @@ class Filter: ObservableObject {
         }
         
         print(colorsFilterItems)
+    }
+    
+    func toggleBaseItem(id: UUID) -> Void {
+        
+        selectedBaseList = selectedBaseList.map {
+            if ($0.id != id) {
+                return $0
+            }
+            
+            var modifiedItem = $0
+            modifiedItem.selected.toggle()
+            return modifiedItem
+        }
+        
+    }
+    
+    func isSelectedBaseContained(ingredients: [Ingredient]) -> Bool {
+        var ret = false
+        
+        ingredients.forEach { ingredient in
+            ingredient.names.forEach { name in
+                selectedBaseList.forEach { item in
+                    if (item.selected) {
+                        if (name.contains(item.ingredientName)) {
+                            ret = true
+                        }
+                    }
+                }
+            }
+        }
+        
+        
+        return ret
+    }
+    
+    func isSelectedTech(techtypes: [TechniqueType]) -> Bool {
+        var ret = false
+        
+        techtypes.forEach { tech in
+            if (selectedTechList[tech] == true) {
+                ret = true
+            }
+        }
+        
+        
+        return ret
     }
 }
