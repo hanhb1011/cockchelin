@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		562B2A2E258FA6F00014A558 /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562B2A2D258FA6F00014A558 /* MyPageView.swift */; };
 		562B2A43259F04830014A558 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562B2A42259F04830014A558 /* Item.swift */; };
+		661E5F0D27787D0600F6497E /* RecipeData.json in Resources */ = {isa = PBXBuildFile; fileRef = 661E5F0C27787D0600F6497E /* RecipeData.json */; };
 		6653B4952620A6490096A0A5 /* Classification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6653B4942620A6490096A0A5 /* Classification.swift */; };
 		665E03D1254B117D00F62F66 /* cockchelinApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665E03D0254B117D00F62F66 /* cockchelinApp.swift */; };
 		665E03D3254B117D00F62F66 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665E03D2254B117D00F62F66 /* ContentView.swift */; };
@@ -29,7 +30,6 @@
 		66817C75273188F60067221C /* FavoriteCocktailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66817C74273188F60067221C /* FavoriteCocktailView.swift */; };
 		66817C77273189030067221C /* FavoriteCocktailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66817C76273189030067221C /* FavoriteCocktailViewModel.swift */; };
 		6690C697254D27C100F5031E /* RecipeSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6690C696254D27C100F5031E /* RecipeSearchViewModel.swift */; };
-		66A70619271B22800064CA4C /* RecipeData.json in Resources */ = {isa = PBXBuildFile; fileRef = 66A70618271B22800064CA4C /* RecipeData.json */; };
 		66A7061C271B255A0064CA4C /* Classifications.json in Resources */ = {isa = PBXBuildFile; fileRef = 66A7061A271B255A0064CA4C /* Classifications.json */; };
 		66A7061D271B255A0064CA4C /* Ingredients.json in Resources */ = {isa = PBXBuildFile; fileRef = 66A7061B271B255A0064CA4C /* Ingredients.json */; };
 		66CA2A8825A0D19000CEB149 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CA2A8725A0D19000CEB149 /* Filter.swift */; };
@@ -43,6 +43,7 @@
 /* Begin PBXFileReference section */
 		562B2A2D258FA6F00014A558 /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
 		562B2A42259F04830014A558 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		661E5F0C27787D0600F6497E /* RecipeData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = RecipeData.json; path = ../../../../Documents/RecipeData.json; sourceTree = "<group>"; };
 		6653B4942620A6490096A0A5 /* Classification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Classification.swift; sourceTree = "<group>"; };
 		665E03CD254B117D00F62F66 /* cockchelin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cockchelin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		665E03D0254B117D00F62F66 /* cockchelinApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cockchelinApp.swift; sourceTree = "<group>"; };
@@ -65,7 +66,6 @@
 		66817C74273188F60067221C /* FavoriteCocktailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCocktailView.swift; sourceTree = "<group>"; };
 		66817C76273189030067221C /* FavoriteCocktailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCocktailViewModel.swift; sourceTree = "<group>"; };
 		6690C696254D27C100F5031E /* RecipeSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeSearchViewModel.swift; sourceTree = "<group>"; };
-		66A70618271B22800064CA4C /* RecipeData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = RecipeData.json; path = ../../../../Documents/RecipeData.json; sourceTree = "<group>"; };
 		66A7061A271B255A0064CA4C /* Classifications.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Classifications.json; path = ../../../../Documents/Classifications.json; sourceTree = "<group>"; };
 		66A7061B271B255A0064CA4C /* Ingredients.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Ingredients.json; path = ../../../../Documents/Ingredients.json; sourceTree = "<group>"; };
 		66CA2A8725A0D19000CEB149 /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
@@ -116,7 +116,7 @@
 				66CA2A8725A0D19000CEB149 /* Filter.swift */,
 				665E03E7254B11EB00F62F66 /* Constants.swift */,
 				665E03E6254B11EB00F62F66 /* Helper.swift */,
-				66A70618271B22800064CA4C /* RecipeData.json */,
+				661E5F0C27787D0600F6497E /* RecipeData.json */,
 				66A7061A271B255A0064CA4C /* Classifications.json */,
 				66A7061B271B255A0064CA4C /* Ingredients.json */,
 				665E03D4254B117E00F62F66 /* Assets.xcassets */,
@@ -235,8 +235,8 @@
 			files = (
 				665E03D8254B117E00F62F66 /* Preview Assets.xcassets in Resources */,
 				665E03D5254B117E00F62F66 /* Assets.xcassets in Resources */,
-				66A70619271B22800064CA4C /* RecipeData.json in Resources */,
 				66A7061D271B255A0064CA4C /* Ingredients.json in Resources */,
+				661E5F0D27787D0600F6497E /* RecipeData.json in Resources */,
 				66A7061C271B255A0064CA4C /* Classifications.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -403,6 +403,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"cockchelin/Preview Content\"";
+				DEVELOPMENT_TEAM = ZWZ5466AK8;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = cockchelin/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -424,6 +425,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"cockchelin/Preview Content\"";
+				DEVELOPMENT_TEAM = ZWZ5466AK8;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = cockchelin/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

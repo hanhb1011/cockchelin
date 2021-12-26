@@ -17,7 +17,7 @@ class Filter: ObservableObject {
     @Published var isFavoriteSelected: Bool = false
     @Published var colorsFilterItems: [LiquidColorType:Bool] = [
         .red : true, .blue : true, .pink : true, .yellow : true, .brown : true, .mixed : true,
-        .none : true, .beige : true, .green : true, .black : true, .white: true, .orange : true
+        .none : true, .beige : true, .green : true, .black : true, .white: true, .orange : true, .lightYellow : true
     ]
     
     @Published var selectedTechList: [TechniqueType:Bool] = [.build:true, .stir:true, .shake:true, .float: true, .blend:true]
@@ -31,7 +31,7 @@ class Filter: ObservableObject {
         IngredientSearchItem(ingredientName: "데킬라", selected: true),
         IngredientSearchItem(ingredientName: "와인", selected: true),
         IngredientSearchItem(ingredientName: "샴페인", selected: true),
-    
+        
     ]
     
     init() {
@@ -76,16 +76,14 @@ class Filter: ObservableObject {
         } else if (.none == color || .white == color) {
             colorsFilterItems[.none] = isChecked
             colorsFilterItems[.white] = isChecked
+            colorsFilterItems[.lightYellow] = isChecked
         }
         else {
             colorsFilterItems[color] = isChecked
         }
-        
-        print(colorsFilterItems)
     }
     
     func toggleBaseItem(id: UUID) -> Void {
-        
         selectedBaseList = selectedBaseList.map {
             if ($0.id != id) {
                 return $0
@@ -125,7 +123,6 @@ class Filter: ObservableObject {
                 ret = true
             }
         }
-        
         
         return ret
     }
