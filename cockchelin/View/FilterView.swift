@@ -64,6 +64,7 @@ struct Filterview : View{
                     }
                     HStack {
                         ForEach(colorSecondRow){ color in
+                            
                             ColorItemView(colorFilterItem:color, filter: filter, checked: filter.isSelectedColor(color: color.colorType))
                         }
                     }
@@ -245,20 +246,38 @@ struct Filterview : View{
         var colorFilterItem: ColorFilterItem
         @ObservedObject var filter: Filter
         @State var checked: Bool
+        var colorArray: [Color]
+        
+        init(colorFilterItem: ColorFilterItem, filter: Filter, checked: Bool) {
+            self.colorFilterItem = colorFilterItem
+            self.filter = filter
+            self.checked = checked
+            
+            if (colorFilterItem.colorType == .mixed) {
+                colorArray = [.blue, .green, .red]
+            }
+            else {
+                colorArray = [colorFilterItem.color]
+            }
+            
+        }
         
         var body : some View {
             HStack{
                 ZStack{
                     Circle()
-                        .stroke(colorFilterItem.color, lineWidth: 5)
-                        .frame(width: 25, height: 25)
+                        .strokeBorder(
+                            LinearGradient(gradient: Gradient(colors: colorArray), startPoint: .top, endPoint: .bottom),
+                            lineWidth: 5
+                        )
+                        .frame(width: 30, height: 30)
                     
                     if (checked) {
-                        Image(systemName: "checkmark.circle.fill")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 25, height: 25, alignment: .center)
-                            .foregroundColor(colorFilterItem.color)
+                        LinearGradient(gradient: Gradient(colors: colorArray), startPoint: .top, endPoint: .bottom)
+                            .frame(width: 30, height: 30)
+                            .mask(Image(systemName: "checkmark.circle.fill")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit))
                     }
                 }
             }.padding(.horizontal)
