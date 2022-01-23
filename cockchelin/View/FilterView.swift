@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-
-
 struct Filterview : View{
     
     @ObservedObject var filterViewModel: FilterViewModel

@@ -106,10 +106,82 @@ class RecipeModel {
         return randomCocktailImages.randomElement()!
     }
     
-    static func getCocktailImageName(recipe: Recipe) -> String {
-        let glassType: String = recipe.glassType.rawValue
-        let liquidColor: String = recipe.liquidColor.rawValue
+    static func getNameOfGlass(glassType: GlassType) -> String {
+        var adjsutedGlassType: String = glassType.rawValue
         
-        return glassType + "_" + liquidColor //todo check this name.
+        /*
+         stemmedLiqueurGlass -> sherryGlass
+         cocktailGlass
+         oldFashonedGlass
+         highballGlass
+         footedPilsnerGlass
+         sourGlass
+         collinsGlass
+         sherryGlass
+         champagneGlass
+         whiteWineGlass
+         */
+        
+        switch (glassType) {
+        case .sourGlass:
+            adjsutedGlassType = "whiteWineGlass"
+        case .stemmedLiqueurGlass:
+            adjsutedGlassType = "shotGlass"
+        case .cocktailGlass:
+            break
+        case .oldFashonedGlass:
+            break
+        case .highballGlass:
+            break
+        case .footedPilsnerGlass:
+            adjsutedGlassType = "highballGlass"
+        case .collinsGlass:
+            adjsutedGlassType = "highballGlass"
+        case .sherryGlass:
+            adjsutedGlassType = "shotGlass"
+            break
+        case .champagneGlass:
+            break
+        case .whiteWineGlass:
+            break
+        }
+        
+        return adjsutedGlassType
+    }
+    
+    static func getImageNameOfMixedColor(recipe: Recipe) -> String {
+        
+        if (recipe.names[0] == "커비 블루") {
+            return "Cubby Blue"
+        }
+        else if (recipe.names[0] == "B-52") {
+            return "B-52"
+        }
+        
+        return recipe.names[1]
+    }
+    
+    static func isValidName(imageName: String) -> Bool {
+        return true
+    }
+    
+    static func getCocktailImageName(recipe: Recipe) -> String {
+        let glass: String = getNameOfGlass(glassType: recipe.glassType)
+        let liquidColor: String = recipe.liquidColor.rawValue
+        var imageName: String
+        
+        if (.mixed == recipe.liquidColor) {
+            imageName = getImageNameOfMixedColor(recipe: recipe)
+        } else {
+            imageName = glass + "_" + liquidColor
+        }
+        
+        //check
+        if (true == isValidName(imageName: imageName)) {
+            return imageName
+        } else {
+            return glass + "_none"
+        }
+        
     }
 }

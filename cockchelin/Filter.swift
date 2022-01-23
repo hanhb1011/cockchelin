@@ -17,7 +17,7 @@ class Filter: ObservableObject {
     @Published var isFavoriteSelected: Bool = false
     @Published var colorsFilterItems: [LiquidColorType:Bool] = [
         .red : true, .blue : true, .pink : true, .yellow : true, .brown : true, .mixed : true,
-        .none : true, .beige : true, .green : true, .black : true, .white: true, .orange : true, .lightYellow : true
+        .none : true, .beige : true, .green : true, .black : true, .white: true, .orange : true, .lightYellow : true, .lightGreen : true
     ]
     
     @Published var selectedTechList: [TechniqueType:Bool] = [.build:true, .stir:true, .shake:true, .float: true, .blend:true]
@@ -77,6 +77,7 @@ class Filter: ObservableObject {
             colorsFilterItems[.none] = isChecked
             colorsFilterItems[.white] = isChecked
             colorsFilterItems[.lightYellow] = isChecked
+            colorsFilterItems[.lightGreen] = isChecked
         }
         else {
             colorsFilterItems[color] = isChecked
