@@ -21,10 +21,10 @@ struct RecipeView: View {
     var body: some View {
         ScrollView() {
             VStack {
-                Image("temp")
+                Image(RecipeModel.getCocktailImageName(recipe: recipe))
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 250, height: 250, alignment: .center)
+                    .frame(width: 230, height: 230, alignment: .center)
                 
                 HStack {
                     Spacer()

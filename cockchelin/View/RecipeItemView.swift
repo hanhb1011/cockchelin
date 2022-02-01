@@ -24,11 +24,12 @@ struct RecipeItemView: View {
     var body: some View {
         NavigationLink(destination: RecipeView(recipe: recipe)){
             HStack{
-                Image(RecipeModel.getRandomCocktailImageName())
+                Image(RecipeModel.getCocktailImageName(recipe: recipe))
                     .resizable()
                     .scaledToFit()
                     .frame(width: 100, height: 100, alignment: .center)
                     .padding(.horizontal, 1)
+                    .padding(.vertical, 5)
                 
                 VStack(alignment: .leading) {
                     HStack(alignment: .bottom) {

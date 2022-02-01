@@ -60,7 +60,7 @@ struct TodaysCocktalView: View{
             VStack{
                 HStack {
                     Spacer()
-                    Image("todayCocktail")
+                    Image(RecipeModel.getCocktailImageName(recipe: recipe))
                         .resizable()
                         .scaledToFit()
                         .frame(width: 200, height: 200, alignment: .center)
@@ -98,10 +98,10 @@ struct GroupView: View{
     var body: some View{
         NavigationLink(destination: RecipeView(recipe: recipe)){
             VStack{
-                Image("temp")
+                Image(RecipeModel.getCocktailImageName(recipe: recipe))
                     .resizable()
-                //.scaledToFit()
-                    .frame(width: 130, height: 110, alignment: .center)
+                    .scaledToFit()
+                    .frame(width: 100, height: 100, alignment: .center)
                     .padding(.top, 5)
                 
                 VStack(alignment: .leading, spacing: 5){
