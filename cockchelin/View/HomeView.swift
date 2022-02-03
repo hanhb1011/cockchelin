@@ -63,7 +63,8 @@ struct TodaysCocktalView: View{
                     Image(RecipeModel.getCocktailImageName(recipe: recipe))
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 200, height: 200, alignment: .center)
+                        .frame(width: 180, height: 180, alignment: .center)
+                        .padding(.top)
                     Spacer()
                 }
                 VStack{
