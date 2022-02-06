@@ -23,7 +23,7 @@ struct HomeView: View {
                         Group{
                             TodaysCocktalView(recipe: homeViewModel.getTodaysCocktail())
                             
-                            CocktailCardView(title: "최근에 본 칵테일", recipes: homeViewModel.getRecentlyViewedCocktails(maxCount: 10))
+                            CocktailCardView(title: "최근 본 칵테일", recipes: homeViewModel.getRecentlyViewedCocktails(maxCount: 10))
                             
                             CocktailCardView(title: "추천 칵테일", recipes: homeViewModel.getCocktailsForYou(maxCount: 10))
                             
