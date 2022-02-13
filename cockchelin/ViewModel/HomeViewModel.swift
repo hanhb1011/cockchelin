@@ -43,6 +43,7 @@ enum PhraseType: Codable {
 class HomeViewModel: ObservableObject {
     @Published var recipes: [Recipe]
     @Published var classificationList: [Classification]
+    @Published var cocktailsForYou: [Recipe] = []
     
     init(){
         self.recipes = RecipeModel.loadSavedRecipes()
@@ -347,6 +348,11 @@ class HomeViewModel: ObservableObject {
     }
     
     func getCocktailsForYou(maxCount: Int) -> [Recipe] {
+        
+        if (cocktailsForYou.count != 0) {
+            return cocktailsForYou
+        }
+        
         /*
          1. select makeable recipes.
          2. select recipes that were in the bookmark list.
@@ -373,7 +379,9 @@ class HomeViewModel: ObservableObject {
             }
         }
         
-        return candidates
+        cocktailsForYou = candidates
+        
+        return cocktailsForYou
     }
     
     func getRecentlyViewedCocktails(maxCount: Int) -> [Recipe] {
