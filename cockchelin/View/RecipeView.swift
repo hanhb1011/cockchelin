@@ -243,7 +243,6 @@ let testRecipe = Recipe(names: ["Recipe name"],
                         liquidColor: .blue,
                         glassType: .stemmedLiqueurGlass,
                         garnish: "가니쉬")
-#endif
 
 struct RecipeView_Previews: PreviewProvider {
     
@@ -251,3 +250,5 @@ struct RecipeView_Previews: PreviewProvider {
         RecipeView(recipe: testRecipe)
     }
 }
+
+#endif

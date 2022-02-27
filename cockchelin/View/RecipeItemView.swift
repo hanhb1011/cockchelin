@@ -80,13 +80,13 @@ struct RecipeItemView: View {
     }
 }
 
+#if DEBUG
 struct RecipeItemView_Previews: PreviewProvider {
     static var previews: some View {
         RecipeItemView(recipe: test,additionalTitle: "재료 1개 부족")
     }
 }
 
-#if DEBUG
 let test = Recipe(names: ["Recipe name"],
                   alcoholDegree: 25,
                   ingredients: [Ingredient(names: ["ingredient0"], volume: 60, type: .ml), Ingredient(names: ["ingredient1"], volume: 1, type: .oz), Ingredient(names: ["ingredient2"], volume: 1, type: .oz), Ingredient(names: ["ingredient3"], volume: 1, type: .oz)],
