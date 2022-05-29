@@ -25,14 +25,20 @@ class MyIngredientShowViewModel: ObservableObject {
     
     func isConditionallyMakeableRecipe(recipe: Recipe, diff: Int) -> Bool {
         var missCount = 0
+        var foundAnything = false
         
         recipe.ingredients.forEach { ingredient in
             let ingredientInRecipe: String = ingredient.names[0]
             var found = false
             
+            if (ingredientInRecipe == "물" || ingredientInRecipe == "으깬 얼음") {
+                return
+            }
+            
             ingredients.forEach { givenIngredient in
                 if (ingredientInRecipe == givenIngredient) {
                     found = true
+                    foundAnything = true
                 }
             }
             
@@ -41,7 +47,7 @@ class MyIngredientShowViewModel: ObservableObject {
             }
         }
         
-        if (missCount == diff) {
+        if ((missCount == diff) && (true == foundAnything)) {
             return true
         }
         else {
